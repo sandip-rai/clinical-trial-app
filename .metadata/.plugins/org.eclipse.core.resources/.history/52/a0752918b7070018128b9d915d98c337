@@ -1,0 +1,13 @@
+import java.util.ArrayList;
+
+public class Patient {
+	private String patientId;
+	private boolean active;
+	private ArrayList<Reading> readings;
+	
+	protected patient(String patientId){
+		this.patientId = patientId;
+		
+	}
+
+}

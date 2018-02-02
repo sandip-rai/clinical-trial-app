@@ -3,3 +3,7 @@
 1517532179721	Encapsulate field 'value'
 1517532184822	Encapsulate field 'bpValue'
 1517532192498	Encapsulate field 'date'
+1517533241763	Encapsulate field 'patientId'
+1517533246567	Encapsulate field 'active'
+1517533251050	Encapsulate field 'readings'
+1517534728095	Encapsulate field 'active'
