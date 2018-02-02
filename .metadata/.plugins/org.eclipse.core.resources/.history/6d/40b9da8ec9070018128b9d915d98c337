@@ -1,0 +1,34 @@
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.List;
+import java.util.Map;
+
+public class FileHandler {
+
+	public static void main(String[] args) {
+		Gson gson = new Gson();
+		// TODO add file selector to upload a json file.
+		String fileLocation = ".\\assignment_1_example.json";
+
+		try (Reader reader = new FileReader(fileLocation)) {
+			JsonElement json = gson.fromJson(reader, JsonElement.class);
+			//String jsonInString = gson.toJson(json);
+			//.out.println(jsonInString);
+
+			System.out.println(json.getAsJsonArray());
+
+			// Convert JSON to JsonElement, and later to String
+			// JsonElement json = gson.fromJson(reader, JsonElement.class);
+			// String jsonInString = gson.toJson(json);
+			// System.out.println(jsonInString);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

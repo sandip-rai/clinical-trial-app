@@ -1,0 +1,32 @@
+{
+   "patient_readings":[
+      {
+         "patient_id":"12513",
+		 "reading_type":"weight",
+         "reading_id":"48934j",
+		 "reading_value": 189,
+	  "reading_date": 1515354694451
+      },
+      {
+         "patient_id":"15566",
+		 "reading_type":"steps",
+         "reading_id":"1adf4",
+		 "reading_value":6958,
+	  "reading_date": 1515354694451
+      },
+	  {
+         "patient_id":"15566",
+		 "reading_type":"temp",
+         "reading_id":"1a545",
+		 "reading_value": 98.6,
+	  "reading_date": 1515354694451
+      },
+	  {
+         "patient_id":"336558",
+		 "reading_type":"blood_press",
+         "reading_id":"85545",
+		 "reading_value": "120/60",
+	  "reading_date": 1515354694451
+      }	  
+   ]
+}
