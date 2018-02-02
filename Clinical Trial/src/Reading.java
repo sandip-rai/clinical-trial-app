@@ -1,6 +1,5 @@
 
 public class Reading {
-
 	private String readingId;
 	private String type;
 	private double value;

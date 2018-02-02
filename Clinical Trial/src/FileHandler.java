@@ -1,13 +1,10 @@
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.ArrayList;
 
 public class FileHandler {
-
+	ArrayList<Patient> patients = new ArrayList<>();
 	public static void main(String[] args) {
 		Gson objGson = new GsonBuilder().setPrettyPrinting().create();
 
