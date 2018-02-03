@@ -1,0 +1,27 @@
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.*;
+
+import com.google.gson.*;
+
+public class FileHandler {
+	ArrayList<Patient> patients = new ArrayList<>();
+
+	private class Readings {
+		List<Reading> patient_readings;
+	}
+
+	public static void main(String[] args) {
+		Gson gson = new GsonBuilder().serializeNulls().create();
+
+		try (Reader reader = new FileReader(fileLocation)) {
+			Type reader = new TypeToken<ArrayList<Founder>>(){}.getType();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

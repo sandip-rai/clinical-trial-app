@@ -1,0 +1,47 @@
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Type;
+import java.util.*;
+
+import com.google.gson.*;
+
+public class FileHandler {
+	// TODO add file selector to upload a json file.
+	private static String fileLocation = ".\\assignment_1_example.json";
+
+	private class PatientReadings {
+		private ArrayList<ReadingJson> patient_readings;
+	}
+
+	private class ReadingJson {
+		private String patient_id;
+		private String reading_type;
+		private String reading_id;
+		private String reading_value;
+		private String reading_date;
+	}
+
+	public static void main(String[] args) {
+		Gson gson = new GsonBuilder().serializeNulls().create();
+
+		try (Reader fileReader = new FileReader(fileLocation)) {
+			PatientReadings readingList = gson.fromJson(fileReader, PatientReadings.class);
+
+			for (ReadingJson reading : readingList.patient_readings) {
+				System.out.println(reading.patient_id);
+				System.out.println(reading.reading_type);
+				System.out.println(reading.reading_id);
+				System.out.println(reading.reading_value);
+				System.out.println(reading.reading_date);
+				System.out.println("******************");
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

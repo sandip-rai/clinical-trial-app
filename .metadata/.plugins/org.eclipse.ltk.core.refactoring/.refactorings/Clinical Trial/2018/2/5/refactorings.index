@@ -8,3 +8,11 @@
 1517533251050	Encapsulate field 'readings'
 1517534728095	Encapsulate field 'active'
 1517537984518	Delete element
+1517680623412	Encapsulate field 'patient_id'
+1517680854985	Encapsulate field 'patient_id'
+1517681010999	Encapsulate field 'patient_id'
+1517681018352	Encapsulate field 'reading_type'
+1517681028720	Encapsulate field 'reading_id'
+1517681035186	Encapsulate field 'reading_value'
+1517681040017	Encapsulate field 'reading_date'
+1517685748207	Encapsulate field 'allPatients'
