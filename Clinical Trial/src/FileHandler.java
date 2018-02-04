@@ -7,7 +7,7 @@ import com.google.gson.*;
 
 public class FileHandler {
 	// TODO add file selector to upload a json file.
-	private final static String TEST = ".\\assignment_1_example.json";
+	public static String filePath;
 
 	private class PatientReadingsJson {
 		private ArrayList<ReadingJson> patient_readings;
@@ -19,10 +19,6 @@ public class FileHandler {
 		private String reading_id;
 		private String reading_value;
 		private String reading_date;
-	}
-
-	public static void main(String[] args){
-		readJsonFile(TEST);
 	}
 
 	//TODO remove static after testing!
