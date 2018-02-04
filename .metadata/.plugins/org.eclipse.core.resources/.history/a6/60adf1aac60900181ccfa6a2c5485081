@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -30,8 +31,8 @@ public class Gui extends JPanel implements ActionListener {
 		int result = fileChooser.showOpenDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fileChooser.getSelectedFile();
-			String filePath = selectedFile.getAbsolutePath();
-			FileHandler.readJsonFile(filePath);
+			FileHandler.filePath = selectedFile.getAbsolutePath();
+			FileHandler.readJsonFile(FileHandler.filePath);
 			for (Patient patient : ClinicalTrial.getAllPatients()) {
 				patiensID.add(patient.getPatientId());
 				frame.dispose();

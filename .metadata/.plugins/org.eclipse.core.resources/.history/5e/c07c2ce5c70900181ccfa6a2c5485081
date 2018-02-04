@@ -6,6 +6,8 @@ import java.util.*;
 import com.google.gson.*;
 
 public class FileHandler {
+	// TODO add file selector to upload a json file.
+	public static String filePath;
 
 	private class PatientReadingsJson {
 		private ArrayList<ReadingJson> patient_readings;
@@ -25,7 +27,7 @@ public class FileHandler {
 
 		try (Reader fileReader = new FileReader(fileLocation)) {
 			PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class);
-			//addPatientsToTrial(readingList.patient_readings);
+			addPatientsToTrial(readingList.patient_readings);
 			AddReadingToPatient(readingList.patient_readings);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -34,12 +36,12 @@ public class FileHandler {
 
 	// TODO DELETE THIS AFTER TESTING!!! This will create a new patient for
 	// every reading in the file
-//	private static void addPatientsToTrial(ArrayList<ReadingJson> readings) {
-//		for (ReadingJson readingJson : readings) {
-//			Patient patient = new Patient(readingJson.patient_id);
-//			ClinicalTrial.getAllPatients().add(patient);
-//		}
-//	}
+	private static void addPatientsToTrial(ArrayList<ReadingJson> readings) {
+		for (ReadingJson readingJson : readings) {
+			Patient patient = new Patient(readingJson.patient_id);
+			ClinicalTrial.getAllPatients().add(patient);
+		}
+	}
 
 	private static void AddReadingToPatient(ArrayList<ReadingJson> readings) {
 		for (ReadingJson reading : readings) {
