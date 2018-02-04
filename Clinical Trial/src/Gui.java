@@ -23,6 +23,7 @@ public class Gui extends JPanel implements ActionListener {
 	JCheckBox checkbox;
 	JTextField userInputNewPatienID = new JTextField(16);
 	JTextField addPatientState = new JTextField("Click Add button to add new Patient");
+	FileHandler fh = new FileHandler();
 
 	public void uploadFile() {
 		JFileChooser fileChooser = new JFileChooser();
@@ -31,7 +32,7 @@ public class Gui extends JPanel implements ActionListener {
 		if (result == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fileChooser.getSelectedFile();
 			String filePath = selectedFile.getAbsolutePath();
-			FileHandler.readJsonFile(filePath);
+			fh.readJsonFile(filePath);
 			for (Patient patient : ClinicalTrial.getAllPatients()) {
 				patiensID.add(patient.getPatientId());
 				frame.dispose();
