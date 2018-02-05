@@ -5,7 +5,7 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.google.gson.*;
 
 public class Gui extends JPanel implements ActionListener {
 	JFrame frame;
@@ -106,6 +108,7 @@ public class Gui extends JPanel implements ActionListener {
 		
 		JButton buttonShowInfo = new JButton("Show Patient's Info");
 		JButton buttonStartTrial = new JButton("Start Patient Trial");
+		JButton buttonExportReadings = new JButton("Export All Readings");
 		
 		//JPanel for the text
 		JPanel panel1 = new JPanel();
@@ -118,6 +121,7 @@ public class Gui extends JPanel implements ActionListener {
 		panel2.add(comboBox); 
 		panel2.add(buttonShowInfo);
 		panel2.add(buttonStartTrial);
+		panel2.add(buttonExportReadings);
 		
 		//Select a patient id from the dropdown menu and display the corresponding patient info
 		buttonShowInfo.addActionListener(new ActionListener() {
@@ -128,6 +132,33 @@ public class Gui extends JPanel implements ActionListener {
 			};
 		});
 
+		buttonExportReadings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fileName;
+				frame.dispose();
+				//Print the info of selected patient id
+				JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
+				int returnValue = jfc.showSaveDialog(null);
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					fileName = jfc.getSelectedFile().getAbsolutePath();
+					if(fileName.lastIndexOf(".") != -1) {fileName = fileName.substring(0, fileName.lastIndexOf('.'))+".json";}
+					else {fileName = fileName+".json";}
+					System.out.println(fileName);
+
+					try {
+						Writer writer = new FileWriter(fileName);
+						Gson gson = new GsonBuilder().create();
+					    gson.toJson(ClinicalTrial.getAllPatients(), writer);	
+						writer.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	
+				}
+			};
+		});
+		
 		//Start the patient Trial by calling the startPatientTrial() method
 		buttonStartTrial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -314,5 +345,6 @@ public class Gui extends JPanel implements ActionListener {
 		if (e.getSource() == buttonUploadFile) {
 			uploadFile();
 		}
+		
 	}
 }
