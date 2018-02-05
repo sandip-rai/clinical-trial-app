@@ -109,6 +109,7 @@ public class Gui extends JPanel implements ActionListener {
 		JButton buttonShowInfo = new JButton("Show Patient's Info");
 		JButton buttonStartTrial = new JButton("Start Patient Trial");
 		JButton buttonExportReadings = new JButton("Export All Readings");
+		JButton buttonEndTrial = new JButton("End Patient Trial");
 		
 		//JPanel for the text
 		JPanel panel1 = new JPanel();
@@ -121,7 +122,9 @@ public class Gui extends JPanel implements ActionListener {
 		panel2.add(comboBox); 
 		panel2.add(buttonShowInfo);
 		panel2.add(buttonStartTrial);
+		panel2.add(buttonEndTrial);
 		panel2.add(buttonExportReadings);
+
 		
 		//Select a patient id from the dropdown menu and display the corresponding patient info
 		buttonShowInfo.addActionListener(new ActionListener() {
@@ -136,15 +139,15 @@ public class Gui extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				String fileName;
 				frame.dispose();
-				//generate save/export filepath
+				//Print the info of selected patient id
 				JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
 				int returnValue = jfc.showSaveDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					fileName = jfc.getSelectedFile().getAbsolutePath();
 					if(fileName.lastIndexOf(".") != -1) {fileName = fileName.substring(0, fileName.lastIndexOf('.'))+".json";}
 					else {fileName = fileName+".json";}
+					System.out.println(fileName);
 
-					//gson_lib writes arraylist of patients to JSON file 
 					try {
 						Writer writer = new FileWriter(fileName);
 						Gson gson = new GsonBuilder().create();
@@ -168,6 +171,14 @@ public class Gui extends JPanel implements ActionListener {
 			};
 		});
 	
+		//sets active to false on click, displays confirmation message
+		buttonEndTrial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Start trial
+				ClinicalTrial.findPatient(ClinicalTrial.getAllPatients().get(comboBox.getSelectedIndex()).getPatientId()).setActive(false);
+				JOptionPane.showMessageDialog(null, "Patient ID: " + ClinicalTrial.getAllPatients().get(comboBox.getSelectedIndex()).getPatientId()+"\nTrial has ended");
+			};
+		});
 		
 		//Create a frame and add the two panels created
 		frame = new JFrame();
