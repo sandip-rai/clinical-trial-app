@@ -38,13 +38,35 @@ public class Reading {
 	public Long getDate() {
 		return date;
 	}
-
+	
+	/**
+	 * Set new type and reading value for patients in trial
+	 * @param type
+	 * @param ReadingValue
+	 * @param patient
+	 */
+	public void setTypeandReading(String type, String ReadingValue, Patient patient) {
+		if(patient.isActive()) { //Reading can only be added if patient is active i.e in patient trial
+			this.type = type; //Set the Reading type
+			try {
+				double newValue = Integer.parseInt(ReadingValue);
+				this.value = newValue; //Set value that is not of blood_pressure
+			} catch (java.lang.NumberFormatException e) {
+				String newValue = ReadingValue;
+				this.bpValue = newValue; //Set the bpValue
+			}
+			
+			
+		}
+	}
+	
+	//Added comma by replacing /n for printing in the GUI
 	public String toString() {
-		String string = "Reading ID: " + readingId + "\n" + "Type: " + type + "\n";
+		String string = "Reading ID: " + readingId + ", " + "Type: " + type + ", ";
 		if (bpValue == null) {
-			string = string + "Value: " + value + "\n";
+			string = string + "Value: " + value + ", ";
 		}else{
-			string = string + "Value: " + bpValue + "\n";
+			string = string + "Value: " + bpValue + ", ";
 		}
 
 		string = string + "Date: " + date;
