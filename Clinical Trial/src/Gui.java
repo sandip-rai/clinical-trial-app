@@ -136,15 +136,15 @@ public class Gui extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				String fileName;
 				frame.dispose();
-				//Print the info of selected patient id
+				//generate save/export filepath
 				JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
 				int returnValue = jfc.showSaveDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					fileName = jfc.getSelectedFile().getAbsolutePath();
 					if(fileName.lastIndexOf(".") != -1) {fileName = fileName.substring(0, fileName.lastIndexOf('.'))+".json";}
 					else {fileName = fileName+".json";}
-					System.out.println(fileName);
 
+					//gson_lib writes arraylist of patients to JSON file 
 					try {
 						Writer writer = new FileWriter(fileName);
 						Gson gson = new GsonBuilder().create();
