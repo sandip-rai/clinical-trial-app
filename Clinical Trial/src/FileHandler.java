@@ -27,7 +27,6 @@ public class FileHandler {
 		private String reading_date;
 		
 		ReadingJson(){
-
         }
 
 		ReadingJson(String id, String type, String rid, String rval, String rdate){
@@ -39,13 +38,13 @@ public class FileHandler {
         }
 	}
 
-
+	
 	protected void readJsonFile (String fileLocation) {
 		Gson gson = new GsonBuilder().serializeNulls().create();
 
 		try (Reader fileReader = new FileReader(fileLocation)) {
 			PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class);
-			//addPatientsToTrial(readingList.patient_readings);
+			addPatientsToTrial(readingList.patient_readings);
 			AddReadingToPatient(readingList.patient_readings);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -54,12 +53,12 @@ public class FileHandler {
 
 	// TODO DELETE THIS AFTER TESTING!!! This will create a new patient for
 	// every reading in the file
-//	private static void addPatientsToTrial(ArrayList<ReadingJson> readings) {
-//		for (ReadingJson readingJson : readings) {
-//			Patient patient = new Patient(readingJson.patient_id);
-//			ClinicalTrial.getAllPatients().add(patient);
-//		}
-//	}
+	private static void addPatientsToTrial(ArrayList<ReadingJson> readings) {
+		for (ReadingJson readingJson : readings) {
+			Patient patient = new Patient(readingJson.patient_id);
+			ClinicalTrial.getAllPatients().add(patient);
+		}
+	}
 	
 	protected void writeJsonFile(String fileName){
         ArrayList<Patient> patients = ClinicalTrial.getAllPatients();
@@ -103,6 +102,7 @@ public class FileHandler {
 				continue;
 			}
 			String readingId = reading.reading_id;
+			//System.out.println("readingID = " + readingId);
 			String type = reading.reading_type;
 			long date = Long.parseLong(reading.reading_date);
 			try {
