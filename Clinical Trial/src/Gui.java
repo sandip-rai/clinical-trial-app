@@ -134,12 +134,12 @@ public class Gui extends JPanel implements ActionListener {
 				displayPatientInfo(ClinicalTrial.getAllPatients().get(comboBox.getSelectedIndex()).getPatientId());
 			};
 		});
-
+		
+		//Open save dialog box, find filepath of selected file, use gson_lib to write patients to JSON file
 		buttonExportReadings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String fileName;
 				frame.dispose();
-				//Print the info of selected patient id
 				JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
 				int returnValue = jfc.showSaveDialog(null);
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
