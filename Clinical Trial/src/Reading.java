@@ -68,26 +68,6 @@ public class Reading {
 		return date;
 	}
 	
-	/**
-	 * Set new type and reading value for patients in trial
-	 * @param type reading type of the patient
-	 * @param ReadingValue value of the reading 
-	 * @param patient the patient whose reading is being processed
-	 */
-	public void setTypeandReading(String type, String ReadingValue, Patient patient) {
-		if(patient.isActive()) { //Reading can only be added if patient is active i.e in patient trial
-			this.type = type; //Set the Reading type
-			try {
-				double newValue = Integer.parseInt(ReadingValue);
-				this.value = newValue; //Set value that is not of blood_pressure
-			} catch (java.lang.NumberFormatException e) {
-				String newValue = ReadingValue;
-				this.bpValue = newValue; //Set the bpValue
-			}
-			
-			
-		}
-	}
 	
 	/**
 	 * toString method to print the String representation of the Reading object
