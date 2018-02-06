@@ -1,0 +1,20 @@
+To do:
+
+Updated class diagram
+Update GUI to match photos
+Update GUI to match program requirements
+
+In GUI class, startPatientTrial the blow line of code should be removed:
+ClinicalTrial.findPatient(selectedPatient).setActive(true); //set patient as active during the trial
+
+if we attempt to add a reading to an individual we should not be setting them to active
+only the button for setting them to active should set them as active
+
+we seem to have two arrays of patients.  one in the Clinical Trials class, one in the GUI class used for the display dropdown.  
+These two lists should not differ.  Regardless of whether someone is active or not, if they have been added to the trial they should both be in the array and display in the dropdown.
+
+Code that is commented for delete (mainly code that was used for testing) needs to be removed
+
+Code that does System.out.println is mostly stuff that was built for testing, can be deleted
+
+FH.writeJsonFile is redundant with ExportReadings.  Review and remove FH.writeJsonFile.
