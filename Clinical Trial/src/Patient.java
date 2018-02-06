@@ -65,6 +65,27 @@ public class Patient {
 	}
 
 	/**
+	 * Adds the new readings to the Patient object readings arraylist if the patient is active i.e on trial
+	 * @param readingId the reading Id number 
+	 * @param type the reading type
+	 * @param value the reading value
+	 * @param date the date of reading
+	 */
+	protected void addNewReadings(String readingId, String type, String value, long date) {
+		if (active) { //Only add if the patient is active i.e on trial
+			try {
+				double numValue = Integer.parseInt(value); //Every reading value except of blood_pressure type will be parsed into a double
+				Reading reading = new Reading(readingId, type, numValue, date); //Create the reading object with the passed values
+				readings.add(reading); //add the new reading to the readings ArrayList of the patient object
+			} 
+			catch (java.lang.NumberFormatException e) { //For the reading value of blood_pressure type which will be string
+				String bpValue = value; //assign to the bpValue string
+				Reading reading = new Reading(readingId, type, bpValue, date); //create reading object
+				readings.add(reading); //add the new reading to the reading ArrayLsit
+			}
+		}
+	}
+	/**
 	 * Returns patient's active boolean value
 	 * @return active the boolean to show if patient is in trial
 	 */
