@@ -16,3 +16,5 @@ These two lists should not differ.  Regardless of whether someone is active or n
 Code that is commented for delete (mainly code that was used for testing) needs to be removed
 
 Code that does System.out.println is mostly stuff that was built for testing, can be deleted
+
+FH.writeJsonFile is redundant with ExportReadings.  Review and remove FH.writeJsonFile.
