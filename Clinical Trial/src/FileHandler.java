@@ -1,34 +1,55 @@
+/**
+ * FileHandler class handles the json file reading and writing the output to a new json file.
+ */
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 
-import com.google.gson.*;
+import com.google.gson.*; //Importing gson library
 
 public class FileHandler {
 
+	/**
+	 * PatientReadingsJson stores the ReadingJson class objects into an ArrayList
+	 *
+	 */
 	private class PatientReadingsJson {
+		//Arraylist to hold ReadingJson class objects
 		private ArrayList<ReadingJson> patient_readings;
 
+		//No-Args constructor
 		PatientReadingsJson(){}
 
+		/**
+		 * Argument specified Constructor
+		 * @param pr arraylist holding the ReadingJson class objects
+		 */
 		PatientReadingsJson(ArrayList<ReadingJson> pr)
         {
             patient_readings = pr;
         }
 	}
 
+	/**
+	 * ReadingJson class handles the objects with the specified parameters that are present in the input Json File.
+	 *
+	 */
 	private class ReadingJson {
+		//Initializing parameters
 		private String patient_id;
 		private String reading_type;
 		private String reading_id;
 		private String reading_value;
 		private String reading_date;
 		
+		//No-Args Constructor
 		ReadingJson(){
         }
 
+		//Arguments specified Constructor
 		ReadingJson(String id, String type, String rid, String rval, String rdate){
 		    patient_id = id;
 		    reading_type = type;
@@ -38,15 +59,21 @@ public class FileHandler {
         }
 	}
 
-	
+	/**
+	 * readJsonFile initializes the FileReader, creates a Gson object, and creates PatientReadingsJson object.
+	 * It gets called from uploadFile method of GUI class and then it passes PatientReadingsJson object patient readings to AddReadingToPatient method.
+	 * @param fileLocation the absolute path of the selected input file
+	 */
 	protected void readJsonFile (String fileLocation) {
+		//Create a Gson object
 		Gson gson = new GsonBuilder().serializeNulls().create();
 
+		//Try a FileReader 
 		try (Reader fileReader = new FileReader(fileLocation)) {
-			PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class);
+			PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class); //Create PatientReadingsJson object which creates an arraylist
 			addPatientsToTrial(readingList.patient_readings);
-			AddReadingToPatient(readingList.patient_readings);
-		} catch (IOException e) {
+			AddReadingToPatient(readingList.patient_readings); //Call AddReadingToPatient to add readings from input file to Patient's readings arraylist
+		} catch (IOException e) { //Catch if fileLocation doesn't exist
 			e.printStackTrace();
 		}
 	}
@@ -60,6 +87,11 @@ public class FileHandler {
 		}
 	}
 	
+	/**
+	 * writeJsonFile writes to the output Json File.
+	 * @param fileName the name of the output file
+	 */
+	//******I HAVEN'T COMMENTED AS THERE SEEMS TO BE SIMILAR METHOD IN GUI AS WELL. ***//
 	protected void writeJsonFile(String fileName){
         ArrayList<Patient> patients = ClinicalTrial.getAllPatients();
         ArrayList<ReadingJson> prj_list = new ArrayList<ReadingJson>();
@@ -95,21 +127,26 @@ public class FileHandler {
 
     }
 
+	/**
+	 * AddReadingToPatient adds the readings from the input file to the Patient's reading ArrayList
+	 * @param readings the readings of the input file in an ArrayList
+	 */
 	private void AddReadingToPatient(ArrayList<ReadingJson> readings) {
-		for (ReadingJson reading : readings) {
-			Patient patient = ClinicalTrial.findPatient(reading.patient_id);
-			if (patient == null) {
-				continue;
+		for (ReadingJson reading : readings) { //loop through the readings arrayList
+			Patient patient = ClinicalTrial.findPatient(reading.patient_id); //Get a patient from the arrayList
+			if (patient == null) { 
+				continue; //Continue if arrayList is empty
 			}
+			
+			//Grab the readings into each String
 			String readingId = reading.reading_id;
-			//System.out.println("readingID = " + readingId);
 			String type = reading.reading_type;
 			long date = Long.parseLong(reading.reading_date);
-			try {
+			try { //Try for every reading value except blood_pressure type
 				double value = Integer.parseInt(reading.reading_value);
 				patient.addReading(readingId, type, value, date);
-			} catch (java.lang.NumberFormatException e) {
-				String value = reading.reading_value;
+			} catch (java.lang.NumberFormatException e) { //Do this for reading value if the reading type is of blood_pressure
+				String value = reading.reading_value; //blood_pressure reading value is of String type
 				patient.addReading(readingId, type, value, date);
 			}
 		}
