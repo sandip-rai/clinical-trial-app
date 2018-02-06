@@ -1,10 +1,18 @@
+/**
+ * Reading class creates objects of readings for the Patient objects.
+ *
+ */
+
 public class Reading {
+	
+	//Initializing parameters
 	private String readingId;
 	private String type;
 	private double value;
 	private String bpValue;
 	private long date;
 
+	//Constructor for every reading value except of blood_pressure type
 	protected Reading(String readingId, String type, double value, long date) {
 		this.readingId = readingId;
 		this.type = type;
@@ -12,6 +20,7 @@ public class Reading {
 		this.date = date;
 	}
 
+	//Constructor for the reading value of blood_pressure type
 	protected Reading(String readingId, String type, String bpValue, long date) {
 		this.readingId = readingId;
 		this.type = type;
@@ -19,31 +28,51 @@ public class Reading {
 		this.date = date;
 	}
 
+	/**
+	 * Getter for readingId
+	 * @return readingId of the patient
+	 */
 	public String getReadingId() {
 		return readingId;
 	}
 
+	/**
+	 * Getter for type
+	 * @return type of reading of the patient
+	 */
 	public String getType() {
 		return type;
 	}
 
+	/**
+	 * Getter for value of every type except blood_pressure
+	 * @return value of the reading of the patient
+	 */
 	public double getValue() {
 		return value;
 	}
 
+	/**
+	 * Getter for reading value of blood_pressure type
+	 * @return value of the blood_pressure reading of the patient
+	 */
 	public String getBpValue() {
 		return bpValue;
 	}
 
+	/**
+	 * Getter for date
+	 * @return date of the reading of the patient
+	 */
 	public Long getDate() {
 		return date;
 	}
 	
 	/**
 	 * Set new type and reading value for patients in trial
-	 * @param type
-	 * @param ReadingValue
-	 * @param patient
+	 * @param type reading type of the patient
+	 * @param ReadingValue value of the reading 
+	 * @param patient the patient whose reading is being processed
 	 */
 	public void setTypeandReading(String type, String ReadingValue, Patient patient) {
 		if(patient.isActive()) { //Reading can only be added if patient is active i.e in patient trial
@@ -60,16 +89,18 @@ public class Reading {
 		}
 	}
 	
-	//Added comma by replacing /n for printing in the GUI
+	/**
+	 * toString method to print the String representation of the Reading object
+	 */
 	public String toString() {
 		String string = "Reading ID: " + readingId + ", " + "Type: " + type + ", ";
-		if (bpValue == null) {
+		if (bpValue == null) { //for every value except blood_pressure
 			string = string + "Value: " + value + ", ";
-		}else{
+		}else{//for only blood_pressure value
 			string = string + "Value: " + bpValue + ", ";
 		}
-
 		string = string + "Date: " + date;
+		
 		return string;
 	}
 }
