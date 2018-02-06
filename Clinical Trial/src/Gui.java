@@ -1,22 +1,31 @@
 /**
- * Gui class to show options to add, show patients list, and get input file from the user.
+ * GGui class to show options to add, show patients list, and get input file from the user.
  */
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Gui extends JPanel implements ActionListener {
 	JFrame frame;
@@ -29,12 +38,133 @@ public class Gui extends JPanel implements ActionListener {
 	
 	
 	//Initializing 
-	JComboBox comboBox; 
+	JComboBox comboBoxPatientsIds; 
 	JCheckBox checkbox;
 	
 	JTextField userInputNewPatientID = new JTextField(16); //Corrected the name
 	JTextField addPatientState = new JTextField("Click Add button to add new Patient");
 	FileHandler fh = new FileHandler();
+	
+	
+	public void mainMenu(){
+		if(!patientsID.contains("New patient")){
+			patientsID.add("New patient");
+		}
+
+		String [] readingTypes = new String[] {"Weight", "Steps", "Temp", "Blood Pressuer"};
+		JComboBox comboBoxRadingType = new JComboBox(readingTypes);
+		
+		JButton buttonAddReading = new JButton("Add");
+		
+		//Creates labels and user input textFeild 
+		JLabel addReading = new JLabel("Add a new reading:");
+		JLabel id = new JLabel("PatientID:");
+		JLabel date = new JLabel("Date:");
+		JLabel type = new JLabel("Type:");
+		JLabel value = new JLabel("Value:");
+		JTextField valueInput = new JTextField(16);
+		JTextField idInput = new JTextField(16);
+		JTextField dateInput = new JTextField(16);
+		JLabel pastReading = new JLabel("Past readings:");
+		JTextField pastReadingDisplay = new JTextField(16);
+		
+		//Set all labels not editable
+		pastReadingDisplay.setEditable(false);
+		
+		//Create menu components 
+		JMenuBar menuBar = new JMenuBar();
+		JMenu menu = new JMenu("Menu");
+		
+		//Add menus to menu bar
+		menuBar.add(menu);
+		
+		//Create and add menuItems to menu
+		JMenuItem patientInfo = menu.add("Patient Info");
+		JMenuItem manageFile = menu.add("Manage Files");
+		
+		patientInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		manageFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		comboBoxPatientsIds = new JComboBox(patientsID.toArray());
+		
+		JButton buttonStartTrail = new JButton("Start Patient Trail");
+		
+		buttonStartTrail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comboBoxPatientsIds.getSelectedItem().toString() == "New patient") {
+					frame.dispose();
+					//addPatient();
+				} else {
+					if (ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).isActive()) {
+						JOptionPane.showMessageDialog(null, "This Patient is already active in trail");
+					} else {
+						ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).setActive(true);
+						JOptionPane.showMessageDialog(null, "This patient is set to actve and started trial");
+					}
+				}
+			}
+		});
+		
+		//Create JPanels
+		JPanel panel1 = new JPanel();
+		JPanel panel2 = new JPanel();
+		JPanel panel3 = new JPanel();
+		JPanel panel4 = new JPanel();
+		JPanel panel5 = new JPanel();
+		JPanel panel6 = new JPanel();
+		JPanel panel7 = new JPanel();
+		
+		panel1.setLayout(new GridLayout(0, 3, 10, 10));
+		panel2.setLayout(new GridLayout(0, 3, 10, 10));
+		panel3.setLayout(new GridLayout(0, 3, 10, 10));
+		panel4.setLayout(new GridLayout(0, 3, 10, 10));
+		panel5.setLayout(new GridLayout(0, 3, 10, 10));
+		panel6.setLayout(new GridLayout(0, 3, 10, 10));
+		panel7.setLayout(new GridLayout(0, 3, 10, 10));
+		
+		panel1.add(comboBoxPatientsIds);
+		panel1.add(buttonStartTrail);		
+		panel2.add(addReading);
+		panel3.add(id);
+		panel3.add(idInput);
+		panel4.add(date);
+		panel4.add(dateInput);
+		panel5.add(type);
+		panel5.add(comboBoxRadingType);
+		panel6.add(value);
+		panel6.add(valueInput);
+		panel7.add(buttonAddReading);
+		
+		//Frame setup
+		frame = new JFrame();
+		frame.setLayout(new GridLayout(10, 10, 50, 50));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setJMenuBar(menuBar);
+		
+		frame.add(panel1);
+		frame.add(panel2);
+		frame.add(panel3);
+		frame.add(panel4);
+		frame.add(panel5);
+		frame.add(panel6);
+		frame.add(panel7);
+		
+		frame.pack();
+		frame.setLocation(150, 150);
+		frame.setVisible(true);
+	}
+	
+	
+	
 	
 	/**
 	 * uploadFile gets called from actionPerformed method, gets the input file and passes the filePath to readJsonFile in FileHandler class
@@ -76,16 +206,7 @@ public class Gui extends JPanel implements ActionListener {
 		buttonPatientsList.addActionListener(this);
 		buttonUploadFile.addActionListener(this);
 
-		//Frame setup
-		frame = new JFrame();
-		frame.setLayout(new GridLayout(5, 1, 10, 10));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(panel1);
-		frame.add(panel2);
-		
-		frame.pack();
-		frame.setLocation(150, 150);
-		frame.setVisible(true);
+
 	}
 
 	/**
@@ -102,7 +223,7 @@ public class Gui extends JPanel implements ActionListener {
 	 * and gives option to show info or start a trial for a patient
 	 */
 	public void displayPatientList() {
-		comboBox = new JComboBox(patientsID.toArray()); //Fill the comboBox with patients id
+		comboBoxPatientsIds = new JComboBox(patientsID.toArray()); //Fill the comboBox with patients id
 		JTextField textField = new JTextField("Patients List: Select a Patient");
 		textField.setEditable(false); //added this to make the textField uneditable
 		
@@ -119,7 +240,7 @@ public class Gui extends JPanel implements ActionListener {
 		//JPanel for the comboBox and button
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new GridLayout(0, 3, 10, 10));
-		panel2.add(comboBox); 
+		panel2.add(comboBoxPatientsIds); 
 		panel2.add(buttonShowInfo);
 		panel2.add(buttonStartTrial);
 		panel2.add(buttonEndTrial);
@@ -131,7 +252,7 @@ public class Gui extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				//Print the info of selected patient id
-				displayPatientInfo(ClinicalTrial.getAllPatients().get(comboBox.getSelectedIndex()).getPatientId());
+				displayPatientInfo(ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId());
 			};
 		});
 		
@@ -167,7 +288,7 @@ public class Gui extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				//Start trial
-				startPatientTrial(ClinicalTrial.getAllPatients().get(comboBox.getSelectedIndex()).getPatientId());
+				startPatientTrial(ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId());
 			};
 		});
 	
@@ -175,8 +296,8 @@ public class Gui extends JPanel implements ActionListener {
 		buttonEndTrial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Start trial
-				ClinicalTrial.findPatient(ClinicalTrial.getAllPatients().get(comboBox.getSelectedIndex()).getPatientId()).setActive(false);
-				JOptionPane.showMessageDialog(null, "Patient ID: " + ClinicalTrial.getAllPatients().get(comboBox.getSelectedIndex()).getPatientId()+"\nTrial has ended");
+				ClinicalTrial.findPatient(ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()).setActive(false);
+				JOptionPane.showMessageDialog(null, "Patient ID: " + ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()+"\nTrial has ended");
 			};
 		});
 		

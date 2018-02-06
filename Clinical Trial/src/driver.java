@@ -5,7 +5,7 @@ public class driver {
 		// TODO Auto-ge	nerated method stub
 		Gui g = new Gui();
 		
-		g.addPatient();
+		g.mainMenu();
 	}
 
 }
