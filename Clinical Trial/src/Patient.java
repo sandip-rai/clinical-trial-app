@@ -7,7 +7,7 @@ public class Patient {
 
 	protected Patient(String patientId) {
 		this.patientId = patientId;
-		this.setActive(true);
+		this.setActive(false);
 		this.readings = new ArrayList<Reading>();
 	}
 
