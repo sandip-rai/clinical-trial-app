@@ -228,19 +228,26 @@ public class Gui extends JPanel implements ActionListener {
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new GridLayout(0, 3, 10, 10));
 		
+		//Added all reading values for new readings
+		JTextField readingIdText = new JTextField(16);
 		JTextField readingTypeText = new JTextField(16);
-		JTextField readingValueText = new JTextField();
+		JTextField readingValueText = new JTextField(16);
+		JTextField readingDateText = new JTextField(16);
 		readingValueText.setSize(200, 200);
 
-		//set textfields
+		//set textfields.
+		readingIdText.setText("Enter readingId");
 		readingTypeText.setText("Enter reading type");
 		readingValueText.setText("Enter reading value");
+		readingDateText.setText("Enter date of reading");
 		
 		
 		
 		//Add elements to the panels
+		panel1.add(readingIdText);
 		panel1.add(readingTypeText);
 		panel1.add(readingValueText);
+		panel1.add(readingDateText);
 		panel2.add(addReadingButton);
 		
 		addReadingButton.addActionListener(new ActionListener(){
@@ -248,24 +255,29 @@ public class Gui extends JPanel implements ActionListener {
 				frame.dispose();
 				
 				//Get the new entered values in the textfield
+				String readingId = readingIdText.getText();
+				System.out.println("New Reading Type: =" + readingId); //DELETE
 				String readingType = readingTypeText.getText();
 				System.out.println("New Reading Type: =" + readingType); //DELETE
 				String readingValue = readingValueText.getText();
 				System.out.println("New Reading Value: =" + readingValue); //DELETE
+				String readingDate = readingDateText.getText();
+				System.out.println("New Reading Type: =" + readingDate); //DELETE
+				long date = Long.parseLong(readingDate); //Change date from String to long
+				
 				
 				Patient patient = ClinicalTrial.findPatient(selectedPatient); //Get the Patient
-				patient.getReadings().get(0).setTypeandReading(readingType, readingValue, patient); //Update the new reading info
-				//***************I ONLY AM CONSIDERING ONE READING VALUE IN THE ARRAYLIST OF READINGS; SO THERE'S AN INDEX 0 IN THERE.
-				//***************I ASSUME WE MIGHT ADD MULTIPLE READINGS WHILE IN THE TRIAL AND BEFORE WE END THE TRIAL
+				patient.addNewReadings(readingId, readingType, readingValue, date); //add the new readings to the patient
+				
 				//***************PLEASE LOOK INTO THIS AND ADD WHATEVER YOU FEEL MIGHT GET US CORRECTLY
 				
-				System.out.println(patient.getReadings().get(0).toString());
+				System.out.println(patient.getReadings().toString());
 				
 				JOptionPane.showMessageDialog(null,
 						"New Records have been added!!"); //Prompt the user that the new readings are added
 				
 				displayPatientList(); //GO BACK TO PREVIOUS MENU TO SHOW UPDATED INFO ;; NEED TO DO THIS TO DISPLAY END OF TRIAL WHILE KEEP ON ADDING 
-				//NEW READINGS BEFORE THE ENDING THE TRIAL
+				//NEED TO PASS TO ANOTHER METHOD WHICH WILL HAVE FRAME TO KEEP ADDING NEW RECORDS ALONG WITH END TRIAL BUTTON
 			}
 		});
 		

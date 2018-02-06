@@ -71,7 +71,7 @@ public class FileHandler {
 		//Try a FileReader 
 		try (Reader fileReader = new FileReader(fileLocation)) {
 			PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class); //Create PatientReadingsJson object which creates an arraylist
-			//addPatientsToTrial(readingList.patient_readings);
+			addPatientsToTrial(readingList.patient_readings);
 			AddReadingToPatient(readingList.patient_readings); //Call AddReadingToPatient to add readings from input file to Patient's readings arraylist
 		} catch (IOException e) { //Catch if fileLocation doesn't exist
 			e.printStackTrace();
