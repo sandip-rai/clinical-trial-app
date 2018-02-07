@@ -1,4 +1,5 @@
 
+
 /**
  * Gui class to show options to add, show patients list, and get input file from the user.
  */
@@ -30,78 +31,98 @@ public class Gui extends JPanel implements ActionListener {
 	FileHandler fh = new FileHandler();
 
 	public void mainMenu() {
+		// Create menu components
+				JMenuBar menuBar = new JMenuBar();
+				JMenu menu = new JMenu("Menu");
+
+				// Add menus to menu bar
+				menuBar.add(menu);
+
+				// Create and add menuItems to menu
+				JMenuItem patientInfo = menu.add("Patient Info");
+				JMenuItem manageFile = menu.add("Manage Files");
+
+				patientInfo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						frame.dispose();
+						displayPatientList();
+					}
+				});
+
+				manageFile.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						frame.dispose();
+						manageFile();
+					}
+				});
+				
+				//ComboBox to hold the patient id from the patients
+				comboBoxPatientsIds = new JComboBox<String>();
+				comboBoxPatientsIds.addItem("New patient"); //Display New Patient for the dropdown list in the first place
+				for (Patient patient : ClinicalTrial.getAllPatients()) {
+					comboBoxPatientsIds.addItem(patient.getPatientId()); //Fill the comboBox from the ClinicalTrial arrayList
+				}
+
+				JButton buttonStartTrial = new JButton("Start Patient Trial"); //Button
+				buttonStartTrial.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (comboBoxPatientsIds.getSelectedItem().toString() == "New patient") {
+							frame.dispose();
+							addPatient(); //Selecting new patient will call addPatient to allow to add new patient
+						} else {//already in trial
+							if (ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).isActive()) {
+								JOptionPane.showMessageDialog(null, "This Patient is already active in trial");
+							} else {//added to trail
+								ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).setActive(true);
+								JOptionPane.showMessageDialog(null, "This patient is set to actve and started trial");
+							}
+						}
+					}
+				});
+		
+		//Array to hold the reading types which will be showed in the comboBox
 		String[] readingTypes = new String[] { "Weight", "Steps", "Temp", "Blood Pressure" };
-		JComboBox<String> comboBoxRadingType = new JComboBox<String>(readingTypes);
+		JComboBox<String> comboBoxReadingType = new JComboBox<String>(readingTypes);
 
 		JButton buttonAddReading = new JButton("Add");
-		buttonAddReading.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// need implementation.
-			};
-		});
+		
 
 		// Creates labels and user input textFeild
 		JLabel addReading = new JLabel("Add a new reading:");
-		JLabel id = new JLabel("PatientID:");
-		JLabel date = new JLabel("Date:");
-		JLabel type = new JLabel("Type:");
-		JLabel value = new JLabel("Value:");
+		JLabel id = new JLabel("Reading ID:");
+		JLabel date = new JLabel("Reading Date:");
+		JLabel type = new JLabel("Reading Type:");
+		JLabel value = new JLabel("Reading Value:");
 		JTextField valueInput = new JTextField(16);
 		JTextField idInput = new JTextField(16);
 		JTextField dateInput = new JTextField(16);
 		JTextField pastReadingDisplay = new JTextField(16);
+		
+		//When Add button is pressed
+		buttonAddReading.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+ 				//Get the new entered values in the textfield
+				String readingId = idInput.getText();
+ 				String readingType = (String) comboBoxReadingType.getSelectedItem();
+ 				String readingValue = valueInput.getText();
+ 				String readingDate = dateInput.getText();
+				long date = Long.parseLong(readingDate); //Change date from String to long
+				
+				//Get the patient from the ClinicalTrial arraylist and add the new readings to that patient
+				ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).
+																			addNewReadings(readingId, readingType, readingValue, date);
+				
+				//Clear the textfields for new input
+				idInput.setText("");
+				valueInput.setText("");
+				dateInput.setText("");
+			};
+		});
 
 		// Set all labels not editable
 		pastReadingDisplay.setEditable(false);
 
-		// Create menu components
-		JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu("Menu");
-
-		// Add menus to menu bar
-		menuBar.add(menu);
-
-		// Create and add menuItems to menu
-		JMenuItem patientInfo = menu.add("Patient Info");
-		JMenuItem manageFile = menu.add("Manage Files");
-
-		patientInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				displayPatientList();
-			}
-		});
-
-		manageFile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				manageFile();
-			}
-		});
-
-		comboBoxPatientsIds = new JComboBox<String>();
-		comboBoxPatientsIds.addItem("New patient");
-		for (Patient patient : ClinicalTrial.getAllPatients()) {
-			comboBoxPatientsIds.addItem(patient.getPatientId());
-		}
-
-		JButton buttonStartTrial = new JButton("Start Patient Trial");
-		buttonStartTrial.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				if (comboBoxPatientsIds.getSelectedItem().toString() == "New patient") {
-					frame.dispose();
-					addPatient();
-				} else {
-					if (ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).isActive()) {
-						JOptionPane.showMessageDialog(null, "This Patient is already active in trial");
-					} else {
-						ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).setActive(true);
-						JOptionPane.showMessageDialog(null, "This patient is set to actve and started trial");
-					}
-				}
-			}
-		});
+		
 
 		// Create JPanels
 		JPanel panel1 = new JPanel();
@@ -128,10 +149,12 @@ public class Gui extends JPanel implements ActionListener {
 		panel4.add(date);
 		panel4.add(dateInput);
 		panel5.add(type);
-		panel5.add(comboBoxRadingType);
+		panel5.add(comboBoxReadingType);
 		panel6.add(value);
 		panel6.add(valueInput);
 		panel7.add(buttonAddReading);
+		
+		
 
 		// Frame setup
 		frame = new JFrame();
@@ -152,6 +175,9 @@ public class Gui extends JPanel implements ActionListener {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * 
+	 */
 	public void manageFile() {
 		JButton buttonUpload = new JButton("Upload a json file");
 		JButton buttonSave = new JButton("Save as a json file");
@@ -378,6 +404,7 @@ public class Gui extends JPanel implements ActionListener {
 		buttonShowInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
+				
 				// Print the info of selected patient id
 				displayPatientInfo(
 						ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId());
