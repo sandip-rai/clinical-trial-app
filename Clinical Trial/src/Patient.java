@@ -110,7 +110,7 @@ public class Patient {
 	 */
 	@Override
 	public String toString() {
-		return "Patient [patientId =" + patientId + ", active =" + active + ", readings =" + readings + "]";
+		return "Patient [patientId=" + patientId + ", active=" + active + ", readings=" + readings + "]";
 	}
 
 	
