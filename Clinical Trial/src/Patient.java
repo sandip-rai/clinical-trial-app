@@ -19,7 +19,6 @@ public class Patient {
 
 		this.setActive(true); //Needs to be false as no patient is in the trial at first; This will be set to true once a patient enters a trial
 		this.readings = new ArrayList<Reading>(); //Creates an arrayList of reading 
-=======
 	
 
 	}
