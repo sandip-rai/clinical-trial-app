@@ -17,7 +17,7 @@ public class ClinicalTrial {
 	}
 
 	/**
-	 * findPatient finds if a patient is currently in a trial or not	
+	 * findPatient finds if a patient is currently in a trial or not
 	 * @param patientId the Id of the patient
 	 * @return patient the patient if it exists in the allPatients arrayList
 	 */
@@ -28,5 +28,23 @@ public class ClinicalTrial {
 			}
 		}
 		return null; //if patient doesn't exist in the trial
+	}
+
+	/**
+	 * Adds a Patient to the Clinical trial if that patient has not yet been added.
+	 * @param patientId the Id of the patient
+	 * @return boolean true if patient was added. False if another patient with the same ID was found
+	 */
+	protected static Boolean addPatient(String patientId){
+		for (Patient patient : allPatients) { //loop through the allPatients arrayList
+			if (patientId.equals(patient.getPatientId())) {
+				//a patient with that ID was found return false without adding a new patient
+				return false;
+			}
+		}
+		//if no patient was found then add a new patient to the trial
+		Patient patient = new Patient(patientId);
+		allPatients.add(patient);
+		return true;
 	}
 }
