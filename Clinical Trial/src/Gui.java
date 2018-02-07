@@ -1,6 +1,6 @@
 
 /**
- * GGui class to show options to add, show patients list, and get input file from the user.
+ * Gui class to show options to add, show patients list, and get input file from the user.
  */
 import javax.swing.*;
 import java.awt.event.*;
@@ -17,7 +17,6 @@ public class Gui extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	JFrame frame;
-	ArrayList<String> patientsID = new ArrayList<>(); // Corrected the name
 
 	// Adding buttons to the GUI interface; these buttons are later called in
 	// actionPerformed event.
@@ -30,10 +29,6 @@ public class Gui extends JPanel implements ActionListener {
 	FileHandler fh = new FileHandler();
 
 	public void mainMenu() {
-		if (!patientsID.contains("New patient")) {
-			patientsID.add("New patient");
-		}
-
 		String[] readingTypes = new String[] { "Weight", "Steps", "Temp", "Blood Pressuer" };
 		JComboBox<String> comboBoxRadingType = new JComboBox<String>(readingTypes);
 
@@ -84,8 +79,9 @@ public class Gui extends JPanel implements ActionListener {
 		});
 
 		comboBoxPatientsIds = new JComboBox<String>();
-		for (String patient : patientsID) {
-			comboBoxPatientsIds.addItem(patient);
+		comboBoxPatientsIds.addItem("New patient");
+		for (Patient patient : ClinicalTrial.getAllPatients()) {
+			comboBoxPatientsIds.addItem(patient.getPatientId());
 		}
 
 		JButton buttonStartTrail = new JButton("Start Patient Trail");
@@ -227,9 +223,6 @@ public class Gui extends JPanel implements ActionListener {
 																// path
 			fh.readJsonFile(filePath); // Pass to FileHandler class method
 
-			for (Patient patient : ClinicalTrial.getAllPatients()) {
-				patientsID.add(patient.getPatientId());
-			}
 			frame.dispose();
 			displayPatientList();
 		}
@@ -284,6 +277,14 @@ public class Gui extends JPanel implements ActionListener {
 		panel2.add(inputText);
 		panel3.add(buttonAdd);
 		panel3.add(back);
+		
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				mainMenu();
+			}
+		});
+			
 
 		buttonAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -322,11 +323,9 @@ public class Gui extends JPanel implements ActionListener {
 	 * Trial and gives option to show info or start a trial for a patient
 	 */
 	public void displayPatientList() {
-		patientsID.remove(0);
-
 		JComboBox<String> comboBoxPatientsIds = new JComboBox<String>();
-		for (String patient : patientsID) {
-			comboBoxPatientsIds.addItem(patient);
+		for (Patient patient : ClinicalTrial.getAllPatients()) {
+			comboBoxPatientsIds.addItem(patient.getPatientId());
 		}
 
 		JLabel label = new JLabel("Patients List: Select a Patient");
@@ -417,8 +416,6 @@ public class Gui extends JPanel implements ActionListener {
 	 */
 	public void displayPatientInfo(String selectedPatient) {
 		JButton buttonBack = new JButton("Back");
-		// checkbox = new JCheckBox("Check to Active");
-		// checkbox.setSelected(true);
 
 		// Two textfields to show the PatientID and the patient info
 		JTextField patientID = new JTextField(16);
