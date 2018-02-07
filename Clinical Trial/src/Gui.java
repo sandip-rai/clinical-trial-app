@@ -4,7 +4,6 @@
  */
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.awt.GridLayout;
 import java.io.*;
 import com.google.gson.*;
@@ -34,15 +33,10 @@ public class Gui extends JPanel implements ActionListener {
 		JComboBox<String> comboBoxRadingType = new JComboBox<String>(readingTypes);
 
 		JButton buttonAddReading = new JButton("Add");
-		buttonAddReading.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// need implementation.
-			};
-		});
 
 		// Creates labels and user input textFeild
 		JLabel addReading = new JLabel("Add a new reading:");
-		JLabel id = new JLabel("PatientID:");
+		JLabel id = new JLabel("ReadingID:");
 		JLabel date = new JLabel("Date:");
 		JLabel type = new JLabel("Type:");
 		JLabel value = new JLabel("Value:");
@@ -78,7 +72,31 @@ public class Gui extends JPanel implements ActionListener {
 				manageFile();
 			}
 		});
+		
+		buttonAddReading.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String readingId = idInput.getText();
+				
+				String readingType = comboBoxRadingType.getSelectedItem().toString();
+				
+				String readingValue = valueInput.getText();
+				
+				String readingDate = dateInput.getText();
+				
+				long date = Long.parseLong(readingDate); // Change date from String to long
+				
+				if(ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()) !=null){
+					Patient patient = ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()); 
+					patient.addNewReadings(readingId, readingType, readingValue, date); 
 
+					JOptionPane.showMessageDialog(null, "New Records have been added!!");
+				} else {
+					JOptionPane.showMessageDialog(null, "Fail, selected patient is not in trail");
+				}
+
+			};
+		});
+		
 		comboBoxPatientsIds = new JComboBox<String>();
 		comboBoxPatientsIds.addItem("New patient");
 		for (Patient patient : ClinicalTrial.getAllPatients()) {
@@ -189,31 +207,29 @@ public class Gui extends JPanel implements ActionListener {
 			}
 		});
 
-		// need to be implemented
 		buttonSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String fileName;
- +				frame.dispose();
- +				//Print the info of selected patient id
- +				JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
- +				int returnValue = jfc.showSaveDialog(null);
- +				if (returnValue == JFileChooser.APPROVE_OPTION) {
- +					fileName = jfc.getSelectedFile().getAbsolutePath();
- +					if(fileName.lastIndexOf(".") != -1) {fileName = fileName.substring(0, fileName.lastIndexOf('.'))+".json";}
- +					else {fileName = fileName+".json";}
- +					System.out.println(fileName);
- +
- +					try {
- +						Writer writer = new FileWriter(fileName);
- +						Gson gson = new GsonBuilder().create();
- +					    gson.toJson(ClinicalTrial.getAllPatients(), writer);	
- +						writer.close();
- +					} catch (IOException e1) {
- +						// TODO Auto-generated catch block
- +						e1.printStackTrace();
- +					}
- +	
- +				}
+ 				frame.dispose();
+ 				//Print the info of selected patient id
+ 				JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
+ 				int returnValue = jfc.showSaveDialog(null);
+ 				if (returnValue == JFileChooser.APPROVE_OPTION) {
+ 					fileName = jfc.getSelectedFile().getAbsolutePath();
+ 					if(fileName.lastIndexOf(".") != -1) {fileName = fileName.substring(0, fileName.lastIndexOf('.'))+".json";}
+ 					else {fileName = fileName+".json";}
+ 					System.out.println(fileName);
+
+					try {
+						Writer writer = new FileWriter(fileName);
+						Gson gson = new GsonBuilder().create();
+					    gson.toJson(ClinicalTrial.getAllPatients(), writer);	
+ 						writer.close();
+ 					} catch (IOException e1) {
+ 						e1.printStackTrace();
+ 					}
+ 	
+ 				}
 			}
 		});
 
@@ -487,6 +503,8 @@ public class Gui extends JPanel implements ActionListener {
 	 *
 	 * @param selectedPatient
 	 */
+	// this method is no longer needed I modified your implementation and added it to addreading button 
+	/*
 	public void startPatientTrial(String selectedPatient) {
 		ClinicalTrial.findPatient(selectedPatient).setActive(true); // set
 																	// patient
@@ -582,6 +600,7 @@ public class Gui extends JPanel implements ActionListener {
 		frame.setLocation(150, 150);
 		frame.setVisible(true);
 	}
+	*/
 
 	/**
 	 * actionPerformed gets the user action from the GUI and calls further
@@ -589,30 +608,6 @@ public class Gui extends JPanel implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/**
-		 * This condition is NOT-NEEDED as we are not adding any new patient;
-		 * but we could use codes present in this //Condition for Add button if
-		 * (e.getSource() == buttonAdd) { String tempId =
-		 * userInputNewPatientID.getText(); //assign the PatientId that user
-		 * inputs if (ClinicalTrial.findPatient(tempId) == null) {
-		 * addPatientsToTrial(tempId); //add the Patient to trial if it is not
-		 * in trial addPatientState.setText("Patient Added !! Ready for next
-		 * patient. "); } else { //notify if patient is already present in trial
-		 * addPatientState.setText("Patient is already enrolled for the
-		 * trial."); } }
-		 **/
-
-		/**
-		 * NOT-NEEDED as this is done on the next menu after the FILE is
-		 * UPLOADED. //Condition to show list of Patients if (e.getSource() ==
-		 * buttonPatientsList) { if (ClinicalTrial.getAllPatients().size() <= 0)
-		 * { //Notify if no patient in the trial
-		 * JOptionPane.showMessageDialog(null, "No patient record in this
-		 * clinical trial. Please add new patient first!"); } else {
-		 * frame.dispose(); displayPatientList(); //Display the patients list }
-		 * }
-		 **/
-
 		// Condition for upload button; call uploadFile method which gets the
 		// input file.
 		if (e.getSource() == buttonUploadFile) {
