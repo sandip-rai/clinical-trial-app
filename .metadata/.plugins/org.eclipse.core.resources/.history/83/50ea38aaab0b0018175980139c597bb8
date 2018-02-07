@@ -2,20 +2,33 @@
 /**
  * GGui class to show options to add, show patients list, and get input file from the user.
  */
-import javax.swing.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.awt.GridLayout;
-import java.io.File;
 
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Gui extends JPanel implements ActionListener {
-
-	/**
-	 * default serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-
 	JFrame frame;
 	ArrayList<String> patientsID = new ArrayList<>(); // Corrected the name
 
@@ -53,6 +66,7 @@ public class Gui extends JPanel implements ActionListener {
 		JTextField valueInput = new JTextField(16);
 		JTextField idInput = new JTextField(16);
 		JTextField dateInput = new JTextField(16);
+		JLabel pastReading = new JLabel("Past readings:");
 		JTextField pastReadingDisplay = new JTextField(16);
 
 		// Set all labels not editable
@@ -83,10 +97,7 @@ public class Gui extends JPanel implements ActionListener {
 			}
 		});
 
-		comboBoxPatientsIds = new JComboBox<String>();
-		for (String patient : patientsID) {
-			comboBoxPatientsIds.addItem(patient);
-		}
+		comboBoxPatientsIds = new JComboBox(patientsID.toArray());
 
 		JButton buttonStartTrail = new JButton("Start Patient Trail");
 
@@ -271,10 +282,10 @@ public class Gui extends JPanel implements ActionListener {
 			}
 		});
 
-		manageFile.addActionListener(new ActionListener() {
+		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				manageFile();
+				mainMenu();
 			}
 		});
 
@@ -298,6 +309,7 @@ public class Gui extends JPanel implements ActionListener {
 					inputText.setText("");
 				} else {
 					addPatientState.setText("That patient is already in this trial.");
+					inputText.setText("");
 				}
 			}
 		});
@@ -323,12 +335,11 @@ public class Gui extends JPanel implements ActionListener {
 	 */
 	public void displayPatientList() {
 		patientsID.remove(0);
-
-		JComboBox<String> comboBoxPatientsIds = new JComboBox<String>();
-		for (String patient : patientsID) {
-			comboBoxPatientsIds.addItem(patient);
-		}
-
+		comboBoxPatientsIds = new JComboBox(patientsID.toArray()); // Fill the
+																	// comboBox
+																	// with
+																	// patients
+																	// id
 		JLabel label = new JLabel("Patients List: Select a Patient");
 
 		JButton buttonShowInfo = new JButton("Show Patient's Info");
@@ -373,6 +384,29 @@ public class Gui extends JPanel implements ActionListener {
 			};
 		});
 
+		/*
+		 * Open save dialog box, find filepath of selected file, use gson_lib to
+		 * write patients to JSON file
+		 * buttonExportReadings.addActionListener(new ActionListener() { public
+		 * void actionPerformed(ActionEvent e) { String fileName;
+		 * frame.dispose(); JFileChooser jfc = new
+		 * JFileChooser(System.getProperty("user.dir")); int returnValue =
+		 * jfc.showSaveDialog(null); if (returnValue ==
+		 * JFileChooser.APPROVE_OPTION) { fileName =
+		 * jfc.getSelectedFile().getAbsolutePath(); if(fileName.lastIndexOf(".")
+		 * != -1) {fileName = fileName.substring(0,
+		 * fileName.lastIndexOf('.'))+".json";} else {fileName =
+		 * fileName+".json";} System.out.println(fileName);
+		 * 
+		 * try { Writer writer = new FileWriter(fileName); Gson gson = new
+		 * GsonBuilder().create(); gson.toJson(ClinicalTrial.getAllPatients(),
+		 * writer); writer.close(); } catch (IOException e1) { // TODO
+		 * Auto-generated catch block e1.printStackTrace(); }
+		 * 
+		 * } }; });
+		 */
+
+		//
 		buttonResumeTrial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClinicalTrial.findPatient(
@@ -411,7 +445,7 @@ public class Gui extends JPanel implements ActionListener {
 
 	/**
 	 * displayPatientInfo shows the patient info of the corresponding patient id
-	 *
+	 * 
 	 * @param selectedPatient
 	 *            patientID of the called patient
 	 */
@@ -464,7 +498,7 @@ public class Gui extends JPanel implements ActionListener {
 	/**
 	 * Starts the patient trial by allowing user to add new reading type and
 	 * value, and adds them to the patient's reading info
-	 *
+	 * 
 	 * @param selectedPatient
 	 */
 	public void startPatientTrial(String selectedPatient) {

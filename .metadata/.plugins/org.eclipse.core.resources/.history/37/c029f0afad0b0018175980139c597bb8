@@ -10,12 +10,6 @@ import java.io.File;
 
 
 public class Gui extends JPanel implements ActionListener {
-
-	/**
-	 * default serialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
-
 	JFrame frame;
 	ArrayList<String> patientsID = new ArrayList<>(); // Corrected the name
 
@@ -53,6 +47,7 @@ public class Gui extends JPanel implements ActionListener {
 		JTextField valueInput = new JTextField(16);
 		JTextField idInput = new JTextField(16);
 		JTextField dateInput = new JTextField(16);
+		JLabel pastReading = new JLabel("Past readings:");
 		JTextField pastReadingDisplay = new JTextField(16);
 
 		// Set all labels not editable
@@ -83,10 +78,7 @@ public class Gui extends JPanel implements ActionListener {
 			}
 		});
 
-		comboBoxPatientsIds = new JComboBox<String>();
-		for (String patient : patientsID) {
-			comboBoxPatientsIds.addItem(patient);
-		}
+		comboBoxPatientsIds = new JComboBox(patientsID.toArray());
 
 		JButton buttonStartTrail = new JButton("Start Patient Trail");
 
@@ -271,10 +263,10 @@ public class Gui extends JPanel implements ActionListener {
 			}
 		});
 
-		manageFile.addActionListener(new ActionListener() {
+		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				manageFile();
+				mainMenu();
 			}
 		});
 
@@ -323,12 +315,11 @@ public class Gui extends JPanel implements ActionListener {
 	 */
 	public void displayPatientList() {
 		patientsID.remove(0);
-
-		JComboBox<String> comboBoxPatientsIds = new JComboBox<String>();
-		for (String patient : patientsID) {
-			comboBoxPatientsIds.addItem(patient);
-		}
-
+		comboBoxPatientsIds = new JComboBox(patientsID.toArray()); // Fill the
+																	// comboBox
+																	// with
+																	// patients
+																	// id
 		JLabel label = new JLabel("Patients List: Select a Patient");
 
 		JButton buttonShowInfo = new JButton("Show Patient's Info");
@@ -372,6 +363,7 @@ public class Gui extends JPanel implements ActionListener {
 				mainMenu();
 			};
 		});
+
 
 		buttonResumeTrial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

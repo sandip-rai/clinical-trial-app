@@ -83,10 +83,7 @@ public class Gui extends JPanel implements ActionListener {
 			}
 		});
 
-		comboBoxPatientsIds = new JComboBox<String>();
-		for (String patient : patientsID) {
-			comboBoxPatientsIds.addItem(patient);
-		}
+		comboBoxPatientsIds = new JComboBox(patientsID.toArray());
 
 		JButton buttonStartTrail = new JButton("Start Patient Trail");
 
@@ -323,12 +320,11 @@ public class Gui extends JPanel implements ActionListener {
 	 */
 	public void displayPatientList() {
 		patientsID.remove(0);
-
-		JComboBox<String> comboBoxPatientsIds = new JComboBox<String>();
-		for (String patient : patientsID) {
-			comboBoxPatientsIds.addItem(patient);
-		}
-
+		comboBoxPatientsIds = new JComboBox(patientsID.toArray()); // Fill the
+																	// comboBox
+																	// with
+																	// patients
+																	// id
 		JLabel label = new JLabel("Patients List: Select a Patient");
 
 		JButton buttonShowInfo = new JButton("Show Patient's Info");
