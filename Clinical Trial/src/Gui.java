@@ -6,7 +6,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.awt.GridLayout;
-import java.io.File;
+import java.io.*;
+import com.google.gson.*;
 
 
 public class Gui extends JPanel implements ActionListener {
@@ -191,6 +192,28 @@ public class Gui extends JPanel implements ActionListener {
 		// need to be implemented
 		buttonSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String fileName;
+ +				frame.dispose();
+ +				//Print the info of selected patient id
+ +				JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
+ +				int returnValue = jfc.showSaveDialog(null);
+ +				if (returnValue == JFileChooser.APPROVE_OPTION) {
+ +					fileName = jfc.getSelectedFile().getAbsolutePath();
+ +					if(fileName.lastIndexOf(".") != -1) {fileName = fileName.substring(0, fileName.lastIndexOf('.'))+".json";}
+ +					else {fileName = fileName+".json";}
+ +					System.out.println(fileName);
+ +
+ +					try {
+ +						Writer writer = new FileWriter(fileName);
+ +						Gson gson = new GsonBuilder().create();
+ +					    gson.toJson(ClinicalTrial.getAllPatients(), writer);	
+ +						writer.close();
+ +					} catch (IOException e1) {
+ +						// TODO Auto-generated catch block
+ +						e1.printStackTrace();
+ +					}
+ +	
+ +				}
 			}
 		});
 
