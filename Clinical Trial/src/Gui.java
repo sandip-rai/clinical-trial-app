@@ -47,7 +47,7 @@ public class Gui extends JPanel implements ActionListener {
 			patientsID.add("New patient");
 		}
 
-		String [] readingTypes = new String[] {"Weight", "Steps", "Temp", "Blood Pressuer"};
+		String [] readingTypes = new String[] {"Weight", "Steps", "Temp", "Blood Pressure"};
 		JComboBox comboBoxRadingType = new JComboBox(readingTypes);
 		
 		JButton buttonAddReading = new JButton("Add");
@@ -99,16 +99,16 @@ public class Gui extends JPanel implements ActionListener {
 		
 		comboBoxPatientsIds = new JComboBox(patientsID.toArray());
 		
-		JButton buttonStartTrail = new JButton("Start Patient Trail");
+		JButton buttonStartTrial = new JButton("Start Patient Trial");
 		
-		buttonStartTrail.addActionListener(new ActionListener() {
+		buttonStartTrial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBoxPatientsIds.getSelectedItem().toString() == "New patient") {
 					frame.dispose();
 					addPatient();
 				} else {
 					if (ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).isActive()) {
-						JOptionPane.showMessageDialog(null, "This Patient is already active in trail");
+						JOptionPane.showMessageDialog(null, "This Patient is already active in trial");
 					} else {
 						ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).setActive(true);
 						JOptionPane.showMessageDialog(null, "This patient is set to actve and started trial");
@@ -135,7 +135,7 @@ public class Gui extends JPanel implements ActionListener {
 		panel7.setLayout(new GridLayout(0, 3, 10, 10));
 		
 		panel1.add(comboBoxPatientsIds);
-		panel1.add(buttonStartTrail);		
+		panel1.add(buttonStartTrial);		
 		panel2.add(addReading);
 		panel3.add(id);
 		panel3.add(idInput);
@@ -167,8 +167,8 @@ public class Gui extends JPanel implements ActionListener {
 	}	
 	
 	public void manageFile(){
-		JButton buttonUpload = new JButton("Upload a Jason file");
-		JButton buttonSave = new JButton("Save as a jaon file");
+		JButton buttonUpload = new JButton("Upload a json file");
+		JButton buttonSave = new JButton("Save as a json file");
 		
 		
 		//Creating JPanels
