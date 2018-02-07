@@ -1,11 +1,17 @@
 
+/**
+ * Driver class having the main method.
+ *
+ */
 public class driver {
 
 	public static void main(String[] args) {
-		// TODO Auto-ge	nerated method stub
+		//Create a Gui object
 		Gui g = new Gui();
 		
-		g.addPatient();
+		//Run the mainMenu() of the Gui class to start the program
+		g.mainMenu();
 	}
 
 }
+
