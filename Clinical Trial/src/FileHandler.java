@@ -28,10 +28,6 @@ public class FileHandler {
 		 * Argument specified Constructor
 		 * @param pr arraylist holding the ReadingJson class objects
 		 */
-		PatientReadingsJson(ArrayList<ReadingJson> pr)
-        {
-            patient_readings = pr;
-        }
 	}
 
 	/**
@@ -47,13 +43,7 @@ public class FileHandler {
 		private String reading_date;
 
 		//Arguments specified Constructor
-		ReadingJson(String id, String type, String rid, String rval, String rdate){
-		    patient_id = id;
-		    reading_type = type;
-		    reading_id = rid;
-		    reading_value = rval;
-		    reading_date = rdate;
-        }
+
 	}
 
 	/**

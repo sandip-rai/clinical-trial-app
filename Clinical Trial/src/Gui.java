@@ -5,13 +5,11 @@
  */
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.awt.GridLayout;
-import java.io.*;
-import com.google.gson.*;
 
 
-public class Gui extends JPanel implements ActionListener {
+
+public class Gui extends JPanel {
 
 	/**
 	 * default serialVersionUID
@@ -211,7 +209,8 @@ public class Gui extends JPanel implements ActionListener {
 		buttonUpload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				uploadFile();
+				fh.readJsonFile();
+				displayPatientList();
 			}
 		});
 
@@ -238,13 +237,6 @@ public class Gui extends JPanel implements ActionListener {
 	 * uploadFile gets called from actionPerformed method, gets the input file
 	 * and passes the filePath to readJsonFile in FileHandler class
 	 */
-	public void uploadFile() {
-			fh.readJsonFile(); // Pass to FileHandler class method
-
-			frame.dispose();
-			displayPatientList();
-
-	}
 
 	public void addPatient() {
 		JLabel label = new JLabel("PatientID:");
@@ -482,137 +474,5 @@ public class Gui extends JPanel implements ActionListener {
 	 *
 	 * @param selectedPatient
 	 */
-	public void startPatientTrial(String selectedPatient) {
-		ClinicalTrial.findPatient(selectedPatient).setActive(true); // set
-																	// patient
-																	// as active
-																	// during
-																	// the trial
 
-		JButton addReadingButton = new JButton("Add new readings");
-
-		JPanel panel1 = new JPanel();
-		panel1.setLayout(new GridLayout(0, 3, 10, 10));
-		JPanel panel2 = new JPanel();
-		panel2.setLayout(new GridLayout(0, 3, 10, 10));
-
-		// Added all reading values for new readings
-		JTextField readingIdText = new JTextField(16);
-		JTextField readingTypeText = new JTextField(16);
-		JTextField readingValueText = new JTextField(16);
-		JTextField readingDateText = new JTextField(16);
-		readingValueText.setSize(200, 200);
-
-		// set textfields.
-		readingIdText.setText("Enter readingId");
-		readingTypeText.setText("Enter reading type");
-		readingValueText.setText("Enter reading value");
-		readingDateText.setText("Enter date of reading");
-
-		// Add elements to the panels
-		panel1.add(readingIdText);
-		panel1.add(readingTypeText);
-		panel1.add(readingValueText);
-		panel1.add(readingDateText);
-		panel2.add(addReadingButton);
-
-		addReadingButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-
-				// Get the new entered values in the textfield
-				String readingId = readingIdText.getText();
-				System.out.println("New Reading Type: =" + readingId); // DELETE
-				String readingType = readingTypeText.getText();
-				System.out.println("New Reading Type: =" + readingType); // DELETE
-				String readingValue = readingValueText.getText();
-				System.out.println("New Reading Value: =" + readingValue); // DELETE
-				String readingDate = readingDateText.getText();
-				System.out.println("New Reading Type: =" + readingDate); // DELETE
-				long date = Long.parseLong(readingDate); // Change date from
-															// String to long
-
-				Patient patient = ClinicalTrial.findPatient(selectedPatient); // Get
-																				// the
-																				// Patient
-				patient.addNewReadings(readingId, readingType, readingValue, date); // add
-																					// the
-																					// new
-																					// readings
-																					// to
-																					// the
-																					// patient
-
-				// ***************PLEASE LOOK INTO THIS AND ADD WHATEVER YOU
-				// FEEL MIGHT GET US CORRECTLY
-
-				System.out.println(patient.getReadings().toString());
-
-				JOptionPane.showMessageDialog(null, "New Records have been added!!"); // Prompt
-																						// the
-																						// user
-																						// that
-																						// the
-																						// new
-																						// readings
-																						// are
-																						// added
-
-				displayPatientList(); // GO BACK TO PREVIOUS MENU TO SHOW
-										// UPDATED INFO ;; NEED TO DO THIS TO
-										// DISPLAY END OF TRIAL WHILE KEEP ON
-										// ADDING
-				// NEED TO PASS TO ANOTHER METHOD WHICH WILL HAVE FRAME TO KEEP
-				// ADDING NEW RECORDS ALONG WITH END TRIAL BUTTON
-			}
-		});
-
-		// Create the frame and add the panels to it
-		frame = new JFrame();
-		frame.setLayout(new GridLayout(3, 1, 10, 10));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(panel1);
-		frame.add(panel2);
-		frame.pack();
-		frame.setLocation(150, 150);
-		frame.setVisible(true);
-	}
-
-	/**
-	 * actionPerformed gets the user action from the GUI and calls further
-	 * methods based on user choice.
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		/**
-		 * This condition is NOT-NEEDED as we are not adding any new patient;
-		 * but we could use codes present in this //Condition for Add button if
-		 * (e.getSource() == buttonAdd) { String tempId =
-		 * userInputNewPatientID.getText(); //assign the PatientId that user
-		 * inputs if (ClinicalTrial.findPatient(tempId) == null) {
-		 * addPatientsToTrial(tempId); //add the Patient to trial if it is not
-		 * in trial addPatientState.setText("Patient Added !! Ready for next
-		 * patient. "); } else { //notify if patient is already present in trial
-		 * addPatientState.setText("Patient is already enrolled for the
-		 * trial."); } }
-		 **/
-
-		/**
-		 * NOT-NEEDED as this is done on the next menu after the FILE is
-		 * UPLOADED. //Condition to show list of Patients if (e.getSource() ==
-		 * buttonPatientsList) { if (ClinicalTrial.getAllPatients().size() <= 0)
-		 * { //Notify if no patient in the trial
-		 * JOptionPane.showMessageDialog(null, "No patient record in this
-		 * clinical trial. Please add new patient first!"); } else {
-		 * frame.dispose(); displayPatientList(); //Display the patients list }
-		 * }
-		 **/
-
-		// Condition for upload button; call uploadFile method which gets the
-		// input file.
-		if (e.getSource() == buttonUploadFile) {
-			uploadFile();
-		}
-
-	}
 }
