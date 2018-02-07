@@ -19,7 +19,7 @@ public class Patient {
 
 		this.setActive(true); //Needs to be false as no patient is in the trial at first; This will be set to true once a patient enters a trial
 		this.readings = new ArrayList<Reading>(); //Creates an arrayList of reading 
-=======
+
 	
 
 	}
@@ -105,4 +105,13 @@ public class Patient {
 		this.active = active;
 	}
 
+	/**
+	 * toString method to print the parameters of the Patient class in string form
+	 */
+	@Override
+	public String toString() {
+		return "Patient [patientId=" + patientId + ", active=" + active + ", readings=" + readings + "]";
+	}
+
+	
 }
