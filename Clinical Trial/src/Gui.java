@@ -304,6 +304,7 @@ public class Gui extends JPanel {
 															// patient ID
 					addPatientState.setText("Please enter a patient ID");
 				} else if (ClinicalTrial.addPatient(tempId)) {
+					ClinicalTrial.findPatient(tempId).setActive(true);
 					addPatientState.setText("Added! Ready for next patient. ");
 					inputText.setText("");
 				} else {
