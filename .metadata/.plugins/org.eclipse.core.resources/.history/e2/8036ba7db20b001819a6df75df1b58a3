@@ -34,9 +34,15 @@ public class Gui extends JPanel implements ActionListener {
 			patientsID.add("New patient");
 		}
 
+<<<<<<< HEAD
 		String[] readingTypes = new String[] { "Weight", "Steps", "Temp", "Blood Pressuer" };
 		JComboBox<String> comboBoxRadingType = new JComboBox<String>(readingTypes);
 
+=======
+		String [] readingTypes = new String[] {"Weight", "Steps", "Temp", "Blood Pressure"};
+		JComboBox comboBoxRadingType = new JComboBox(readingTypes);
+		
+>>>>>>> 806eb708bd973437522adb68bbe93e7a58313789
 		JButton buttonAddReading = new JButton("Add");
 		buttonAddReading.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,6 +88,7 @@ public class Gui extends JPanel implements ActionListener {
 				manageFile();
 			}
 		});
+<<<<<<< HEAD
 
 		comboBoxPatientsIds = new JComboBox<String>();
 		for (String patient : patientsID) {
@@ -89,8 +96,16 @@ public class Gui extends JPanel implements ActionListener {
 		}
 
 		JButton buttonStartTrail = new JButton("Start Patient Trail");
-		buttonStartTrail.addActionListener(new ActionListener() {
 
+		buttonStartTrail.addActionListener(new ActionListener() {
+=======
+		
+		comboBoxPatientsIds = new JComboBox(patientsID.toArray());
+		
+		JButton buttonStartTrial = new JButton("Start Patient Trial");
+		
+		buttonStartTrial.addActionListener(new ActionListener() {
+>>>>>>> 806eb708bd973437522adb68bbe93e7a58313789
 			public void actionPerformed(ActionEvent e) {
 				if (comboBoxPatientsIds.getSelectedItem().toString() == "New patient") {
 					frame.dispose();
@@ -124,7 +139,11 @@ public class Gui extends JPanel implements ActionListener {
 		panel7.setLayout(new GridLayout(0, 3, 10, 10));
 
 		panel1.add(comboBoxPatientsIds);
+<<<<<<< HEAD
 		panel1.add(buttonStartTrail);
+=======
+		panel1.add(buttonStartTrial);		
+>>>>>>> 806eb708bd973437522adb68bbe93e7a58313789
 		panel2.add(addReading);
 		panel3.add(id);
 		panel3.add(idInput);
@@ -153,6 +172,7 @@ public class Gui extends JPanel implements ActionListener {
 		frame.pack();
 		frame.setLocation(150, 150);
 		frame.setVisible(true);
+<<<<<<< HEAD
 	}
 
 	public void manageFile() {
@@ -160,6 +180,16 @@ public class Gui extends JPanel implements ActionListener {
 		JButton buttonSave = new JButton("Save as a jaon file");
 
 		// Creating JPanels
+=======
+	}	
+	
+	public void manageFile(){
+		JButton buttonUpload = new JButton("Upload a json file");
+		JButton buttonSave = new JButton("Save as a json file");
+		
+		
+		//Creating JPanels
+>>>>>>> 806eb708bd973437522adb68bbe93e7a58313789
 		JPanel panel1 = new JPanel();
 
 		panel1.setLayout(new GridLayout(0, 3, 10, 10));
