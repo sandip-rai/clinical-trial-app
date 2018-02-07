@@ -176,7 +176,7 @@ public class Gui extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * This method manages the io, both importing and exporting json files.
 	 */
 	public void manageFile() {
 		JButton buttonUpload = new JButton("Upload a json file");
@@ -273,7 +273,11 @@ public class Gui extends JPanel implements ActionListener {
 		}
 
 	}
-
+	
+	/**
+	 * This method will add the patient to the trial, allowing it to be edited 
+	 * for the duration of the trial.
+	 */
 	public void addPatient() {
 		JLabel label = new JLabel("PatientID:");
 		JTextField inputText = new JTextField("");
@@ -612,29 +616,7 @@ public class Gui extends JPanel implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/**
-		 * This condition is NOT-NEEDED as we are not adding any new patient;
-		 * but we could use codes present in this //Condition for Add button if
-		 * (e.getSource() == buttonAdd) { String tempId =
-		 * userInputNewPatientID.getText(); //assign the PatientId that user
-		 * inputs if (ClinicalTrial.findPatient(tempId) == null) {
-		 * addPatientsToTrial(tempId); //add the Patient to trial if it is not
-		 * in trial addPatientState.setText("Patient Added !! Ready for next
-		 * patient. "); } else { //notify if patient is already present in trial
-		 * addPatientState.setText("Patient is already enrolled for the
-		 * trial."); } }
-		 **/
-
-		/**
-		 * NOT-NEEDED as this is done on the next menu after the FILE is
-		 * UPLOADED. //Condition to show list of Patients if (e.getSource() ==
-		 * buttonPatientsList) { if (ClinicalTrial.getAllPatients().size() <= 0)
-		 * { //Notify if no patient in the trial
-		 * JOptionPane.showMessageDialog(null, "No patient record in this
-		 * clinical trial. Please add new patient first!"); } else {
-		 * frame.dispose(); displayPatientList(); //Display the patients list }
-		 * }
-		 **/
+		
 
 		// Condition for upload button; call uploadFile method which gets the
 		// input file.
