@@ -20,9 +20,6 @@ public class FileHandler {
 		//Arraylist to hold ReadingJson class objects
 		private ArrayList<ReadingJson> patient_readings;
 
-		//No-Args constructor
-		PatientReadingsJson(){}
-
 		/**
 		 * Argument specified Constructor
 		 * @param pr arraylist holding the ReadingJson class objects
@@ -44,10 +41,6 @@ public class FileHandler {
 		private String reading_id;
 		private String reading_value;
 		private String reading_date;
-		
-		//No-Args Constructor
-		ReadingJson(){
-        }
 
 		//Arguments specified Constructor
 		ReadingJson(String id, String type, String rid, String rval, String rdate){
@@ -68,25 +61,16 @@ public class FileHandler {
 		//Create a Gson object
 		Gson gson = new GsonBuilder().serializeNulls().create();
 
-		//Try a FileReader 
+		//Try a FileReader
 		try (Reader fileReader = new FileReader(fileLocation)) {
 			PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class); //Create PatientReadingsJson object which creates an arraylist
-			addPatientsToTrial(readingList.patient_readings);
 			AddReadingToPatient(readingList.patient_readings); //Call AddReadingToPatient to add readings from input file to Patient's readings arraylist
 		} catch (IOException e) { //Catch if fileLocation doesn't exist
 			e.printStackTrace();
 		}
 	}
 
-	// TODO DELETE THIS AFTER TESTING!!! This will create a new patient for
-	// every reading in the file
-	private static void addPatientsToTrial(ArrayList<ReadingJson> readings) {
-		for (ReadingJson readingJson : readings) {
-			Patient patient = new Patient(readingJson.patient_id);
-			ClinicalTrial.getAllPatients().add(patient);
-		}
-	}
-	
+
 	/**
 	 * writeJsonFile writes to the output Json File.
 	 * @param fileName the name of the output file
@@ -134,10 +118,10 @@ public class FileHandler {
 	private void AddReadingToPatient(ArrayList<ReadingJson> readings) {
 		for (ReadingJson reading : readings) { //loop through the readings arrayList
 			Patient patient = ClinicalTrial.findPatient(reading.patient_id); //Get a patient from the arrayList
-			if (patient == null) { 
+			if (patient == null) {
 				continue; //Continue if arrayList is empty
 			}
-			
+
 			//Grab the readings into each String
 			String readingId = reading.reading_id;
 			String type = reading.reading_type;
@@ -148,15 +132,6 @@ public class FileHandler {
 			} catch (java.lang.NumberFormatException e) { //Do this for reading value if the reading type is of blood_pressure
 				String value = reading.reading_value; //blood_pressure reading value is of String type
 				patient.addReading(readingId, type, value, date);
-			}
-		}
-
-		//TODO REMOVE AFTER TESTING!!!
-		for (Patient patient : ClinicalTrial.getAllPatients()) {
-			for (Reading reading : patient.getReadings()) {
-				System.out.println("Patient: " + patient.getPatientId());
-				System.out.println(reading.toString());
-				System.out.println("**************************************");
 			}
 		}
 	}
