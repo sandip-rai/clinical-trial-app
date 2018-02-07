@@ -239,21 +239,10 @@ public class Gui extends JPanel implements ActionListener {
 	 * and passes the filePath to readJsonFile in FileHandler class
 	 */
 	public void uploadFile() {
-		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setCurrentDirectory(new File(".")); // Opens the file
-														// selection dialog at
-														// the current project
-														// directory
-		int result = fileChooser.showOpenDialog(this);
-		if (result == JFileChooser.APPROVE_OPTION) {
-			File selectedFile = fileChooser.getSelectedFile(); // Get the file
-			String filePath = selectedFile.getAbsolutePath(); // Get the file
-																// path
-			fh.readJsonFile(filePath); // Pass to FileHandler class method
+			fh.readJsonFile(); // Pass to FileHandler class method
 
 			frame.dispose();
 			displayPatientList();
-		}
 
 	}
 

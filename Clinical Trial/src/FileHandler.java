@@ -2,6 +2,7 @@
  * FileHandler class handles the json file reading and writing the output to a new json file.
  */
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -60,16 +61,28 @@ public class FileHandler {
 	 * It gets called from uploadFile method of GUI class and then it passes PatientReadingsJson object patient readings to AddReadingToPatient method.
 	 * @param fileLocation the absolute path of the selected input file
 	 */
-	protected void readJsonFile (String fileLocation) {
+	protected void readJsonFile () {
 		//Create a Gson object
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File(".")); // Opens the file
+														// selection dialog at
+														// the current project
+														// directory
+		int result = fileChooser.showOpenDialog(null);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = fileChooser.getSelectedFile(); // Get the file
+			String filePath = selectedFile.getAbsolutePath(); // Get the file
+																// path
 		Gson gson = new GsonBuilder().serializeNulls().create();
 
 		//Try a FileReader
-		try (Reader fileReader = new FileReader(fileLocation)) {
+		try (Reader fileReader = new FileReader(filePath)) {
 			PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class); //Create PatientReadingsJson object which creates an arraylist
+			addPatientsToTrial(readingList.patient_readings);
 			AddReadingToPatient(readingList.patient_readings); //Call AddReadingToPatient to add readings from input file to Patient's readings arraylist
 		} catch (IOException e) { //Catch if fileLocation doesn't exist
 			e.printStackTrace();
+		}
 		}
 	}
 
@@ -98,6 +111,16 @@ public class FileHandler {
 			}
 
     }
+	
+	private void addPatientsToTrial(ArrayList<ReadingJson> readings) {
+		for (ReadingJson readingJson : readings) {
+			if(ClinicalTrial.findPatient(readingJson.patient_id)==null) {
+				Patient patient = new Patient(readingJson.patient_id);
+				ClinicalTrial.getAllPatients().add(patient);
+			}
+
+		}
+	}
 
 	/**
 	 * AddReadingToPatient adds the readings from the input file to the Patient's reading ArrayList
