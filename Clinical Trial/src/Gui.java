@@ -127,9 +127,6 @@ public class Gui extends JPanel {
 
 		// Set all labels not editable
 		pastReadingDisplay.setEditable(false);
-
-		
-
 		// Create JPanels
 		JPanel panel1 = new JPanel();
 		JPanel panel2 = new JPanel();
@@ -182,7 +179,7 @@ public class Gui extends JPanel {
 	}
 
 	/**
-	 * 
+	 * GUI to implement the File management for input and output.
 	 */
 	public void manageFile() {
 		JButton buttonUpload = new JButton("Upload a json file");
@@ -203,6 +200,7 @@ public class Gui extends JPanel {
 		// Create and add menuItems to menu
 		JMenuItem back = menu.add("Back");
 
+		//Back button 
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -214,18 +212,33 @@ public class Gui extends JPanel {
 		panel1.add(buttonUpload);
 		panel1.add(buttonSave);
 
+		//Upload button functionality
 		buttonUpload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				fh.readJsonFile();
-				displayPatientList();
+				if(fh.readJsonFile()) { //If file is read, prompt the user and display the patient list interface
+					JOptionPane.showMessageDialog(null, "File uploaded successfully.");
+					displayPatientList();
+				} else { //If no file read, prompt the user and show the manage file interface
+					JOptionPane.showMessageDialog(null, "File not uploaded.");
+					manageFile();
+				}
+			
+				
 			}
 		});
 
-		// need to be implemented
+		//Save button functionality
 		buttonSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fh.writeJsonFile();
+				if(fh.writeJsonFile()) { //If file is saved, prompt the user and display manage file interface
+					JOptionPane.showMessageDialog(null, "File saved successfully.");
+					manageFile();
+				}
+				else { //If no file saved, prompt and display manage file interface again.
+					JOptionPane.showMessageDialog(null, "File not saved.");
+					manageFile();
+				}
 			}
 		});
 
@@ -492,12 +505,4 @@ public class Gui extends JPanel {
 		frame.setLocation(150, 150);
 		frame.setVisible(true);
 	}
-
-	/**
-	 * Starts the patient trial by allowing user to add new reading type and
-	 * value, and adds them to the patient's reading info
-	 *
-	 * @param selectedPatient
-	 */
-
 }
