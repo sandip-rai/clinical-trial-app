@@ -104,16 +104,28 @@ public class Gui extends JPanel {
  				String readingType = (String) comboBoxReadingType.getSelectedItem();
  				String readingValue = valueInput.getText();
  				String readingDate = dateInput.getText();
-				long date = Long.parseLong(readingDate); //Change date from String to long
+ 				try {
+ 					//Prompt the user if reading values aren't filled
+ 					if(readingId.equals("") || readingValue.equals("") || readingDate.equals("")) {
+ 						JOptionPane.showMessageDialog(null, "Please fill in the values for every field.");
+ 					} else { //If all values are filled, add them to to corresponding Patient
+ 						long date = Long.parseLong(readingDate); //Change date from String to long
+ 						//Get the patient from the ClinicalTrial arraylist and add the new readings to that patient
+ 						ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).
+ 																					addNewReadings(readingId, readingType, readingValue, date);
+ 						
+ 						//Clear the textfields for new input
+ 						idInput.setText("");
+ 						valueInput.setText("");
+ 						dateInput.setText("");
+ 					}
+ 				} catch(NullPointerException ex) { //Catch the error if no patient is selected to for adding readings.
+ 					JOptionPane.showMessageDialog(null, "Please select a Patient to add readings.");
+ 				}
+ 				
 				
-				//Get the patient from the ClinicalTrial arraylist and add the new readings to that patient
-				ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).
-																			addNewReadings(readingId, readingType, readingValue, date);
 				
-				//Clear the textfields for new input
-				idInput.setText("");
-				valueInput.setText("");
-				dateInput.setText("");
+				
 			};
 		});
 
@@ -369,10 +381,14 @@ public class Gui extends JPanel {
 		buttonShowInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				
-				// Print the info of selected patient id
-				displayPatientInfo(
-						ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId());
+				try {
+					// Print the info of selected patient id
+					displayPatientInfo(
+							ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId());
+				} catch (ArrayIndexOutOfBoundsException ex){ //Handle the exception by prompting a user to select a patient or add a patient if list is empty
+					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
+					displayPatientList(); //Go back to the display frame again
+				}
 			};
 		});
 
