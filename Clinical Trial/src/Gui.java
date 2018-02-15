@@ -122,10 +122,6 @@ public class Gui extends JPanel {
  				} catch(NullPointerException ex) { //Catch the error if no patient is selected to for adding readings.
  					JOptionPane.showMessageDialog(null, "Please select a Patient to add readings.");
  				}
- 				
-				
-				
-				
 			};
 		});
 
@@ -381,11 +377,11 @@ public class Gui extends JPanel {
 		buttonShowInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				try {
+				try {//Handle the exception by prompting a user to select a patient or add a patient if list is empty
 					// Print the info of selected patient id
 					displayPatientInfo(
 							ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId());
-				} catch (ArrayIndexOutOfBoundsException ex){ //Handle the exception by prompting a user to select a patient or add a patient if list is empty
+				} catch (ArrayIndexOutOfBoundsException ex){ 
 					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
 					displayPatientList(); //Go back to the display frame again
 				}
@@ -401,25 +397,37 @@ public class Gui extends JPanel {
 
 		buttonResumeTrial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClinicalTrial.findPatient(
-						ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId())
-						.setActive(true);
-				JOptionPane.showMessageDialog(null, "Patient ID: "
-						+ ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()
-						+ "\nTrial has been activated");
+				try { //Handle the exception if no patient is selected to resume the trial.
+					ClinicalTrial.findPatient(
+							ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId())
+							.setActive(true);
+					JOptionPane.showMessageDialog(null, "Patient ID: "
+							+ ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()
+							+ "\nTrial has been activated");
+				} catch (ArrayIndexOutOfBoundsException ex) {
+					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
+					displayPatientList(); //Go back to the display frame again
+				}
+				
 			};
 		});
 
 		// sets active to false on click, displays confirmation message
 		buttonEndTrial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Start trial
-				ClinicalTrial.findPatient(
-						ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId())
-						.setActive(false);
-				JOptionPane.showMessageDialog(null, "Patient ID: "
-						+ ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()
-						+ "\nTrial has ended");
+				try {//Handle the exception if no patient is selected to end the trial.
+					// Set patient's active to false
+					ClinicalTrial.findPatient(
+							ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId())
+							.setActive(false);
+					JOptionPane.showMessageDialog(null, "Patient ID: "
+							+ ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()
+							+ "\nTrial has ended");
+				} catch (ArrayIndexOutOfBoundsException ex) {
+					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
+					displayPatientList(); //Go back to the display frame again
+				}
+				
 			};
 		});
 
