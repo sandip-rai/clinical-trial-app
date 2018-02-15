@@ -104,24 +104,29 @@ public class Gui extends JPanel {
  				String readingType = (String) comboBoxReadingType.getSelectedItem();
  				String readingValue = valueInput.getText();
  				String readingDate = dateInput.getText();
-				long date = Long.parseLong(readingDate); //Change date from String to long
-				
-				//Get the patient from the ClinicalTrial arraylist and add the new readings to that patient
-				ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).
-																			addNewReadings(readingId, readingType, readingValue, date);
-				
-				//Clear the textfields for new input
-				idInput.setText("");
-				valueInput.setText("");
-				dateInput.setText("");
+ 				try {
+ 					//Prompt the user if reading values aren't filled
+ 					if(readingId.equals("") || readingValue.equals("") || readingDate.equals("")) {
+ 						JOptionPane.showMessageDialog(null, "Please fill in the values for every field.");
+ 					} else { //If all values are filled, add them to to corresponding Patient
+ 						long date = Long.parseLong(readingDate); //Change date from String to long
+ 						//Get the patient from the ClinicalTrial arraylist and add the new readings to that patient
+ 						ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).
+ 																					addNewReadings(readingId, readingType, readingValue, date);
+ 						
+ 						//Clear the textfields for new input
+ 						idInput.setText("");
+ 						valueInput.setText("");
+ 						dateInput.setText("");
+ 					}
+ 				} catch(NullPointerException ex) { //Catch the error if no patient is selected to for adding readings.
+ 					JOptionPane.showMessageDialog(null, "Please select a Patient to add readings.");
+ 				}
 			};
 		});
 
 		// Set all labels not editable
 		pastReadingDisplay.setEditable(false);
-
-		
-
 		// Create JPanels
 		JPanel panel1 = new JPanel();
 		JPanel panel2 = new JPanel();
@@ -174,7 +179,7 @@ public class Gui extends JPanel {
 	}
 
 	/**
-	 * 
+	 * GUI to implement the File management for input and output.
 	 */
 	public void manageFile() {
 		JButton buttonUpload = new JButton("Upload a json file");
@@ -195,6 +200,7 @@ public class Gui extends JPanel {
 		// Create and add menuItems to menu
 		JMenuItem back = menu.add("Back");
 
+		//Back button 
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -206,18 +212,33 @@ public class Gui extends JPanel {
 		panel1.add(buttonUpload);
 		panel1.add(buttonSave);
 
+		//Upload button functionality
 		buttonUpload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				fh.readJsonFile();
-				displayPatientList();
+				if(fh.readJsonFile()) { //If file is read, prompt the user and display the patient list interface
+					JOptionPane.showMessageDialog(null, "File uploaded successfully.");
+					displayPatientList();
+				} else { //If no file read, prompt the user and show the manage file interface
+					JOptionPane.showMessageDialog(null, "File not uploaded.");
+					manageFile();
+				}
+			
+				
 			}
 		});
 
-		// need to be implemented
+		//Save button functionality
 		buttonSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fh.writeJsonFile();
+				if(fh.writeJsonFile()) { //If file is saved, prompt the user and display manage file interface
+					JOptionPane.showMessageDialog(null, "File saved successfully.");
+					manageFile();
+				}
+				else { //If no file saved, prompt and display manage file interface again.
+					JOptionPane.showMessageDialog(null, "File not saved.");
+					manageFile();
+				}
 			}
 		});
 
@@ -369,10 +390,14 @@ public class Gui extends JPanel {
 		buttonShowInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				
-				// Print the info of selected patient id
-				displayPatientInfo(
-						ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId());
+				try {//Handle the exception by prompting a user to select a patient or add a patient if list is empty
+					// Print the info of selected patient id
+					displayPatientInfo(
+							ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId());
+				} catch (ArrayIndexOutOfBoundsException ex){ 
+					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
+					displayPatientList(); //Go back to the display frame again
+				}
 			};
 		});
 
@@ -385,25 +410,37 @@ public class Gui extends JPanel {
 
 		buttonResumeTrial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClinicalTrial.findPatient(
-						ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId())
-						.setActive(true);
-				JOptionPane.showMessageDialog(null, "Patient ID: "
-						+ ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()
-						+ "\nTrial has been activated");
+				try { //Handle the exception if no patient is selected to resume the trial.
+					ClinicalTrial.findPatient(
+							ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId())
+							.setActive(true);
+					JOptionPane.showMessageDialog(null, "Patient ID: "
+							+ ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()
+							+ "\nTrial has been activated");
+				} catch (ArrayIndexOutOfBoundsException ex) {
+					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
+					displayPatientList(); //Go back to the display frame again
+				}
+				
 			};
 		});
 
 		// sets active to false on click, displays confirmation message
 		buttonEndTrial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Start trial
-				ClinicalTrial.findPatient(
-						ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId())
-						.setActive(false);
-				JOptionPane.showMessageDialog(null, "Patient ID: "
-						+ ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()
-						+ "\nTrial has ended");
+				try {//Handle the exception if no patient is selected to end the trial.
+					// Set patient's active to false
+					ClinicalTrial.findPatient(
+							ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId())
+							.setActive(false);
+					JOptionPane.showMessageDialog(null, "Patient ID: "
+							+ ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId()
+							+ "\nTrial has ended");
+				} catch (ArrayIndexOutOfBoundsException ex) {
+					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
+					displayPatientList(); //Go back to the display frame again
+				}
+				
 			};
 		});
 
@@ -468,12 +505,4 @@ public class Gui extends JPanel {
 		frame.setLocation(150, 150);
 		frame.setVisible(true);
 	}
-
-	/**
-	 * Starts the patient trial by allowing user to add new reading type and
-	 * value, and adds them to the patient's reading info
-	 *
-	 * @param selectedPatient
-	 */
-
 }

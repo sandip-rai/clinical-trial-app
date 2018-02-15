@@ -49,9 +49,9 @@ public class FileHandler {
 	/**
 	 * readJsonFile initializes the FileReader, creates a Gson object, and creates PatientReadingsJson object.
 	 * It gets called from uploadFile method of GUI class and then it passes PatientReadingsJson object patient readings to AddReadingToPatient method.
-	 * @param fileLocation the absolute path of the selected input file
+	 * @return true if file is successfully read and contents are added appropriately
 	 */
-	protected void readJsonFile () {
+	protected boolean readJsonFile () {
 		//Create a Gson object
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File(".")); // Opens the file
@@ -70,35 +70,41 @@ public class FileHandler {
 			PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class); //Create PatientReadingsJson object which creates an arraylist
 			addPatientsToTrial(readingList.patient_readings);
 			AddReadingToPatient(readingList.patient_readings); //Call AddReadingToPatient to add readings from input file to Patient's readings arraylist
+			return true; //If file has been read and contents added
 		} catch (IOException e) { //Catch if fileLocation doesn't exist
 			e.printStackTrace();
+			return false; //If exception occurs
 		}
 		}
+		return false;
 	}
+
 
 	/**
 	 * writeJsonFile writes to the output Json File.
-	 * @param fileName the name of the output file
+	 * @return true if file is successfully return and writer is closed
 	 */
-	//******I HAVEN'T COMMENTED AS THERE SEEMS TO BE SIMILAR METHOD IN GUI AS WELL. ***//
-	protected void writeJsonFile(){
+	protected boolean writeJsonFile(){
 		String fileName;
-			//Print the info of selected patient id
-			JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
-			int returnValue = jfc.showSaveDialog(null);
-			if (returnValue == JFileChooser.APPROVE_OPTION) {
-				fileName = jfc.getSelectedFile().getAbsolutePath()+".json";
-				try {
-					Writer writer = new FileWriter(fileName);
-					Gson gson = new GsonBuilder().create();
-				    gson.toJson(ClinicalTrial.getAllPatients(), writer);	
-					writer.close();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+		//Print the info of selected patient id
+		JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
+		int returnValue = jfc.showSaveDialog(null);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			fileName = jfc.getSelectedFile().getAbsolutePath()+".json";
+			try {
+				Writer writer = new FileWriter(fileName);
+				Gson gson = new GsonBuilder().create();
+				gson.toJson(ClinicalTrial.getAllPatients(), writer);	
+				writer.close();
+				return true; //If file is written and writer closed
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				return false; //If exception occurs
 				}
 
 			}
+		return false;
 
     }
 	

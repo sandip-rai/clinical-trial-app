@@ -1,6 +1,6 @@
 /**
  * Reading class creates objects of readings for the Patient objects.
- *
+ * Need to add the clinic section
  */
 
 public class Reading {
