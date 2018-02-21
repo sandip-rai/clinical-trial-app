@@ -1,9 +1,15 @@
+package gui;
 
 
 /**
  * Gui class to show options to add, show patients list, and get input file from the user.
  */
 import javax.swing.*;
+
+import trial.ClinicalTrial;
+import trial.FileHandler;
+import trial.Patient;
+
 import java.awt.event.*;
 import java.awt.GridLayout;
 
@@ -53,7 +59,7 @@ public class Gui extends JPanel {
 						manageFile();
 					}
 				});
-				
+
 				//ComboBox to hold the patient id from the patients
 				comboBoxPatientsIds = new JComboBox<String>();
 				comboBoxPatientsIds.addItem("New patient"); //Display New Patient for the dropdown list in the first place
@@ -77,13 +83,13 @@ public class Gui extends JPanel {
 						}
 					}
 				});
-		
+
 		//Array to hold the reading types which will be showed in the comboBox
 		String[] readingTypes = new String[] { "Weight", "Steps", "Temp", "Blood Pressure" };
 		JComboBox<String> comboBoxReadingType = new JComboBox<String>(readingTypes);
 
 		JButton buttonAddReading = new JButton("Add");
-		
+
 
 		// Creates labels and user input textFeild
 		JLabel addReading = new JLabel("Add a new reading:");
@@ -95,7 +101,7 @@ public class Gui extends JPanel {
 		JTextField idInput = new JTextField(16);
 		JTextField dateInput = new JTextField(16);
 		JTextField pastReadingDisplay = new JTextField(16);
-		
+
 		//When Add button is pressed
 		buttonAddReading.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -113,7 +119,7 @@ public class Gui extends JPanel {
  						//Get the patient from the ClinicalTrial arraylist and add the new readings to that patient
  						ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString()).
  																					addNewReadings(readingId, readingType, readingValue, date);
- 						
+
  						//Clear the textfields for new input
  						idInput.setText("");
  						valueInput.setText("");
@@ -156,8 +162,8 @@ public class Gui extends JPanel {
 		panel6.add(value);
 		panel6.add(valueInput);
 		panel7.add(buttonAddReading);
-		
-		
+
+
 
 		// Frame setup
 		frame = new JFrame();
@@ -200,7 +206,7 @@ public class Gui extends JPanel {
 		// Create and add menuItems to menu
 		JMenuItem back = menu.add("Back");
 
-		//Back button 
+		//Back button
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -223,8 +229,8 @@ public class Gui extends JPanel {
 					JOptionPane.showMessageDialog(null, "File not uploaded.");
 					manageFile();
 				}
-			
-				
+
+
 			}
 		});
 
@@ -307,14 +313,14 @@ public class Gui extends JPanel {
 		panel2.add(inputText);
 		panel3.add(buttonAdd);
 		panel3.add(back);
-		
+
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				mainMenu();
 			}
 		});
-			
+
 
 		buttonAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -394,7 +400,7 @@ public class Gui extends JPanel {
 					// Print the info of selected patient id
 					displayPatientInfo(
 							ClinicalTrial.getAllPatients().get(comboBoxPatientsIds.getSelectedIndex()).getPatientId());
-				} catch (ArrayIndexOutOfBoundsException ex){ 
+				} catch (ArrayIndexOutOfBoundsException ex){
 					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
 					displayPatientList(); //Go back to the display frame again
 				}
@@ -421,7 +427,7 @@ public class Gui extends JPanel {
 					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
 					displayPatientList(); //Go back to the display frame again
 				}
-				
+
 			};
 		});
 
@@ -440,7 +446,7 @@ public class Gui extends JPanel {
 					JOptionPane.showMessageDialog(null, "Please select a patient from the list. Add a patient if list is empty.");
 					displayPatientList(); //Go back to the display frame again
 				}
-				
+
 			};
 		});
 

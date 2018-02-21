@@ -1,3 +1,4 @@
+package trial;
 /**
  * FileHandler class handles the json file reading and writing the output to a new json file.
  */
@@ -51,7 +52,7 @@ public class FileHandler {
 	 * It gets called from uploadFile method of GUI class and then it passes PatientReadingsJson object patient readings to AddReadingToPatient method.
 	 * @return true if file is successfully read and contents are added appropriately
 	 */
-	protected boolean readJsonFile () {
+	public boolean readJsonFile () {
 		//Create a Gson object
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File(".")); // Opens the file
@@ -84,7 +85,7 @@ public class FileHandler {
 	 * writeJsonFile writes to the output Json File.
 	 * @return true if file is successfully return and writer is closed
 	 */
-	protected boolean writeJsonFile(){
+	public boolean writeJsonFile(){
 		String fileName;
 		//Print the info of selected patient id
 		JFileChooser jfc = new JFileChooser(System.getProperty("user.dir"));
@@ -94,7 +95,7 @@ public class FileHandler {
 			try {
 				Writer writer = new FileWriter(fileName);
 				Gson gson = new GsonBuilder().create();
-				gson.toJson(ClinicalTrial.getAllPatients(), writer);	
+				gson.toJson(ClinicalTrial.getAllPatients(), writer);
 				writer.close();
 				return true; //If file is written and writer closed
 			} catch (IOException e1) {
@@ -107,7 +108,7 @@ public class FileHandler {
 		return false;
 
     }
-	
+
 	private void addPatientsToTrial(ArrayList<ReadingJson> readings) {
 		for (ReadingJson readingJson : readings) {
 			if(ClinicalTrial.findPatient(readingJson.patient_id)==null) {

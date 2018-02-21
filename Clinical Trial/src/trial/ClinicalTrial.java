@@ -1,3 +1,4 @@
+package trial;
 /**
  * ClinicalTrial class has the arrayList of patients present in the trial.
  */
@@ -12,7 +13,7 @@ public class ClinicalTrial {
 	 * Getter for the allPatients arrayList
 	 * @return allPatients the arrayList holding the Patients in the trial
 	 */
-	protected static ArrayList<Patient> getAllPatients() {
+	public static ArrayList<Patient> getAllPatients() {
 		return allPatients;
 	}
 
@@ -21,7 +22,7 @@ public class ClinicalTrial {
 	 * @param patientId the Id of the patient
 	 * @return patient the patient if it exists in the allPatients arrayList
 	 */
-	protected static Patient findPatient(String patientId){
+	public static Patient findPatient(String patientId){
 		for (Patient patient : allPatients) { //loop through the allPatients arrayList
 			if (patientId.equals(patient.getPatientId())) {
 				return patient; //if patient exists in the trial
@@ -35,7 +36,7 @@ public class ClinicalTrial {
 	 * @param patientId the Id of the patient
 	 * @return boolean true if patient was added. False if another patient with the same ID was found
 	 */
-	protected static Boolean addPatient(String patientId){
+	public static Boolean addPatient(String patientId){
 		for (Patient patient : allPatients) { //loop through the allPatients arrayList
 			if (patientId.equals(patient.getPatientId())) {
 				//a patient with that ID was found return false without adding a new patient
