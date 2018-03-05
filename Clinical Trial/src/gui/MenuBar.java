@@ -20,7 +20,7 @@ public class MenuBar {
 
         mainMenu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //gui.disposeFrame();
+                PanelAndFrame.disposeFrame();
                 MainMenu.mainMenu();
             }
         });
