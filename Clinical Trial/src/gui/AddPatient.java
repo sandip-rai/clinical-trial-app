@@ -30,6 +30,7 @@ public class AddPatient {
 
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	PanelAndFrame.disposeFrame();
                 MainMenu.mainMenu();
             }
         });
@@ -51,5 +52,6 @@ public class AddPatient {
                 }
             }
         });
+        PanelAndFrame.setupFrame();
     }
 }
