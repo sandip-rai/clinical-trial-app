@@ -5,12 +5,11 @@ import trial.ClinicalTrial;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class AddPatient {
-    Gui gui = new Gui();
-
-    public ArrayList<JPanel> addPatient(){
+    public static void addPatient(){
+    	PanelAndFrame.disposeFrame();
+    	
         JLabel label = new JLabel("PatientID:");
         JTextField inputText = new JTextField("");
         JButton buttonAdd = new JButton("Add");
@@ -19,19 +18,20 @@ public class AddPatient {
         JButton back = new JButton("Back");
 
         // Creating JPanels
-        int NUMBER_OF_PANELS = 3;
-        ArrayList<JPanel> panels = gui.setupPanel(NUMBER_OF_PANELS);
+        final int NUMBER_OF_PANELS = 3;
+        PanelAndFrame.setupPanel(NUMBER_OF_PANELS);
 
         // Adding the textField and upload button to the panels
-        panels.get(0).add(addPatientState);
-        panels.get(1).add(label);
-        panels.get(1).add(inputText);
-        panels.get(2).add(buttonAdd);
-        panels.get(2).add(back);
+        PanelAndFrame.panels.get(0).add(addPatientState);
+        PanelAndFrame.panels.get(1).add(label);
+        PanelAndFrame.panels.get(1).add(inputText);
+        PanelAndFrame.panels.get(2).add(buttonAdd);
+        PanelAndFrame.panels.get(2).add(back);
 
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gui.mainMenu();
+            	PanelAndFrame.disposeFrame();
+                MainMenu.mainMenu();
             }
         });
 
@@ -52,6 +52,6 @@ public class AddPatient {
                 }
             }
         });
-    return panels;
+        PanelAndFrame.setupFrame();
     }
 }

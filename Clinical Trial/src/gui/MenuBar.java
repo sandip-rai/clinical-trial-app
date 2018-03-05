@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 public class MenuBar {
     public JMenuBar makeMenuBar(){
-        Gui gui = new Gui();
         // Create menu components
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
@@ -22,19 +21,19 @@ public class MenuBar {
         mainMenu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //gui.disposeFrame();
-                gui.mainMenu();
+                MainMenu.mainMenu();
             }
         });
 
         patientInfo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gui.displayPatientList();
+                DisplayPatientList.displayPatientList();
             }
         });
 
         manageFile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gui.manageFile();
+                ManageFile.manageFile();
             }
         });
 
