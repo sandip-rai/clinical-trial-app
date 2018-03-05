@@ -25,10 +25,10 @@ public class PanelAndFrame extends JPanel {
 	static final int PANEL_HGAP = 10;
 	static final int PANEL_VGAP = 10;
 
-	static final int FRAME_ROWS = 10;
-	static final int FRAME_COLS = 10;
-	static final int FRAME_HGAP = 50;
-	static final int FRAME_VGAP = 50;
+	static final int FRAME_ROWS = 6;
+	static final int FRAME_COLS = 6;
+	static final int FRAME_HGAP = 32;
+	static final int FRAME_VGAP = 32;
 
     public static void setupPanel(int numberOfPanels) {
 		panels = new ArrayList<JPanel>();
