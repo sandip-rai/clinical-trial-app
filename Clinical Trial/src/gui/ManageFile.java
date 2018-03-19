@@ -27,13 +27,8 @@ public class ManageFile {
 		// Upload button functionality
 		buttonUpload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fileChooser = new JFileChooser();
-				// Open the file selection dialog at the current project directory
-				fileChooser.setCurrentDirectory(new File("."));
-				int result = fileChooser.showOpenDialog(null);
-				if (result == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = fileChooser.getSelectedFile(); // Get the file
-					String filePath = selectedFile.getAbsolutePath(); // Get the path
+				String filePath = getPath();
+				if (filePath != null) {
 					fileHandler.readJsonFile(filePath, true, false);
 					JOptionPane.showMessageDialog(null, "File uploaded successfully.");
 					DisplayPatientList.displayPatientList();
@@ -42,7 +37,6 @@ public class ManageFile {
 					JOptionPane.showMessageDialog(null, "File not uploaded.");
 					manageFile();
 				}
-
 			}
 		});
 
@@ -50,7 +44,9 @@ public class ManageFile {
 		buttonSave.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				if (fileHandler.writeJsonFile()) { // If file is saved, prompt the user
+				String filePath = getPath();
+				if (filePath != null) {
+					fileHandler.WritePatientReadings(filePath); // If file is saved, prompt the user
 					// and display manage file interface
 					JOptionPane.showMessageDialog(null, "File saved successfully.");
 					manageFile();
@@ -62,5 +58,18 @@ public class ManageFile {
 			}
 		});
 		PanelAndFrame.setupFrame();
+	}
+
+	private static String getPath() {
+		JFileChooser fileChooser = new JFileChooser();
+		// Open the file selection dialog at the current project directory
+		fileChooser.setCurrentDirectory(new File("."));
+		int result = fileChooser.showOpenDialog(null);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = fileChooser.getSelectedFile(); // Get the file
+			String filePath = selectedFile.getAbsolutePath(); // Get the path
+			return filePath;
+		}
+		return null;
 	}
 }
