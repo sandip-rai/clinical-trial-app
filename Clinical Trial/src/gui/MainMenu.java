@@ -5,6 +5,9 @@ import trial.Patient;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainMenu {
 	public static void mainMenu(){
@@ -60,8 +63,9 @@ public class MainMenu {
 						if (readingId.equals("") || readingValue.equals("") || readingDate.equals("")) {
 							JOptionPane.showMessageDialog(null, "Please fill in the values for every field.");
 	                    } else { // If all values are filled, add them to to corresponding Patient
-	                        long date = Long.parseLong(readingDate); // Change date from String to long
-							// Get the patient from the ClinicalTrial arraylist and
+	                    	SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");  
+	                        Date date = formatter.parse(readingDate); // Change date from String to Date
+							// Get the patient from the ClinicalTrial ArrayList and
 							// add the new readings to that patient
 							ClinicalTrial.findPatient(comboBoxPatientsIds.getSelectedItem().toString())
 									.addNewReadings(readingId, readingType, readingValue, date);
@@ -73,6 +77,8 @@ public class MainMenu {
 						}
 	                } catch (NullPointerException ex) { // Catch the error if no patient is selected for adding readings.
 						JOptionPane.showMessageDialog(null, "Please select a Patient to add readings.");
+					} catch (ParseException e1) {
+						e1.printStackTrace();
 					}
 				};
 			});
