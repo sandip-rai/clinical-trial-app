@@ -75,6 +75,7 @@ public class Patient {
 	 * @param date the date of reading
 	 */
 	public void addNewReadings(String readingId, String type, String value, long date) {
+		System.out.println("new String value reading");
 		if (active) { //Only add if the patient is active i.e on trial
 			try {
 				double numValue = Integer.parseInt(value); //Every reading value except of blood_pressure type will be parsed into a double
