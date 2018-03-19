@@ -26,9 +26,10 @@ public class ButtonStartTrialListener implements ActionListener {
 	
 	@Override
     public void actionPerformed(ActionEvent e) {
-		JFrame frame = (JFrame) SwingUtilities.getRoot((Component) e.getSource());
         if (mainMenuView.getComboBoxPatientsIds().getSelectedItem().toString() == "New patient") {
-        	PanelAndFrame.hideCurrentFrameAndGoToNextFrame(frame, addPatinetView); // Selecting new patient will call addPatient to allow to add new patient
+        	mainMenuView.getFrame().dispose();
+        	addPatinetView.setupFrame();
+    		addPatinetView.setVisible(true);// Selecting new patient will call addPatient to allow to add new patient
         } else {// already in trial
             if (ClinicalTrial.findPatient(mainMenuView.getComboBoxPatientsIds().getSelectedItem().toString()).isActive()) {
                 JOptionPane.showMessageDialog(null, "This Patient is already active in trial");

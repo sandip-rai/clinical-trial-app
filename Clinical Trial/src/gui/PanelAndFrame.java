@@ -60,9 +60,11 @@ public class PanelAndFrame {
 	   frame.setVisible(false);
 	   view.setVisible(true);
     }
+   
    public static void diposeFrame(JFrame frame){
 	   frame.dispose();
    }
+   
    public static MenuBar supplyMenuBar(MainMenuView mainMenuView, AddPatientView addPatientView){
 	   MenuBar menuBar = new MenuBar();
 	   menuBar.addButtonMainMenuListener(new ButtonMainMenuListener(mainMenuView, addPatientView));

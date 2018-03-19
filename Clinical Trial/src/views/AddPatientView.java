@@ -1,8 +1,6 @@
 package views;
 
 import java.awt.Component;
-import java.awt.GridLayout;
-import java.awt.Window;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -12,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 
 import gui.MenuBar;
 import gui.PanelAndFrame;
@@ -27,7 +24,7 @@ public class AddPatientView implements View {
     
     //create a array list to hold all the panels
     private final int NUMBER_OF_PANELS = 3;
-    private ArrayList<JPanel> panels = new ArrayList<>(NUMBER_OF_PANELS);
+    private ArrayList<JPanel> panels;
     
     MenuBar menuBar;
     //Create JFrame
@@ -35,11 +32,7 @@ public class AddPatientView implements View {
     
     public AddPatientView(){
     	// Create JPanels
-        for (int i = 0; i < NUMBER_OF_PANELS; i ++) {
-        	JPanel panel = new JPanel();
-        	panel.setLayout(new GridLayout(6, 6, 32, 32));
-			panels.add(panel);
-		}
+    	panels = PanelAndFrame.setupPanels(NUMBER_OF_PANELS);
     	// Adding the textField and upload button to the panels
         panels.get(0).add(addPatientState);
         panels.get(1).add(label);
@@ -52,7 +45,7 @@ public class AddPatientView implements View {
     
     public void setupFrame(){
         //setup Frame
-        PanelAndFrame.setupFrame(frame, panels, this.menuBar);
+        PanelAndFrame.setupFrame(frame, panels, menuBar);
     }
     
     //getter for frame

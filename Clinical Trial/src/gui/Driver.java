@@ -14,7 +14,6 @@ public class Driver {
     	mainMenuView.setMenuBar(PanelAndFrame.supplyMenuBar(mainMenuView, addPatientView));
     	addPatientView.setMenuBar(PanelAndFrame.supplyMenuBar(mainMenuView, addPatientView));
     	mainMenuView.setupFrame();
-    	addPatientView.setupFrame();
     	GuiController guiController =new GuiController(mainMenuView, addPatientView);
     	guiController.run(mainMenuView);
     }
