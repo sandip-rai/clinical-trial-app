@@ -133,7 +133,7 @@ public class FileHandler {
 				String patient_id = patient.getPatientId();
 				String reading_type = reading.getType();
 				String reading_id = reading.getReadingId();
-				String reading_date = Long.toString(reading.getDate());
+				String reading_date = Long.toString(reading.getDate().getTime());
 				String reading_value = new String();
 				if (reading_type.equals("blood_press")) {
 					reading_value = reading.getBpValue();	
@@ -173,7 +173,7 @@ public class FileHandler {
 			// Grab the readings into each String
 			String readingId = reading.reading_id;
 			String type = reading.reading_type;
-			long date = Long.parseLong(reading.reading_date);
+			Date date = new Date(Long.parseLong(reading.reading_date));
 			try { // Try for every reading value except blood_pressure type
 				double value = Integer.parseInt(reading.reading_value);
 				patient.addReading(readingId, type, value, date);
