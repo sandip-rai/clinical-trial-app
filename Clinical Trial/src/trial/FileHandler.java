@@ -78,13 +78,6 @@ public class FileHandler {
 	 */
 	
 	public boolean readJsonFile(String filePath, boolean addToTrial, boolean activate) {		
-//		JFileChooser fileChooser = new JFileChooser();
-//		// Open the file selection dialog at the current project directory
-//		fileChooser.setCurrentDirectory(new File("."));
-//		int result = fileChooser.showOpenDialog(null);
-//		if (result == JFileChooser.APPROVE_OPTION) {
-//			File selectedFile = fileChooser.getSelectedFile(); // Get the file
-//			String filePath = selectedFile.getAbsolutePath(); // Get the path
 			Gson gson = new GsonBuilder().serializeNulls().create();
 			// Try a FileReader
 			try (Reader fileReader = new FileReader(filePath)) {
@@ -110,8 +103,7 @@ public class FileHandler {
 	 * 
 	 * @return true if file is successfully return and writer is closed
 	 */
-	public boolean writeJsonFile() {
-		String fileName;
+	public boolean writeJsonFile(String fileName) {
 		// Print the info of selected patient id
 		JFileChooser FileChooser = new JFileChooser(System.getProperty("user.dir"));
 		int returnValue = FileChooser.showSaveDialog(null);
