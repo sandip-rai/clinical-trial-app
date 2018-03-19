@@ -51,6 +51,20 @@ public class FileHandler {
 			this.patient_readings = patient_readings;
 		}
 	}
+	
+	private class State {
+		private ArrayList<Patient> allPatients = ClinicalTrial.getAllPatients();;
+		//private ArrayList<Clinic> allClinics = new ArrayList<Clinic>();		
+	}
+	
+	
+	public void startProgram() {
+		
+	}
+	
+	public void endProgram() {
+		
+	}
 
 
 	/**
@@ -62,16 +76,15 @@ public class FileHandler {
 	 * @return true if file is successfully read and contents are added
 	 *         appropriately
 	 */
-	public boolean readJsonFile() {
-		
-		// Create a Gson object
-		JFileChooser fileChooser = new JFileChooser();
-		// Open the file selection dialog at the current project directory
-		fileChooser.setCurrentDirectory(new File("."));
-		int result = fileChooser.showOpenDialog(null);
-		if (result == JFileChooser.APPROVE_OPTION) {
-			File selectedFile = fileChooser.getSelectedFile(); // Get the file
-			String filePath = selectedFile.getAbsolutePath(); // Get the path
+	
+	public boolean readJsonFile(String filePath, boolean addToTrial, boolean activate) {		
+//		JFileChooser fileChooser = new JFileChooser();
+//		// Open the file selection dialog at the current project directory
+//		fileChooser.setCurrentDirectory(new File("."));
+//		int result = fileChooser.showOpenDialog(null);
+//		if (result == JFileChooser.APPROVE_OPTION) {
+//			File selectedFile = fileChooser.getSelectedFile(); // Get the file
+//			String filePath = selectedFile.getAbsolutePath(); // Get the path
 			Gson gson = new GsonBuilder().serializeNulls().create();
 			// Try a FileReader
 			try (Reader fileReader = new FileReader(filePath)) {
@@ -88,10 +101,8 @@ public class FileHandler {
 				return true; // If file has been read and contents added
 			} catch (IOException e) { // Catch if fileLocation doesn't exist
 				e.printStackTrace();
-				return false; // If exception occurs
 			}
-		}
-		return false;
+			return false;		
 	}
 
 	/**
