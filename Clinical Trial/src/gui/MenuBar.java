@@ -4,39 +4,36 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuBar {
-    public JMenuBar makeMenuBar(){
-        // Create menu components
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Menu");
+public class MenuBar extends JMenuBar {
+	// Create menu components
+    JMenu menu = new JMenu("Menu");
+    
+    // Create and add menuItems to menu
+    JMenuItem menuItemMainMenu = menu.add("Main Menu");
+    JMenuItem menuItemPatientInfo = menu.add("Patient Info");
+    JMenuItem menuItemManageFile = menu.add("Manage Files");
+   
+    //Contractor 
+    public MenuBar(){
+    	//Create a menuBar
+    	super();
+       
+        // Add menu to menuBar
+        this.add(menu);
 
-        // Add menus to menu bar
-        menuBar.add(menu);
-
-        // Create and add menuItems to menu
-        JMenuItem mainMenu = menu.add("Main Menu");
-        JMenuItem patientInfo = menu.add("Patient Info");
-        JMenuItem manageFile = menu.add("Manage Files");
-
-        mainMenu.addActionListener(new ActionListener() {
+        menuItemPatientInfo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PanelAndFrame.disposeFrame();
-                MainMenu.mainMenu();
+                //displayPatientList.displayPatientList();
             }
         });
 
-        patientInfo.addActionListener(new ActionListener() {
+        menuItemManageFile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                DisplayPatientList.displayPatientList();
+               // mf.manageFile();
             }
         });
-
-        manageFile.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ManageFile.manageFile();
-            }
-        });
-
-        return menuBar;
+    }
+    void addButtonMainMenuListener(ActionListener listenForButtonMainMenu) {
+    	menuItemMainMenu.addActionListener(listenForButtonMainMenu);
     }
 }
