@@ -5,21 +5,22 @@ import java.awt.event.ActionListener;
 
 import gui.GuiController;
 
-//class for buttonBack to perform actionPerformed(ActionEvent e)
-public class ButtonMainMenuListener implements ActionListener {
+public class ButtonManageFileListener implements ActionListener{
 	GuiController guiController;
+	
 	//constructor
-	public ButtonMainMenuListener(GuiController guiController){
+	public ButtonManageFileListener(GuiController guiController){
 		this.guiController = guiController;
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		guiController.getMainMenuView().getFrame().dispose();
 		guiController.getAddPatientView().getFrame().dispose();
 		guiController.getManageFileView().getFrame().dispose();
-		guiController.getMainMenuView().setupFrame();
-		guiController.getMainMenuView().setVisible(true);
+		
+		guiController.getManageFileView().setupFrame();
+		guiController.getManageFileView().setVisible(true);
 	}
 
 }

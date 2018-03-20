@@ -52,6 +52,6 @@ public class AddPatient {
                 }
             }
         });
-        PanelAndFrame.setupFrame();
+        PanelAndFrame.updatePatientList();
     }
 }

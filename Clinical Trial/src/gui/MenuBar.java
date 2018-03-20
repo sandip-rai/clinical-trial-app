@@ -26,14 +26,11 @@ public class MenuBar extends JMenuBar {
                 //displayPatientList.displayPatientList();
             }
         });
-
-        menuItemManageFile.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               // mf.manageFile();
-            }
-        });
     }
     void addButtonMainMenuListener(ActionListener listenForButtonMainMenu) {
     	menuItemMainMenu.addActionListener(listenForButtonMainMenu);
+    }
+    void addButtonManageFileListener(ActionListener listenForButtonManageFile) {
+    	menuItemManageFile.addActionListener(listenForButtonManageFile);
     }
 }

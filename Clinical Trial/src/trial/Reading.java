@@ -1,7 +1,4 @@
 package trial;
-
-import java.util.Date;
-
 /**
  * Reading class creates objects of readings for the Patient objects.
  * Need to add the clinic section
@@ -14,10 +11,10 @@ public class Reading {
 	private String type;
 	private double value;
 	private String bpValue;
-	private Date date;
+	private long date;
 
 	//Constructor for every reading value except of blood_pressure type
-	protected Reading(String readingId, String type, double value, Date date) {
+	protected Reading(String readingId, String type, double value, long date) {
 		this.readingId = readingId;
 		this.type = type;
 		this.value = value;
@@ -25,7 +22,7 @@ public class Reading {
 	}
 
 	//Constructor for the reading value of blood_pressure type
-	protected Reading(String readingId, String type, String bpValue, Date date) {
+	protected Reading(String readingId, String type, String bpValue, long date) {
 		this.readingId = readingId;
 		this.type = type;
 		this.bpValue = bpValue;
@@ -68,7 +65,7 @@ public class Reading {
 	 * Getter for date
 	 * @return date of the reading of the patient
 	 */
-	public Date getDate() {
+	public Long getDate() {
 		return date;
 	}
 	

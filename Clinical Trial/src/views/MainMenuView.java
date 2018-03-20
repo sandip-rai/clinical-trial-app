@@ -3,15 +3,8 @@ package views;
 import trial.ClinicalTrial;
 import trial.Patient;
 
-import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import gui.MenuBar;
@@ -86,7 +79,7 @@ public class MainMenuView implements View {
 	   for (Patient patient : ClinicalTrial.getAllPatients()) {
            comboBoxPatientsIds.addItem(patient.getPatientId()); // Fill the comboBox from the ClinicalTrial arrayList
        }
-       PanelAndFrame.setupFrame(frame, panels, this.menuBar);
+       PanelAndFrame.setupFrame(frame, panels, menuBar);
    }
    
    //getter for frame

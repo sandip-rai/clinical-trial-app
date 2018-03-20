@@ -44,6 +44,6 @@ public class DisplayPatientInfo {
             }
         });
 
-    	PanelAndFrame.setupFrame();
+    	PanelAndFrame.updatePatientList();
     }
 }

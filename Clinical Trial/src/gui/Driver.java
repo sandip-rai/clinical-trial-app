@@ -1,6 +1,10 @@
 package gui;
 
-import listeners.ButtonMainMenuListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import trial.FileHandler;
 import views.*;
 
 /**
@@ -9,17 +13,21 @@ import views.*;
 public class Driver {
 
     public static void main(String[] args) {
+    	//views
     	MainMenuView mainMenuView = new MainMenuView();
     	AddPatientView addPatientView = new AddPatientView();
-    	mainMenuView.setMenuBar(PanelAndFrame.supplyMenuBar(mainMenuView, addPatientView));
-    	addPatientView.setMenuBar(PanelAndFrame.supplyMenuBar(mainMenuView, addPatientView));
+    	ManageFileView manageFileView = new ManageFileView();
+    	
+    	//Models
+    	FileHandler fileHandler = new FileHandler();
+    	
+    	GuiController guiController =new GuiController(mainMenuView, addPatientView, manageFileView, fileHandler);
+    	
+    	mainMenuView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
+    	addPatientView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
+    	manageFileView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
     	mainMenuView.setupFrame();
-    	GuiController guiController =new GuiController(mainMenuView, addPatientView);
     	guiController.run(mainMenuView);
     }
-    
-    
-    
-
 }
 

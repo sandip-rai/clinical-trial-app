@@ -3,32 +3,33 @@ package listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import gui.GuiController;
 import trial.ClinicalTrial;
 import views.AddPatientView;
 
 //class for buttonAddPatient to perform actionPerformed(ActionEvent e)
 public class ButtonAddPatientListener implements ActionListener {
-	AddPatientView addPatientView;
+	GuiController guiController;
 	
 	//constructor
-	public ButtonAddPatientListener(AddPatientView addPatientView){
-		this.addPatientView = addPatientView;
+	public ButtonAddPatientListener(GuiController guiController){
+		this.guiController = guiController;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String tempId = addPatientView.getInputText().getText(); // assign the PatientId
+		String tempId = guiController.getAddPatientView().getInputText().getText(); // assign the PatientId
         // that user inputs
         if (tempId == null || tempId.equals("")) {// make sure the user
             // has entered a
             // patient ID
-        	addPatientView.getAddPatientState().setText("Please enter a patient ID");
+        	guiController.getAddPatientView().getAddPatientState().setText("Please enter a patient ID");
         } else if (ClinicalTrial.addPatient(tempId)) {
             ClinicalTrial.findPatient(tempId).setActive(true);
-            addPatientView.getAddPatientState().setText("Added! Ready for next patient. ");
-            addPatientView.getInputText().setText("");
+            guiController.getAddPatientView().getAddPatientState().setText("Added! Ready for next patient. ");
+            guiController.getAddPatientView().getInputText().setText("");
         } else {
-        	addPatientView.getAddPatientState().setText("That patient is already in this trial.");
+        	guiController.getAddPatientView().getAddPatientState().setText("That patient is already in this trial.");
         }
 	}
 

@@ -7,8 +7,10 @@ package gui;
 import javax.swing.*;
 
 import listeners.ButtonMainMenuListener;
+import listeners.ButtonManageFileListener;
 import views.AddPatientView;
 import views.MainMenuView;
+import views.ManageFileView;
 import views.View;
 
 import java.awt.*;
@@ -65,9 +67,10 @@ public class PanelAndFrame {
 	   frame.dispose();
    }
    
-   public static MenuBar supplyMenuBar(MainMenuView mainMenuView, AddPatientView addPatientView){
+   public static MenuBar supplyMenuBar(GuiController guiController){
 	   MenuBar menuBar = new MenuBar();
-	   menuBar.addButtonMainMenuListener(new ButtonMainMenuListener(mainMenuView, addPatientView));
+	   menuBar.addButtonMainMenuListener(new ButtonMainMenuListener(guiController));
+	   menuBar.addButtonManageFileListener(new ButtonManageFileListener(guiController));
 	   return menuBar;
    }
    
