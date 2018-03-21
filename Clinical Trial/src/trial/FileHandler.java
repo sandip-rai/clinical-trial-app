@@ -3,6 +3,7 @@ package trial;
  * FileHandler class handles the json file reading and writing the output to a new json file.
  */
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,6 +11,13 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.*;
 import com.google.gson.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class FileHandler {
 	/**
@@ -24,6 +32,7 @@ public class FileHandler {
 		private String reading_id;
 		private String reading_value;
 		private String reading_date;
+		private String clinic_id, clinic_name;
 
 		ReadingJson(String patient_id, String reading_type, String reading_id, String reading_value,
 				String reading_date) {
@@ -33,6 +42,16 @@ public class FileHandler {
 			this.reading_value = reading_value;
 			this.reading_date = reading_date;
 		}
+		
+		ReadingJson(String id, String type, String rid, String rval, String rdate, String cid, String cn){
+		    patient_id = id;
+		    reading_type = type;
+		    reading_id = rid;
+		    reading_value = rval;
+		    reading_date = rdate;
+		    clinic_id = cid;
+		    clinic_name = cn;
+        }
 	}
 
 	/**
@@ -139,9 +158,18 @@ public class FileHandler {
 				} else {
 					reading_value = Double.toString(reading.getValue());
 				}
-				ReadingJson readingJson = new ReadingJson(patient_id, reading_type, reading_id, reading_value,
+				if (reading.getClinicId() != null && reading.getClinicName() != null) {
+					String clinic_id = reading.getClinicId();
+					String clinic_name = reading.getClinicName();
+					ReadingJson rj = new ReadingJson(patient_id, reading_type, reading_id, reading_value,
+							reading_date, clinic_id, clinic_name);
+					allReadings.add(rj);
+				}
+				else {
+					ReadingJson readingJson = new ReadingJson(patient_id, reading_type, reading_id, reading_value,
 						reading_date);
-				allReadings.add(readingJson);
+					allReadings.add(readingJson);
+				}
 			}
 		}
 		return allReadings;
@@ -184,5 +212,55 @@ public class FileHandler {
 			}
 		}
 	}
+	
+	/*
+	 * 
+	 * Read the xml file, and please note that this also adds a clinic id.
+	 */
+	private void readXMLFile(String file) {
+	    String clinicName="", clinicId="";
+	    String[] readingId, readingType, readingValue, patientId;
+        File inputFile = new File(file);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+            NodeList nl1 = doc.getElementsByTagName("Clinic");
+            Node n = nl1.item(0);
+            if (n.getNodeType() == Node.ELEMENT_NODE){
+                Element el = (Element) n;
+                clinicId = el.getAttribute("id");
+                clinicName = el.getTextContent();
+            }
+            NodeList nl2 = doc.getElementsByTagName("Reading");
+            readingId = new String[nl2.getLength()];
+            readingType = new String[nl2.getLength()];
+            readingValue = new String[nl2.getLength()];
+            patientId = new String[nl2.getLength()];
+            for (int temp = 0; temp < nl2.getLength(); temp++){
+                Node n2 = nl2.item(temp);
+                if (n2.getNodeType() == Node.ELEMENT_NODE) {
+                    Element el2 = (Element) n2;
+                    readingId[temp] = el2.getAttribute("id");
+                    readingType[temp] = el2.getAttribute("type");
+                    readingValue[temp] = el2.getElementsByTagName("value").item(0).getTextContent();
+                    patientId[temp] = el2.getElementsByTagName("patient").item(0).getTextContent();
+                }
+            }
+            ArrayList<ReadingJson> rjl = new ArrayList<>();
+
+            for (int i = 0; i < readingId.length; i++){
+                ReadingJson rj = new ReadingJson(patientId[i], readingType[i], readingId[i], readingValue[i], null, clinicId, clinicName);
+                rjl.add(rj);
+            }
+
+            AddReadingToPatient(rjl);
+
+        }
+        catch (Exception e){
+            System.out.println(e.getStackTrace());
+        }
+    }
 
 }

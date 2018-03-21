@@ -15,6 +15,8 @@ public class Reading {
 	private double value;
 	private String bpValue;
 	private Date date;
+	private String clinicId;
+	private String clinicName;
 
 	//Constructor for every reading value except of blood_pressure type
 	protected Reading(String readingId, String type, double value, Date date) {
@@ -86,5 +88,13 @@ public class Reading {
 		string = string + "Date: " + date + "} ";
 		
 		return string;
+	}
+	
+	public String getClinicId() {
+		return clinicId;
+	}
+	
+	public String getClinicName() {
+		return clinicName;
 	}
 }
