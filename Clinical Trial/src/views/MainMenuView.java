@@ -44,9 +44,11 @@ public class MainMenuView implements View {
    public MainMenuView() {
 	    
         comboBoxPatientsIds.addItem("New patient"); // Display New Patient for the dropdown list in the first place
+        /**
         for (Patient patient : ClinicalTrial.getAllPatients()) {
             comboBoxPatientsIds.addItem(patient.getPatientId()); // Fill the comboBox from the ClinicalTrial arrayList
         }
+        **/
         
         // Set all labels not editable
         pastReadingDisplay.setEditable(false);
