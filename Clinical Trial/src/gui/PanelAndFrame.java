@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import listeners.ButtonMainMenuListener;
 import listeners.ButtonManageFileListener;
+import listeners.ButtonPatientInfoListener;
 import views.AddPatientView;
 import views.MainMenuView;
 import views.ManageFileView;
@@ -71,6 +72,7 @@ public class PanelAndFrame {
 	   MenuBar menuBar = new MenuBar();
 	   menuBar.addButtonMainMenuListener(new ButtonMainMenuListener(guiController));
 	   menuBar.addButtonManageFileListener(new ButtonManageFileListener(guiController));
+	   menuBar.addButtonPatientInfoListener(new ButtonPatientInfoListener(guiController)); //added
 	   return menuBar;
    }
    
