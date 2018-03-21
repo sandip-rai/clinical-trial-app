@@ -27,10 +27,28 @@ public class MenuBar extends JMenuBar {
             }
         });
     }
+    
+    /**
+     * Listens to the main menuItem being clicked in the menu
+     * @param listenForButtonMainMenu the actionListener to listen for the MainMenu in the menu
+     */
     void addButtonMainMenuListener(ActionListener listenForButtonMainMenu) {
     	menuItemMainMenu.addActionListener(listenForButtonMainMenu);
     }
+    
+    /**
+     * Listens to the manageFile item being clicked in the menu
+     * @param listenForButtonManageFile the actionListener to listen for the manageFile in the menu
+     */
     void addButtonManageFileListener(ActionListener listenForButtonManageFile) {
     	menuItemManageFile.addActionListener(listenForButtonManageFile);
+    }
+    
+    /**
+     * Listens to the patientInfo item being clicked in the menu
+     * @param listenForPatientInfoMenuItem the actionListener to listen for the PatientInfo in the menu
+     */
+    void addButtonPatientInfoListener(ActionListener listenForPatientInfoMenuItem){
+    	menuItemPatientInfo.addActionListener(listenForPatientInfoMenuItem);
     }
 }
