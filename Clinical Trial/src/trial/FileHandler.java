@@ -61,25 +61,12 @@ public class FileHandler {
 	private class PatientReadingsJson {
 		// Arraylist to hold ReadingJson class objects
 		private ArrayList<ReadingJson> patient_readings;
-
-		PatientReadingsJson(ArrayList<ReadingJson> patient_readings) {
+		
+		PatientReadingsJson(ArrayList<ReadingJson> patient_readings){
 			this.patient_readings = patient_readings;
 		}
 	}
-	
-	@SuppressWarnings("unused")
-	private class State {
-		private ArrayList<Patient> allPatients = ClinicalTrial.getAllPatients();;
-		// private ArrayList<Clinic> allClinics = new ArrayList<Clinic>();
-	}
 
-	public void startProgram() {
-
-	}
-
-	public void endProgram() {
-
-	}
 
 	/**
 	 * readJsonFile initializes the FileReader, creates a Gson object, and creates
@@ -90,72 +77,82 @@ public class FileHandler {
 	 * @return true if file is successfully read and contents are added
 	 *         appropriately
 	 */
-
-	public boolean readJsonFile(String filePath, boolean addToTrial, boolean activate) {
-		Gson gson = new GsonBuilder().serializeNulls().create();
-		// Try a FileReader
-		try (Reader fileReader = new FileReader(filePath)) {
-			// Create PatientReadingsJson object which creates an AarrayList
-			PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class);
-			/*
-			 * TODO per phase 1 requirements readings from patients not in trial should be
-			 * ignored. if we want to automatically add a patient we should add a check box
-			 * to the gui.
-			 */
-			addPatientsToTrial(readingList.patient_readings);
-			// Add readings from input file to Patient's readings ArrayList
-			AddReadingToPatient(readingList.patient_readings);
-			return true; // If file has been read and contents added
-		} catch (IOException e) { // Catch if fileLocation doesn't exist
-			e.printStackTrace();
+	public boolean readJsonFile() {
+		
+		// Create a Gson object
+		JFileChooser fileChooser = new JFileChooser();
+		// Open the file selection dialog at the current project directory
+		fileChooser.setCurrentDirectory(new File("."));
+		int result = fileChooser.showOpenDialog(null);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = fileChooser.getSelectedFile(); // Get the file
+			String filePath = selectedFile.getAbsolutePath(); // Get the path
+			Gson gson = new GsonBuilder().serializeNulls().create();
+			// Try a FileReader
+			try (Reader fileReader = new FileReader(filePath)) {
+				// Create PatientReadingsJson object which creates an AarrayList
+				PatientReadingsJson readingList = gson.fromJson(fileReader, PatientReadingsJson.class);
+				/*
+				 * TODO per phase 1 requirements readings from patients not in trial should be
+				 * ignored. if we want to automatically add a patient we should add a check box
+				 * to the gui.
+				 */
+				addPatientsToTrial(readingList.patient_readings);
+				// Add readings from input file to Patient's readings ArrayList
+				AddReadingToPatient(readingList.patient_readings);
+				return true; // If file has been read and contents added
+			} catch (IOException e) { // Catch if fileLocation doesn't exist
+				e.printStackTrace();
+				return false; // If exception occurs
+			}
 		}
 		return false;
 	}
 
-	public boolean WriteState() {
-		Writer writer;
-		try {
-			writer = new FileWriter("state.json");
-			Gson gson = new GsonBuilder().create();
-			State state = new State();
-			gson.toJson(state, writer);
-			writer.close();// If file is written and writer closed
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;// If exception occurs
-		}
-	}
+	/**
+	 * writeJsonFile writes to the output Json File.
+	 * 
+	 * @return true if file is successfully return and writer is closed
+	 */
+	public boolean writeJsonFile() {
+		String fileName;
+		// Print the info of selected patient id
+		JFileChooser FileChooser = new JFileChooser(System.getProperty("user.dir"));
+		int returnValue = FileChooser.showSaveDialog(null);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			fileName = FileChooser.getSelectedFile().getAbsolutePath() + ".json";
+			try {
+				Writer writer = new FileWriter(fileName);
+				Gson gson = new GsonBuilder().create();
+				ArrayList<ReadingJson> jsonReadings = getJsonReadings();
+				PatientReadingsJson allReadings = new PatientReadingsJson(jsonReadings);
+				gson.toJson(allReadings, writer);
+				writer.close();
+				return true; // If file is written and writer closed
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false; // If exception occurs
+			}
 
-	public boolean WritePatientReadings(String fileName) {
-		try {
-			Writer writer = new FileWriter(fileName);
-			Gson gson = new GsonBuilder().create();
-			ArrayList<ReadingJson> jsonReadings = getJsonReadings();
-			PatientReadingsJson allReadings = new PatientReadingsJson(jsonReadings);
-			gson.toJson(allReadings, writer);
-			writer.close();
-			return true; // If file is written and writer closed
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false; // If exception occurs
 		}
-	}
+		return false;
 
+	}
+	
 	private ArrayList<ReadingJson> getJsonReadings() {
 		ArrayList<Patient> allPatients = ClinicalTrial.getAllPatients();
 		ArrayList<ReadingJson> allReadings = new ArrayList<ReadingJson>();
 		for (Patient patient : allPatients) {
 			ArrayList<Reading> patientReadings = patient.getReadings();
-			for (Reading reading : patientReadings) {
+			for (Reading reading : patientReadings) {	
 				String patient_id = patient.getPatientId();
 				String reading_type = reading.getType();
 				String reading_id = reading.getReadingId();
-				String reading_date = Long.toString(reading.getDate().getTime());
+				String reading_date = Long.toString(reading.getDate());
 				String reading_value = new String();
 				if (reading_type.equals("blood_press")) {
-					reading_value = reading.getBpValue();
-				} else {
+					reading_value = reading.getBpValue();	
+				}else {
 					reading_value = Double.toString(reading.getValue());
 				}
 				if (reading.getClinicId() != null && reading.getClinicName() != null) {
@@ -201,7 +198,7 @@ public class FileHandler {
 			// Grab the readings into each String
 			String readingId = reading.reading_id;
 			String type = reading.reading_type;
-			Date date = new Date(Long.parseLong(reading.reading_date));
+			long date = Long.parseLong(reading.reading_date);
 			try { // Try for every reading value except blood_pressure type
 				double value = Integer.parseInt(reading.reading_value);
 				patient.addReading(readingId, type, value, date);

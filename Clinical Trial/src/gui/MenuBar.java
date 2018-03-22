@@ -4,39 +4,51 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuBar {
-    public JMenuBar makeMenuBar(){
-        // Create menu components
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Menu");
+public class MenuBar extends JMenuBar {
+	// Create menu components
+    JMenu menu = new JMenu("Menu");
+    
+    // Create and add menuItems to menu
+    JMenuItem menuItemMainMenu = menu.add("Main Menu");
+    JMenuItem menuItemPatientInfo = menu.add("Patient Info");
+    JMenuItem menuItemManageFile = menu.add("Manage Files");
+   
+    //Contractor 
+    public MenuBar(){
+    	//Create a menuBar
+    	super();
+       
+        // Add menu to menuBar
+        this.add(menu);
 
-        // Add menus to menu bar
-        menuBar.add(menu);
-
-        // Create and add menuItems to menu
-        JMenuItem mainMenu = menu.add("Main Menu");
-        JMenuItem patientInfo = menu.add("Patient Info");
-        JMenuItem manageFile = menu.add("Manage Files");
-
-        mainMenu.addActionListener(new ActionListener() {
+        menuItemPatientInfo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PanelAndFrame.disposeFrame();
-                MainMenu.mainMenu();
+                //displayPatientList.displayPatientList();
             }
         });
-
-        patientInfo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                DisplayPatientList.displayPatientList();
-            }
-        });
-
-        manageFile.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ManageFile.manageFile();
-            }
-        });
-
-        return menuBar;
+    }
+    
+    /**
+     * Listens to the main menuItem being clicked in the menu
+     * @param listenForButtonMainMenu the actionListener to listen for the MainMenu in the menu
+     */
+    void addButtonMainMenuListener(ActionListener listenForButtonMainMenu) {
+    	menuItemMainMenu.addActionListener(listenForButtonMainMenu);
+    }
+    
+    /**
+     * Listens to the manageFile item being clicked in the menu
+     * @param listenForButtonManageFile the actionListener to listen for the manageFile in the menu
+     */
+    void addButtonManageFileListener(ActionListener listenForButtonManageFile) {
+    	menuItemManageFile.addActionListener(listenForButtonManageFile);
+    }
+    
+    /**
+     * Listens to the patientInfo item being clicked in the menu
+     * @param listenForPatientInfoMenuItem the actionListener to listen for the PatientInfo in the menu
+     */
+    void addButtonPatientInfoListener(ActionListener listenForPatientInfoMenuItem){
+    	menuItemPatientInfo.addActionListener(listenForPatientInfoMenuItem);
     }
 }

@@ -4,7 +4,6 @@ package trial;
  */
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -47,7 +46,7 @@ public class Patient {
 	 * @param value the reading value number
 	 * @param date the date when reading was taken
 	 */
-	public void addReading(String readingId, String type, double value, Date date) {
+	public void addReading(String readingId, String type, double value, long date) {
 		if (active) {
 			Reading reading = new Reading(readingId, type, value, date);
 			readings.add(reading);
@@ -61,7 +60,7 @@ public class Patient {
 	 * @param value the reading value number
 	 * @param date the date when reading was taken
 	 */
-	public void addReading(String readingId, String type, String bpValue, Date date) {
+	public void addReading(String readingId, String type, String bpValue, long date) {
 		if (active) {
 			Reading reading = new Reading(readingId, type, bpValue, date);
 			readings.add(reading);
@@ -75,7 +74,7 @@ public class Patient {
 	 * @param value the reading value
 	 * @param date the date of reading
 	 */
-	public void addNewReadings(String readingId, String type, String value, Date date) {
+	public void addNewReadings(String readingId, String type, String value, long date) {
 		System.out.println("new String value reading");
 		if (active) { //Only add if the patient is active i.e on trial
 			try {
