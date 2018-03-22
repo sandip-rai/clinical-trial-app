@@ -78,6 +78,8 @@ public class MainMenuView implements View {
    
    //setup Frame
    public void setupFrame(){
+       comboBoxPatientsIds.removeAllItems();
+       comboBoxPatientsIds.addItem("New patient");
 	   for (Patient patient : ClinicalTrial.getAllPatients()) {
            comboBoxPatientsIds.addItem(patient.getPatientId()); // Fill the comboBox from the ClinicalTrial arrayList
        }

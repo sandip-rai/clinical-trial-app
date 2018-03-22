@@ -17,7 +17,7 @@ import gui.PanelAndFrame;
 public class AddPatientView implements View {
 	//create labels buttons and textfields
 	JLabel label = new JLabel("PatientID:");
-    JTextField inputText = new JTextField("                                               ");
+    JTextField inputText = new JTextField(16);
     JButton buttonAdd = new JButton("Add");
     JTextField addPatientState = new JTextField("Click Add button to add new Patient");
 	JButton buttonBack = new JButton("Back");
