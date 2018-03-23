@@ -65,7 +65,7 @@ public class PanelAndFrame {
 	   menuBar.addButtonManageFileListener(new ButtonManageFileListener(guiController));
 	   menuBar.addButtonPatientInfoListener(new ButtonPatientInfoListener(guiController));
 	   menuBar.addButtonSaveState(new ButtonSaveState(guiController));
-	   menuBar.addButtonPatientInfoListener(new ButtonExitProgram(guiController));
+	   menuBar.addButtonExitProgram(new ButtonExitProgram(guiController));
 	   return menuBar;
    }
    
