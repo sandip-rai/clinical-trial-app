@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 
 import gui.GuiController;
 import views.MainMenuView;
-import trial.ClinicalTrial;
 
 //inner class for buttonAddReading to perform actionPerformed(ActionEvent e)
 public class ButtonAddReadingListener implements ActionListener {
@@ -35,9 +34,9 @@ public class ButtonAddReadingListener implements ActionListener {
             } else { // If all values are filled, add them to to corresponding Patient
             	SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");  
                 Date date = formatter.parse(readingDate); // Change date from String to Date
-                // Get the patient from the ClinicalTrial arraylist and
+                // Get the patient from the guiController.getClinicalTrial() arraylist and
                 // add the new readings to that patient
-                ClinicalTrial.findPatient(guiController.getMainMenuView().getComboBoxPatientsIds().getSelectedItem().toString())
+                guiController.getClinicalTrial().findPatient(guiController.getMainMenuView().getComboBoxPatientsIds().getSelectedItem().toString())
                         .addNewReadings(readingId, readingType, readingValue, date);
 
                 // Clear the textfields for new input

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ClinicalTrial {
 	//Creating an arrayList to hold the Patients in the trial
-	private static ArrayList<Patient> allPatients = new ArrayList<Patient>();
+	private ArrayList<Patient> allPatients = new ArrayList<Patient>();
 	private ArrayList<Clinic> clinicList = new ArrayList<Clinic>();//array to hold every created clinic object
 	
 	/**ClinicalTrial
@@ -15,7 +15,7 @@ public class ClinicalTrial {
 	 * @return allPatients the arrayList holding the Patients in the trial
 	 */
 	
-	public static ArrayList<Patient> getAllPatients() {
+	public ArrayList<Patient> getAllPatients() {
 		return allPatients;
 	}
 
@@ -24,7 +24,7 @@ public class ClinicalTrial {
 	 * @param patientId the Id of the patient
 	 * @return patient the patient if it exists in the allPatients arrayList
 	 */
-	public static Patient findPatient(String patientId){
+	public Patient findPatient(String patientId){
 		for (Patient patient : allPatients) { //loop through the allPatients arrayList
 			if (patientId.equals(patient.getPatientId())) {
 				return patient; //if patient exists in the trial
@@ -40,7 +40,7 @@ public class ClinicalTrial {
 	 * @param patientId the Id of the patient
 	 * @return boolean true if patient was added. False if another patient with the same ID was found
 	 */
-	public static Boolean addPatient(String patientId){
+	public Boolean addPatient(String patientId){
 		for (Patient patient : allPatients) { //loop through the allPatients arrayList
 			if (patientId.equals(patient.getPatientId())) {
 				//a patient with that ID was found return false without adding a new patient

@@ -13,6 +13,10 @@ import com.google.gson.*;
 
 
 public class JsonHandler extends FileHandler {
+	
+	public JsonHandler(ClinicalTrial clinicalTrial){
+		this.clinicalTrial = clinicalTrial;
+	}
 
 	/**
 	 * readJsonFile initializes the FileReader, creates a Gson object, and creates
@@ -70,7 +74,7 @@ public class JsonHandler extends FileHandler {
 	}
 
 	private ArrayList<FileReading> getJsonReadings() {
-		ArrayList<Patient> allPatients = ClinicalTrial.getAllPatients();
+		ArrayList<Patient> allPatients = clinicalTrial.getAllPatients();
 		ArrayList<FileReading> allReadings = new ArrayList<FileReading>();
 		for (Patient patient : allPatients) {
 			ArrayList<Reading> patientReadings = patient.getReadings();

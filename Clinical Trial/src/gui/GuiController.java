@@ -9,16 +9,19 @@ public class GuiController {
 	private AddPatientView addPatientView;
     private ManageFileView manageFileView;
     private FileAdapter fileAdapter;
+    private ClinicalTrial clinicalTrial;
     private DisplayPatientListView displayPatientListView;
     private DisplayPatientInfoView displayPatientInfoView;
+ 
 
 	//Constructor
-    GuiController(MainMenuView mainMenuView, AddPatientView addPatientView, ManageFileView manageFileView, FileAdapter fileAdapter,
+    GuiController(MainMenuView mainMenuView, AddPatientView addPatientView, ManageFileView manageFileView, FileAdapter fileAdapter, ClinicalTrial clinicalTrial,
     	    DisplayPatientListView displayPatientListView, DisplayPatientInfoView displayPatientInfoView) {
         this.mainMenuView = mainMenuView;
         this.addPatientView = addPatientView;
         this.manageFileView =manageFileView;
         this.fileAdapter = fileAdapter;
+        this.clinicalTrial = clinicalTrial;
         this.displayPatientListView = displayPatientListView;
         this.displayPatientInfoView = displayPatientInfoView;
         
@@ -72,8 +75,9 @@ public class GuiController {
 	public DisplayPatientInfoView getDisplayPatientInfoView() {
 		return displayPatientInfoView;
 	}
-	
-	
-	
+
+	public ClinicalTrial getClinicalTrial() {
+		return clinicalTrial;
+	}
 	
 }

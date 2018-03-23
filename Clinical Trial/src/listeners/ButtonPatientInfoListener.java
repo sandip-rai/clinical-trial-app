@@ -27,7 +27,7 @@ public class ButtonPatientInfoListener implements ActionListener {
 		guiController.getDisplayPatientListView().getFrame().dispose();
 
 		// Setup the DisplayPatientListView frame
-		guiController.getDisplayPatientListView().setupFrame();
+		guiController.getDisplayPatientListView().setupFrame(guiController.getClinicalTrial());
 		guiController.getDisplayPatientListView().setVisible(true);
 	}
 

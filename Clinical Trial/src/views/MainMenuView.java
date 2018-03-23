@@ -77,10 +77,10 @@ public class MainMenuView implements View {
    }
    
    //setup Frame
-   public void setupFrame(){
+   public void setupFrame(ClinicalTrial clinicalTrial){
        comboBoxPatientsIds.removeAllItems();
        comboBoxPatientsIds.addItem("New patient");
-	   for (Patient patient : ClinicalTrial.getAllPatients()) {
+	   for (Patient patient : clinicalTrial.getAllPatients()) {
            comboBoxPatientsIds.addItem(patient.getPatientId()); // Fill the comboBox from the ClinicalTrial arrayList
        }
        PanelAndFrame.setupFrame(frame, panels, menuBar);

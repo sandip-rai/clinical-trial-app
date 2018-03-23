@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import trial.ClinicalTrial;
 import trial.FileAdapter;
 import views.*;
 
@@ -13,6 +14,10 @@ import views.*;
 public class Driver {
 
     public static void main(String[] args) {
+    	//Models
+    	ClinicalTrial clinicalTrial = new ClinicalTrial();
+    	FileAdapter fileAdapter = new FileAdapter();
+    	
     	//views
     	MainMenuView mainMenuView = new MainMenuView();
     	AddPatientView addPatientView = new AddPatientView();
@@ -20,17 +25,16 @@ public class Driver {
     	DisplayPatientListView displayPatientListView = new DisplayPatientListView();
     	DisplayPatientInfoView displayPatientInfoView = new DisplayPatientInfoView();
     	
-    	//Models
-    	FileAdapter fileAdapter = new FileAdapter();
+ 
     	
     	GuiController guiController =new GuiController(mainMenuView, addPatientView
-    			, manageFileView, fileAdapter, displayPatientListView, displayPatientInfoView);
+    			, manageFileView, fileAdapter, clinicalTrial, displayPatientListView, displayPatientInfoView);
     	
     	mainMenuView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
     	addPatientView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
     	manageFileView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
     	displayPatientListView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
-    	mainMenuView.setupFrame();
+    	mainMenuView.setupFrame(clinicalTrial);
     	guiController.run(mainMenuView);
     }
 }

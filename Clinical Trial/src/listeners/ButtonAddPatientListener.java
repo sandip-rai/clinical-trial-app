@@ -22,8 +22,8 @@ public class ButtonAddPatientListener implements ActionListener {
 		// that user inputs
 		if (tempId == null || tempId.equals("")) {// make sure the user has entered a  patient ID
 			guiController.getAddPatientView().getAddPatientState().setText("Please enter a patient ID");
-		} else if (ClinicalTrial.addPatient(tempId)) {
-			ClinicalTrial.findPatient(tempId).setActive(true);
+		} else if (guiController.getClinicalTrial().addPatient(tempId)) {
+			guiController.getClinicalTrial().findPatient(tempId).setActive(true);
 			guiController.getAddPatientView().getAddPatientState().setText("Added! Ready for next patient. ");
 			guiController.getAddPatientView().getInputText().setText("");
 		} else {

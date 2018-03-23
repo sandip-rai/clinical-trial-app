@@ -5,6 +5,7 @@ import java.util.Date;
 
 
 public class FileHandler {	
+	ClinicalTrial clinicalTrial;
 	
 	/**
 	 * ReadingJson class handles the objects with the specified parameters that are
@@ -18,7 +19,8 @@ public class FileHandler {
 		protected String reading_id;
 		protected String reading_value;
 		protected String reading_date;
-		protected String clinic_id, clinic_name;
+		protected String clinic_id;
+		protected String clinic_name;
 
 		FileReading(String patient_id, String reading_type, String reading_id, String reading_value,
 				String reading_date) {
@@ -53,17 +55,16 @@ public class FileHandler {
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	protected class State {
-		private ArrayList<Patient> allPatients = ClinicalTrial.getAllPatients();;
+		protected ArrayList<Patient> allPatients = clinicalTrial.getAllPatients();;
 		// private ArrayList<Clinic> allClinics = new ArrayList<Clinic>();
 	}
 	
 	protected void addPatientsToTrial(ArrayList<FileReading> readings) {
 		for (FileReading readingJson : readings) {
-			if (ClinicalTrial.findPatient(readingJson.patient_id) == null) {
+			if (clinicalTrial.findPatient(readingJson.patient_id) == null) {
 				Patient patient = new Patient(readingJson.patient_id);
-				ClinicalTrial.getAllPatients().add(patient);
+				clinicalTrial.getAllPatients().add(patient);
 			}
 
 		}
@@ -78,7 +79,7 @@ public class FileHandler {
 	 */
 	protected void AddReadingToPatient(ArrayList<FileReading> readings) {
 		for (FileReading reading : readings) { // loop through the readings arrayList
-			Patient patient = ClinicalTrial.findPatient(reading.patient_id); // Get a patient from the arrayList
+			Patient patient = clinicalTrial.findPatient(reading.patient_id); // Get a patient from the arrayList
 			if (patient == null) {
 				continue; // Continue if arrayList is empty
 			}

@@ -16,11 +16,11 @@ public class ButtonUploadListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 if (guiController.getFileAdapter().readFile()) { 
+		 if (guiController.getFileAdapter().readFile(guiController.getClinicalTrial())) { 
 			 // If file is read, prompt the user and display the patient list\
              JOptionPane.showMessageDialog(null, "File uploaded successfully.");
 			 guiController.getManageFileView().getFrame().dispose();
-			 guiController.getDisplayPatientListView().setupFrame();
+			 guiController.getDisplayPatientListView().setupFrame(guiController.getClinicalTrial());
 			 guiController.getDisplayPatientListView().setVisible(true);
          } else { // If no file read, prompt the user and show the manage
             // file interface

@@ -64,9 +64,9 @@ public class DisplayPatientListView {
 	/**
 	 * Setup the frame for the view
 	 */
-	public void setupFrame(){
+	public void setupFrame(ClinicalTrial clinicalTrial){
 		comboBoxPatientsIds.removeAllItems();
-		for (Patient patient : ClinicalTrial.getAllPatients()) {
+		for (Patient patient : clinicalTrial.getAllPatients()) {
 			comboBoxPatientsIds.addItem(patient.getPatientId());
 		}
 		//Setup the frames and panels

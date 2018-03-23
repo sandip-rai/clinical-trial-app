@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import gui.GuiController;
-import trial.ClinicalTrial;
 
 public class ButtonEndTrialListener implements ActionListener {
 	GuiController guiController; //Initialize
@@ -23,11 +22,11 @@ public class ButtonEndTrialListener implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		try { // Handle the exception if no patient is selected to
 			// resume the trial.
-		ClinicalTrial.findPatient(
-				ClinicalTrial.getAllPatients().get(guiController.getDisplayPatientListView().getComboBoxPatientsIds().getSelectedIndex()).getPatientId())
+		guiController.getClinicalTrial().findPatient(
+				guiController.getClinicalTrial().getAllPatients().get(guiController.getDisplayPatientListView().getComboBoxPatientsIds().getSelectedIndex()).getPatientId())
 				.setActive(false);
 		JOptionPane.showMessageDialog(null, "Patient ID: "
-				+ ClinicalTrial.getAllPatients().get(guiController.getDisplayPatientListView().getComboBoxPatientsIds().getSelectedIndex()).getPatientId()
+				+ guiController.getClinicalTrial().getAllPatients().get(guiController.getDisplayPatientListView().getComboBoxPatientsIds().getSelectedIndex()).getPatientId()
 				+ "\nTrial has ended");
 	} catch (ArrayIndexOutOfBoundsException ex) {
 		JOptionPane.showMessageDialog(null,

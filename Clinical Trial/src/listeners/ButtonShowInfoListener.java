@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import gui.GuiController;
-import trial.ClinicalTrial;
 
 public class ButtonShowInfoListener implements ActionListener{
 GuiController guiController; //Initialize
@@ -34,10 +33,10 @@ GuiController guiController; //Initialize
 			
 			
 			guiController.getDisplayPatientInfoView().setSelectedPatient((
-				ClinicalTrial.getAllPatients().get(guiController.getDisplayPatientListView().
+				guiController.getClinicalTrial().getAllPatients().get(guiController.getDisplayPatientListView().
 						getComboBoxPatientsIds().getSelectedIndex()).getPatientId()));
 			//Display the patient info
-			guiController.getDisplayPatientInfoView().displayPatientInfo();
+			guiController.getDisplayPatientInfoView().displayPatientInfo(guiController.getClinicalTrial());
 			guiController.getDisplayPatientInfoView().setVisible(true);
 		} catch (ArrayIndexOutOfBoundsException ex) {
 			JOptionPane.showMessageDialog(null,

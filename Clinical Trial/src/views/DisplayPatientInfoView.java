@@ -57,18 +57,18 @@ public class DisplayPatientInfoView implements View {
 	/**
 	 * Display the patient info of the selected patient
 	 */
-	public void displayPatientInfo() {
+	public void displayPatientInfo(ClinicalTrial clinicalTrial) {
 
 		// Create JPanels
 		panels = PanelAndFrame
-				.setupPanels(NUMBER_OF_PANELS + ClinicalTrial.findPatient(selectedPatient).getReadings().size());
+				.setupPanels(NUMBER_OF_PANELS + clinicalTrial.findPatient(selectedPatient).getReadings().size());
 
 		// Add elements to the panels
 		panels.get(0).add(patientID);
 		// panel1.add(checkbox);
 		panels.get(0).add(buttonBack);
 		int count = 1;
-		for (Reading reading : ClinicalTrial.findPatient(selectedPatient).getReadings()) {
+		for (Reading reading : clinicalTrial.findPatient(selectedPatient).getReadings()) {
 			JTextField readingTextField = new JTextField();
 			readingTextField.setText(reading.toString());
 			readingTextField.setEditable(false); // Textfield is read-only

@@ -4,9 +4,7 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
-public class FileAdapter {
-	JsonHandler json = new JsonHandler();
-	XmlHandler xml = new XmlHandler();	
+public class FileAdapter {		
 	
 	private String getPath() {		
 		JFileChooser fileChooser = new JFileChooser();
@@ -21,14 +19,17 @@ public class FileAdapter {
 		return null;
 	}	
 	
-	public boolean writeFile() {
+	public boolean writeFile(ClinicalTrial clinicalTrial) {
 		String path = getPath();
+		JsonHandler json = new JsonHandler(clinicalTrial);
 		return json.WritePatientReadings(path);		
 	}
 	
 	//TODO Detect file type (regular expression to check for either *.json or *.xml) and send it to the correct handler
-	public boolean readFile() {
+	public boolean readFile(ClinicalTrial clinicalTrial) {
 		String path = getPath();
+		JsonHandler json = new JsonHandler(clinicalTrial);
+		System.out.println(json);
 		return json.readFile(path, true, false);
 	}
 	
