@@ -17,7 +17,7 @@ public class ButtonSaveListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 if (guiController.getFileHandler().writeJsonFile()) { // If file is saved, prompt the user
+		 if (guiController.getFileAdapter().writeFile()) { // If file is saved, prompt the user
              // and display manage file interface
              JOptionPane.showMessageDialog(null, "File saved successfully.");
              

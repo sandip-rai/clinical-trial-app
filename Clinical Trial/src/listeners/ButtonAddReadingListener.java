@@ -2,6 +2,9 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -30,7 +33,8 @@ public class ButtonAddReadingListener implements ActionListener {
             if (readingId.equals("") || readingValue.equals("") || readingDate.equals("")) {
                 JOptionPane.showMessageDialog(null, "Please fill in the values for every field.");
             } else { // If all values are filled, add them to to corresponding Patient
-                long date = Long.parseLong(readingDate); // Change date from String to long
+            	SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");  
+                Date date = formatter.parse(readingDate); // Change date from String to Date
                 // Get the patient from the ClinicalTrial arraylist and
                 // add the new readings to that patient
                 ClinicalTrial.findPatient(guiController.getMainMenuView().getComboBoxPatientsIds().getSelectedItem().toString())
@@ -43,6 +47,9 @@ public class ButtonAddReadingListener implements ActionListener {
             }
         } catch (NullPointerException ex) { // Catch the error if no patient is selected for adding readings.
         	guiController.getMainMenuView().displayErrorMessage(null, "Please select a Patient to add readings.");
-        }	
+        } catch (ParseException e1) {
+        	JOptionPane.showMessageDialog(null, "Please enter a valid date formated mm/dd/yyyy");
+			e1.printStackTrace();
+		}	
 	}
 }

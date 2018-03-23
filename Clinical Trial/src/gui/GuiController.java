@@ -8,17 +8,17 @@ public class GuiController {
     private MainMenuView mainMenuView;
 	private AddPatientView addPatientView;
     private ManageFileView manageFileView;
-    private FileHandler fileHandler;
+    private FileAdapter fileAdapter;
     private DisplayPatientListView displayPatientListView;
     private DisplayPatientInfoView displayPatientInfoView;
 
 	//Constructor
-    GuiController(MainMenuView mainMenuView, AddPatientView addPatientView, ManageFileView manageFileView, FileHandler fileHandler,
+    GuiController(MainMenuView mainMenuView, AddPatientView addPatientView, ManageFileView manageFileView, FileAdapter fileAdapter,
     	    DisplayPatientListView displayPatientListView, DisplayPatientInfoView displayPatientInfoView) {
         this.mainMenuView = mainMenuView;
         this.addPatientView = addPatientView;
         this.manageFileView =manageFileView;
-        this.fileHandler = fileHandler;
+        this.fileAdapter = fileAdapter;
         this.displayPatientListView = displayPatientListView;
         this.displayPatientInfoView = displayPatientInfoView;
         
@@ -49,8 +49,8 @@ public class GuiController {
     }
     
 
-    public FileHandler getFileHandler() {
-		return fileHandler;
+    public FileAdapter getFileAdapter() {
+		return fileAdapter;
 	}
     
     public MainMenuView getMainMenuView() {

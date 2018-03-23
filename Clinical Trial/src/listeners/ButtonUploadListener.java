@@ -16,7 +16,7 @@ public class ButtonUploadListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 if (guiController.getFileHandler().readJsonFile()) { 
+		 if (guiController.getFileAdapter().readFile()) { 
 			 // If file is read, prompt the user and display the patient list\
              JOptionPane.showMessageDialog(null, "File uploaded successfully.");
 			 guiController.getManageFileView().getFrame().dispose();

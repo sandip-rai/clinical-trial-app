@@ -25,8 +25,9 @@ local.properties
 # CDT- autotools
 .autotools
 
-# Java annotation processor (APT)
+# Java
 .factorypath
+*.class
 
 # PDT-specific (PHP Development Tools)
 .buildpath

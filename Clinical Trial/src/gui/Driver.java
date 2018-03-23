@@ -4,7 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import trial.FileHandler;
+import trial.FileAdapter;
 import views.*;
 
 /**
@@ -21,10 +21,10 @@ public class Driver {
     	DisplayPatientInfoView displayPatientInfoView = new DisplayPatientInfoView();
     	
     	//Models
-    	FileHandler fileHandler = new FileHandler();
+    	FileAdapter fileAdapter = new FileAdapter();
     	
     	GuiController guiController =new GuiController(mainMenuView, addPatientView
-    			, manageFileView, fileHandler, displayPatientListView, displayPatientInfoView);
+    			, manageFileView, fileAdapter, displayPatientListView, displayPatientInfoView);
     	
     	mainMenuView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
     	addPatientView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
