@@ -5,6 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuBar extends JMenuBar {
+	/**
+	 * default UID
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// Create menu components
     JMenu menu = new JMenu("Menu");
     
@@ -12,6 +17,8 @@ public class MenuBar extends JMenuBar {
     JMenuItem menuItemMainMenu = menu.add("Main Menu");
     JMenuItem menuItemPatientInfo = menu.add("Patient Info");
     JMenuItem menuItemManageFile = menu.add("Manage Files");
+    JMenuItem menuItemSaveState = menu.add("Save");
+    JMenuItem menuItemExitProgram = menu.add("Exit");
    
     //Contractor 
     public MenuBar(){
@@ -50,5 +57,21 @@ public class MenuBar extends JMenuBar {
      */
     void addButtonPatientInfoListener(ActionListener listenForPatientInfoMenuItem){
     	menuItemPatientInfo.addActionListener(listenForPatientInfoMenuItem);
+    }
+    
+    /**
+     * Listens to the save item being clicked in the menu
+     * @param listenForSaveState the actionListener to listen for the PatientInfo in the menu
+     */
+    void addButtonSaveState(ActionListener listenForSaveState){
+    	menuItemSaveState.addActionListener(listenForSaveState);
+    }
+    
+    /**
+     * Listens to the Exit item being clicked in the menu
+     * @param listenForExitProgram the actionListener to listen for the PatientInfo in the menu
+     */
+    void addButtonExitProgram(ActionListener listenForExitProgram){
+    	menuItemExitProgram.addActionListener(listenForExitProgram);
     }
 }

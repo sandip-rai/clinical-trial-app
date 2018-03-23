@@ -13,6 +13,7 @@ import com.google.gson.*;
 
 
 public class JsonHandler extends FileHandler {
+	private final String SAVE_STATE_PATH = "SaveState.json";
 	
 	public JsonHandler(ClinicalTrial clinicalTrial){
 		this.clinicalTrial = clinicalTrial;
@@ -41,21 +42,6 @@ public class JsonHandler extends FileHandler {
 			e.printStackTrace();
 		}
 		return false;
-	}
-
-	public boolean WriteState() {
-		Writer writer;
-		try {
-			writer = new FileWriter("state.json");
-			Gson gson = new GsonBuilder().create();
-			State state = new State();
-			gson.toJson(state, writer);
-			writer.close();// If file is written and writer closed
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;// If exception occurs
-		}
 	}
 
 	public boolean WritePatientReadings(String fileName) {
@@ -96,5 +82,28 @@ public class JsonHandler extends FileHandler {
 		}
 		return allReadings;
 	}
-
+	
+	protected boolean saveState() {
+		try {
+			Writer writer = new FileWriter(SAVE_STATE_PATH);
+			Gson gson = new GsonBuilder().create();
+			gson.toJson(clinicalTrial, writer);
+			writer.close();
+			return true; // If file is written and writer closed
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false; // If exception occurs
+		}
+	}
+	
+	protected ClinicalTrial loadState() {
+		Gson gson = new GsonBuilder().serializeNulls().create();
+		try (Reader fileReader = new FileReader(SAVE_STATE_PATH)) {
+			// Create PatientReadingsJson object which creates an AarrayList
+			ClinicalTrial fileTrial = gson.fromJson(fileReader, ClinicalTrial.class);			
+			return fileTrial; // If file has been read return the ClinicalTrial
+		} catch (IOException e) { // Catch if fileLocation doesn't exist
+			return new ClinicalTrial();
+		}		
+	}
 }

@@ -55,11 +55,6 @@ public class FileHandler {
 		}
 	}
 	
-	protected class State {
-		protected ArrayList<Patient> allPatients = clinicalTrial.getAllPatients();;
-		// private ArrayList<Clinic> allClinics = new ArrayList<Clinic>();
-	}
-	
 	protected void addPatientsToTrial(ArrayList<FileReading> readings) {
 		for (FileReading readingJson : readings) {
 			if (clinicalTrial.findPatient(readingJson.patient_id) == null) {

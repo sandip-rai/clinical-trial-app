@@ -5,26 +5,17 @@ package gui;
  */
 
 import javax.swing.*;
-
+import listeners.ButtonExitProgram;
 import listeners.ButtonMainMenuListener;
 import listeners.ButtonManageFileListener;
 import listeners.ButtonPatientInfoListener;
-import views.AddPatientView;
-import views.MainMenuView;
-import views.ManageFileView;
+import listeners.ButtonSaveState;
 import views.View;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class PanelAndFrame {
-
-	/**
-	 * default serialVersionUID
-	 */
-	private final long serialVersionUID = 1L;
-
 
 	static final int FRAME_ROWS = 0;
 	static final int FRAME_COLS = 1;
@@ -72,7 +63,9 @@ public class PanelAndFrame {
 	   MenuBar menuBar = new MenuBar();
 	   menuBar.addButtonMainMenuListener(new ButtonMainMenuListener(guiController));
 	   menuBar.addButtonManageFileListener(new ButtonManageFileListener(guiController));
-	   menuBar.addButtonPatientInfoListener(new ButtonPatientInfoListener(guiController)); //added
+	   menuBar.addButtonPatientInfoListener(new ButtonPatientInfoListener(guiController));
+	   menuBar.addButtonSaveState(new ButtonSaveState(guiController));
+	   menuBar.addButtonPatientInfoListener(new ButtonExitProgram(guiController));
 	   return menuBar;
    }
    

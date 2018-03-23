@@ -2,10 +2,7 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import gui.GuiController;
-import trial.ClinicalTrial;
-import views.AddPatientView;
 
 //class for buttonAddPatient to perform actionPerformed(ActionEvent e)
 public class ButtonAddPatientListener implements ActionListener {

@@ -1,9 +1,5 @@
 package gui;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import trial.ClinicalTrial;
 import trial.FileAdapter;
 import views.*;
@@ -15,8 +11,8 @@ public class Driver {
 
     public static void main(String[] args) {
     	//Models
-    	ClinicalTrial clinicalTrial = new ClinicalTrial();
     	FileAdapter fileAdapter = new FileAdapter();
+    	ClinicalTrial clinicalTrial = fileAdapter.loadState();
     	
     	//views
     	MainMenuView mainMenuView = new MainMenuView();

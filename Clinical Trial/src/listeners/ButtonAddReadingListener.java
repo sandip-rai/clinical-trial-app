@@ -5,11 +5,8 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.swing.JOptionPane;
-
 import gui.GuiController;
-import views.MainMenuView;
 
 //inner class for buttonAddReading to perform actionPerformed(ActionEvent e)
 public class ButtonAddReadingListener implements ActionListener {

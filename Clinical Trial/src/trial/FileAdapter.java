@@ -32,4 +32,17 @@ public class FileAdapter {
 		return json.readFile(path, true, false);
 	}
 	
+	public boolean saveState(ClinicalTrial clinicalTrial) {
+		JsonHandler json = new JsonHandler(clinicalTrial);
+		if(json.saveState()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public ClinicalTrial loadState() {
+		JsonHandler json = new JsonHandler(null);
+		return json.loadState();
+	}
+	
 }
