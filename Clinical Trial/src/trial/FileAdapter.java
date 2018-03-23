@@ -29,7 +29,6 @@ public class FileAdapter {
 	public boolean readFile(ClinicalTrial clinicalTrial) {
 		String path = getPath();
 		JsonHandler json = new JsonHandler(clinicalTrial);
-		System.out.println(json);
 		return json.readFile(path, true, false);
 	}
 	
