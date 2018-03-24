@@ -7,11 +7,11 @@ import javax.swing.JOptionPane;
 
 import gui.GuiController;
 
-public class ButtonSaveListener implements ActionListener {
+public class ButtonExportListener implements ActionListener {
 	GuiController guiController;
 	
 	//constructor
-	public ButtonSaveListener(GuiController guiController){
+	public ButtonExportListener(GuiController guiController){
 		this.guiController = guiController;
 	}
 	

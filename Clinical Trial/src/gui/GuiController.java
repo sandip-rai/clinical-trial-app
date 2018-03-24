@@ -7,7 +7,7 @@ import listeners.*;
 public class GuiController {
     private MainMenuView mainMenuView;
 	private AddPatientView addPatientView;
-    private ManageFileView manageFileView;
+    private SystemSettingsView systemSettingsView;
     private FileAdapter fileAdapter;
     private ClinicalTrial clinicalTrial;
     private DisplayPatientListView displayPatientListView;
@@ -15,11 +15,11 @@ public class GuiController {
  
 
 	//Constructor
-    GuiController(MainMenuView mainMenuView, AddPatientView addPatientView, ManageFileView manageFileView, FileAdapter fileAdapter, ClinicalTrial clinicalTrial,
+    GuiController(MainMenuView mainMenuView, AddPatientView addPatientView, SystemSettingsView systemSettingsView, FileAdapter fileAdapter, ClinicalTrial clinicalTrial,
     	    DisplayPatientListView displayPatientListView, DisplayPatientInfoView displayPatientInfoView) {
         this.mainMenuView = mainMenuView;
         this.addPatientView = addPatientView;
-        this.manageFileView =manageFileView;
+        this.systemSettingsView = systemSettingsView;
         this.fileAdapter = fileAdapter;
         this.clinicalTrial = clinicalTrial;
         this.displayPatientListView = displayPatientListView;
@@ -32,9 +32,12 @@ public class GuiController {
         this.addPatientView.addButtonAddListener(new ButtonAddPatientListener(this));
 		this.addPatientView.addButtonBackListener(new ButtonMainMenuListener(this));
 		
-		//this.manageFileView.addButtonSaveListener(new);
-		this.manageFileView.addButtonUploadListener(new ButtonUploadListener(this));
-		this.manageFileView.addButtonSaveListener(new ButtonSaveListener(this));
+		//Tell the SystemSettingsView to listen for their Check boxes
+		this.systemSettingsView.jsonAddPatientListener(new CheckBoxJsonAddPatients(this));
+		this.systemSettingsView.jsonAddReadingListener(new CheckBoxJsonAddReadings(this));
+		this.systemSettingsView.xmlAddPatientListener(new CheckBoxXmlAddPatients(this));
+		this.systemSettingsView.xmlAddReadingListener(new CheckBoxXmlAddReadings(this));
+		
 		
 		//Adding listeners to the buttons in DisplayPatientListView
 		this.displayPatientListView.addButtonResumeTrialListener(new ButtonResumeTrialListener(this));
@@ -64,8 +67,8 @@ public class GuiController {
 		return addPatientView;
 	}
 
-	public ManageFileView getManageFileView() {
-		return manageFileView;
+	public SystemSettingsView getManageFileView() {
+		return systemSettingsView;
 	}
 
 	public DisplayPatientListView getDisplayPatientListView() {
