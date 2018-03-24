@@ -5,11 +5,7 @@ package gui;
  */
 
 import javax.swing.*;
-import listeners.ButtonExitProgram;
-import listeners.ButtonMainMenuListener;
-import listeners.ButtonManageFileListener;
-import listeners.ButtonPatientInfoListener;
-import listeners.ButtonSaveState;
+import listeners.*;
 import views.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -62,9 +58,11 @@ public class PanelAndFrame {
    public static MenuBar supplyMenuBar(GuiController guiController){
 	   MenuBar menuBar = new MenuBar();
 	   menuBar.addButtonMainMenuListener(new ButtonMainMenuListener(guiController));
-	   menuBar.addButtonManageFileListener(new ButtonManageFileListener(guiController));
 	   menuBar.addButtonPatientInfoListener(new ButtonPatientInfoListener(guiController));
+	   menuBar.addButtonImportListener(new ButtonImportListener(guiController));
+	   menuBar.addButtonExportListener(new ButtonExportListener(guiController));
 	   menuBar.addButtonSaveState(new ButtonSaveState(guiController));
+	   menuBar.addButtonSystemSettingsListener(new ButtonSystemSettingsListener(guiController));
 	   menuBar.addButtonExitProgram(new ButtonExitProgram(guiController));
 	   return menuBar;
    }

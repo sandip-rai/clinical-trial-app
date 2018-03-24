@@ -23,7 +23,7 @@ public class ButtonPatientInfoListener implements ActionListener {
 		// Dispose all frames
 		guiController.getMainMenuView().getFrame().dispose();
 		guiController.getAddPatientView().getFrame().dispose();
-		guiController.getManageFileView().getFrame().dispose();
+		guiController.getSystemSettingView().getFrame().dispose();
 		guiController.getDisplayPatientListView().getFrame().dispose();
 
 		// Setup the DisplayPatientListView frame

@@ -5,9 +5,11 @@ package trial;
 import java.util.ArrayList;
 
 public class ClinicalTrial {
+	
 	//Creating an arrayList to hold the Patients in the trial
 	private ArrayList<Patient> allPatients = new ArrayList<Patient>();
 	private ArrayList<Clinic> clinicList = new ArrayList<Clinic>();//array to hold every created clinic object
+	private SystemSettings settings = new SystemSettings();
 	
 	/**ClinicalTrial
 	 * Getter for the allPatients arrayList
@@ -87,5 +89,8 @@ public class ClinicalTrial {
 			return true;
 		
 	}
-	
+
+	public SystemSettings getSettings() {
+		return settings;
+	}
 }

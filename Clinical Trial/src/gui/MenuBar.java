@@ -16,8 +16,10 @@ public class MenuBar extends JMenuBar {
     // Create and add menuItems to menu
     JMenuItem menuItemMainMenu = menu.add("Main Menu");
     JMenuItem menuItemPatientInfo = menu.add("Patient Info");
-    JMenuItem menuItemManageFile = menu.add("Manage Files");
+    JMenuItem menuItemImportReadings = menu.add("Import Readings");
+    JMenuItem menuItemExportReadings = menu.add("Export Readings");
     JMenuItem menuItemSaveState = menu.add("Save");
+    JMenuItem menuItemManageFile = menu.add("System Settings");
     JMenuItem menuItemExitProgram = menu.add("Exit");
    
     //Contractor 
@@ -47,7 +49,7 @@ public class MenuBar extends JMenuBar {
      * Listens to the manageFile item being clicked in the menu
      * @param listenForButtonManageFile the actionListener to listen for the manageFile in the menu
      */
-    void addButtonManageFileListener(ActionListener listenForButtonManageFile) {
+    void addButtonSystemSettingsListener(ActionListener listenForButtonManageFile) {
     	menuItemManageFile.addActionListener(listenForButtonManageFile);
     }
     
@@ -73,5 +75,13 @@ public class MenuBar extends JMenuBar {
      */
     void addButtonExitProgram(ActionListener listenForExitProgram){
     	menuItemExitProgram.addActionListener(listenForExitProgram);
+    }
+    
+    public void addButtonImportListener(ActionListener listenForButtonImport) {
+    	menuItemImportReadings.addActionListener(listenForButtonImport);
+    }
+
+    public void addButtonExportListener(ActionListener listenForButtonExport) {
+    	menuItemExportReadings.addActionListener(listenForButtonExport);
     }
 }

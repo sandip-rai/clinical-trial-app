@@ -11,7 +11,6 @@ import javax.swing.JTextField;
 import gui.MenuBar;
 import gui.PanelAndFrame;
 import trial.ClinicalTrial;
-import trial.Patient;
 import trial.Reading;
 
 public class DisplayPatientInfoView implements View {

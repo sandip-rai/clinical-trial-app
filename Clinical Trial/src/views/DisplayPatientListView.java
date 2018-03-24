@@ -16,7 +16,6 @@ import trial.Patient;
 
 public class DisplayPatientListView {
 	private JComboBox<String> comboBoxPatientsIds = new JComboBox<String>();
-	private ArrayList<String> arrayListPatientsIds = new ArrayList<String>();
 	// Create labels and buttons
 	JLabel label = new JLabel("Patients List: Select a Patient");
 	JButton buttonShowInfo = new JButton("Show Patient's Info");

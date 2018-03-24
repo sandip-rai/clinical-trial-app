@@ -29,12 +29,14 @@ public class JsonHandler extends FileHandler {
 	 *         appropriately
 	 */
 
-	public boolean readFile(String filePath, boolean addToTrial, boolean activate) {
+	public boolean readFile(String path, boolean addUnkownPatients, boolean addUnknownReadings) {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		try (Reader fileReader = new FileReader(filePath)) {
+		try (Reader fileReader = new FileReader(path)) {
 			// Create PatientReadingsJson object which creates an AarrayList
 			FileReadings readingList = gson.fromJson(fileReader, FileReadings.class);
-			addPatientsToTrial(readingList.patient_readings);
+			if (addUnkownPatients) {
+				addPatientsToTrial(readingList.patient_readings, addUnknownReadings);
+			}
 			// Add readings from input file to Patient's readings ArrayList
 			AddReadingToPatient(readingList.patient_readings);
 			return true; // If file has been read and contents added

@@ -5,11 +5,11 @@ import java.awt.event.ActionListener;
 
 import gui.GuiController;
 
-public class ButtonManageFileListener implements ActionListener{
+public class ButtonSystemSettingsListener implements ActionListener{
 	GuiController guiController;
 	
 	//constructor
-	public ButtonManageFileListener(GuiController guiController){
+	public ButtonSystemSettingsListener(GuiController guiController){
 		this.guiController = guiController;
 	}
 	
@@ -17,10 +17,10 @@ public class ButtonManageFileListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		guiController.getMainMenuView().getFrame().dispose();
 		guiController.getAddPatientView().getFrame().dispose();
-		guiController.getManageFileView().getFrame().dispose();
+		guiController.getSystemSettingView().getFrame().dispose();
 		
-		guiController.getManageFileView().setupFrame();
-		guiController.getManageFileView().setVisible(true);
+		guiController.getSystemSettingView().setupFrame();
+		guiController.getSystemSettingView().setVisible(true);
 	}
 
 }

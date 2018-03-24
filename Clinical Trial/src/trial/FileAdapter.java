@@ -27,9 +27,11 @@ public class FileAdapter {
 	
 	//TODO Detect file type (regular expression to check for either *.json or *.xml) and send it to the correct handler
 	public boolean readFile(ClinicalTrial clinicalTrial) {
+		Boolean addUnkownPatients = clinicalTrial.getSettings().jsonAddUnknownPatients();
+		Boolean addUnknownReadings = clinicalTrial.getSettings().jsonAddUnknownReadings();
 		String path = getPath();
 		JsonHandler json = new JsonHandler(clinicalTrial);
-		return json.readFile(path, true, false);
+		return json.readFile(path, addUnkownPatients, addUnknownReadings);
 	}
 	
 	public boolean saveState(ClinicalTrial clinicalTrial) {
