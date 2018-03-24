@@ -54,10 +54,10 @@ public class ClinicalTrial {
 		return true;
 	}
 	
-	/** added by Oussama
-	 * 
-	 * @param Clinicid
-	 * @return
+	/** 
+	 * finds if a clinic exists in the array list of clinics
+	 * @param Clinicid the id number for the clinic 
+	 * @return clinic object if it exists in the allPatients arrayList else null is returned
 	 */
 	public Clinic findClinic(String ClinicName){
 			
@@ -69,12 +69,10 @@ public class ClinicalTrial {
 		return null;
 	}
 	/**
-	 * added by oussama
-	 * method that adds a new clinic to the list of clinics
-	 * 
+	 * method that adds a new clinic to the list of clinics 
 	 * @param clinicName
 	 * @param clinicid
-	 * @return
+	 * @return true if the clinic is added or return false if the clinic already exists in the list 
 	 */
 	public boolean addClinic(String clinicName , String clinicid){
 		

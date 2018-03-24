@@ -7,7 +7,7 @@ public class ClincalTrailUnitTest {
 
 	
 	@Test
-	// unite test method to test the addPatient method 
+	// unit test method to test the addPatient method 
 	public void uTestForAddPatient(){
 		
 		
@@ -23,7 +23,7 @@ public class ClincalTrailUnitTest {
 	
 	
 	@Test
-	// unite test method to test the findPatient method 
+	// unit test method to test the findPatient method 
 	public void uTestForFindPatient(){
 		
 		Patient obj = new Patient("001");
@@ -35,7 +35,7 @@ public class ClincalTrailUnitTest {
 	}
 	
 	@Test
-	// unite test method to test the addClinic method 
+	// unit test method to test the addClinic method 
 	public void uTestForAddClinic(){
 		
 		
@@ -51,7 +51,7 @@ public class ClincalTrailUnitTest {
 	
 	
 	@Test
-	// unite test method to test the findClinic method 
+	// unit test method to test the findClinic method 
 	public void uTestForFindClinic(){
 		
 		Clinic obj = new Clinic("Clinic-A","CLN001");
