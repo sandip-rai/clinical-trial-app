@@ -25,7 +25,7 @@ GuiController guiController; //Initialize
 			
 			guiController.getMainMenuView().getFrame().dispose();
 			guiController.getAddPatientView().getFrame().dispose();
-			guiController.getManageFileView().getFrame().dispose();
+			guiController.getSystemSettingView().getFrame().dispose();
 			guiController.getDisplayPatientListView().getFrame().dispose();
 			guiController.getDisplayPatientInfoView().getFrame().dispose();
 			

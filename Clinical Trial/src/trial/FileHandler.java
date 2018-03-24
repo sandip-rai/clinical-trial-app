@@ -55,10 +55,11 @@ public class FileHandler {
 		}
 	}
 	
-	protected void addPatientsToTrial(ArrayList<FileReading> readings) {
+	protected void addPatientsToTrial(ArrayList<FileReading> readings, boolean active) {
 		for (FileReading readingJson : readings) {
 			if (clinicalTrial.findPatient(readingJson.patient_id) == null) {
 				Patient patient = new Patient(readingJson.patient_id);
+				patient.setActive(active);
 				clinicalTrial.getAllPatients().add(patient);
 			}
 

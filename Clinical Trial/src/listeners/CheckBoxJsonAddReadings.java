@@ -14,7 +14,8 @@ public class CheckBoxJsonAddReadings implements ItemListener{
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		SystemSettings settings = guiController.getClinicalTrial().getSettings();
-		if (e.getStateChange() == 1) {
+		Boolean addPatients = settings.jsonAddUnknownPatients();
+		if (e.getStateChange() == 1 && addPatients) {
 			settings.setJsonAddUnknownReadings(true);
 		}else {
 			settings.setJsonAddUnknownReadings(false);

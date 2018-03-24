@@ -17,7 +17,7 @@ public class XmlHandler extends FileHandler {
 	 * 
 	 * Read the xml file, and please note that this also adds a clinic id.
 	 */
-	public void readXMLFile(String file) {
+	public void readXMLFile(String file, boolean addUnkownPatients, boolean addUnknownReadings) {
 	    String clinicName="", clinicId="";
 	    String[] readingId, readingType, readingValue, patientId;
         File inputFile = new File(file);
@@ -54,6 +54,10 @@ public class XmlHandler extends FileHandler {
             	FileReading rj = new FileReading(patientId[i], readingType[i], readingId[i], readingValue[i], null, clinicId, clinicName);
                 rjl.add(rj);
             }
+            
+            if (addUnkownPatients) {
+				addPatientsToTrial(rjl, addUnknownReadings);
+			}
 
             AddReadingToPatient(rjl);
 

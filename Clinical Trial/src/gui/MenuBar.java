@@ -49,7 +49,7 @@ public class MenuBar extends JMenuBar {
      * Listens to the manageFile item being clicked in the menu
      * @param listenForButtonManageFile the actionListener to listen for the manageFile in the menu
      */
-    void addButtonManageFileListener(ActionListener listenForButtonManageFile) {
+    void addButtonSystemSettingsListener(ActionListener listenForButtonManageFile) {
     	menuItemManageFile.addActionListener(listenForButtonManageFile);
     }
     

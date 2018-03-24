@@ -14,7 +14,8 @@ public class CheckBoxXmlAddReadings implements ItemListener{
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		SystemSettings settings = guiController.getClinicalTrial().getSettings();
-		if (e.getStateChange() == 1) {
+		Boolean addPatients = settings.xmlAddUnknownPatients();
+		if (e.getStateChange() == 1 && addPatients) {
 			settings.setXmlAddUnknownReadings(true);
 		}else {
 			settings.setXmlAddUnknownReadings(false);

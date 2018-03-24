@@ -67,7 +67,7 @@ public class GuiController {
 		return addPatientView;
 	}
 
-	public SystemSettingsView getManageFileView() {
+	public SystemSettingsView getSystemSettingView() {
 		return systemSettingsView;
 	}
 

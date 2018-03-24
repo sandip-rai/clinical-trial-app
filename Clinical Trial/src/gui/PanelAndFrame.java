@@ -58,11 +58,11 @@ public class PanelAndFrame {
    public static MenuBar supplyMenuBar(GuiController guiController){
 	   MenuBar menuBar = new MenuBar();
 	   menuBar.addButtonMainMenuListener(new ButtonMainMenuListener(guiController));
-	   menuBar.addButtonManageFileListener(new ButtonManageFileListener(guiController));
 	   menuBar.addButtonPatientInfoListener(new ButtonPatientInfoListener(guiController));
-	   menuBar.addButtonSaveState(new ButtonSaveState(guiController));
-	   menuBar.addButtonImportListener(new ButtonExitProgram(guiController));
+	   menuBar.addButtonImportListener(new ButtonImportListener(guiController));
 	   menuBar.addButtonExportListener(new ButtonExportListener(guiController));
+	   menuBar.addButtonSaveState(new ButtonSaveState(guiController));
+	   menuBar.addButtonSystemSettingsListener(new ButtonSystemSettingsListener(guiController));
 	   menuBar.addButtonExitProgram(new ButtonExitProgram(guiController));
 	   return menuBar;
    }
