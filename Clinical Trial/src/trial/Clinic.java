@@ -2,10 +2,11 @@ package trial;
 
 public class Clinic {
 
-	
+	// data fields for Clinic class
 	private String name;
 	private String ID;
 	
+	// constructor for clinic 
 	public Clinic(String name, String id){
 			
 		this.name= name;
@@ -13,6 +14,7 @@ public class Clinic {
 		this.ID= id;		
 	}
 
+	// getters and setters
 	public String getName() {
 		return name;
 	}
