@@ -2,7 +2,6 @@ package trial;
 /**
  * ClinicalTrial class has the arrayList of patients present in the trial.
  */
-//11111111111111111111111
 import java.util.ArrayList;
 
 public class ClinicalTrial {
