@@ -25,13 +25,26 @@ public class FileAdapter {
 		return json.WritePatientReadings(path);		
 	}
 	
-	//TODO Detect file type (regular expression to check for either *.json or *.xml) and send it to the correct handler
+	//Parses file extension, calls json or xml reading method accordingly
 	public boolean readFile(ClinicalTrial clinicalTrial) {
-		Boolean addUnkownPatients = clinicalTrial.getSettings().jsonAddUnknownPatients();
-		Boolean addUnknownReadings = clinicalTrial.getSettings().jsonAddUnknownReadings();
 		String path = getPath();
-		JsonHandler json = new JsonHandler(clinicalTrial);
-		return json.readFile(path, addUnkownPatients, addUnknownReadings);
+		int i = path.lastIndexOf('.');
+		String fileType = path.substring(i);
+		if (fileType.equals(".json")) {
+			System.out.println("success");
+			Boolean addUnkownPatients = clinicalTrial.getSettings().jsonAddUnknownPatients();
+			Boolean addUnknownReadings = clinicalTrial.getSettings().jsonAddUnknownReadings();
+			JsonHandler json = new JsonHandler(clinicalTrial);
+			return json.readFile(path, addUnkownPatients, addUnknownReadings);
+		}
+		else if (fileType.equals(".xml")) {
+			Boolean addUnkownPatients = clinicalTrial.getSettings().xmlAddUnknownPatients();
+			Boolean addUnknownReadings = clinicalTrial.getSettings().xmlAddUnknownPatients();
+			XmlHandler xml = new XmlHandler();
+			return xml.readXMLFile(path, addUnkownPatients, addUnknownReadings);
+		}
+		else
+			return false;
 	}
 	
 	public boolean saveState(ClinicalTrial clinicalTrial) {
