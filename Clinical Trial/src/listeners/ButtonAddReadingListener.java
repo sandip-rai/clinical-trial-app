@@ -29,7 +29,7 @@ public class ButtonAddReadingListener implements ActionListener {
             if (readingId.equals("") || readingValue.equals("") || readingDate.equals("")) {
                 JOptionPane.showMessageDialog(null, "Please fill in the values for every field.");
             } else { // If all values are filled, add them to to corresponding Patient
-            	SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");  
+            	SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy HH:mm");  
                 Date date = formatter.parse(readingDate); // Change date from String to Date
                 // Get the patient from the guiController.getClinicalTrial() arraylist and
                 // add the new readings to that patient
@@ -44,7 +44,7 @@ public class ButtonAddReadingListener implements ActionListener {
         } catch (NullPointerException ex) { // Catch the error if no patient is selected for adding readings.
         	guiController.getMainMenuView().displayErrorMessage(null, "Please select a Patient to add readings.");
         } catch (ParseException e1) {
-        	JOptionPane.showMessageDialog(null, "Please enter a valid date formated mm/dd/yyyy");
+        	JOptionPane.showMessageDialog(null, "Please enter a valid date formated ddMMMyyyy HH:mm");
 			e1.printStackTrace();
 		}	
 	}
