@@ -23,10 +23,10 @@ public class ButtonResumeTrialListener implements ActionListener{
 		try { // Handle the exception if no patient is selected to
 			// resume the trial.
 		guiController.getClinicalTrial().findPatient(
-				guiController.getClinicalTrial().getAllPatients().get(guiController.getDisplayPatientListView().getComboBoxPatientsIds().getSelectedIndex()).getPatientId())
+				guiController.getClinicalTrial().getAllPatients().get(guiController.getDisplayPatientListView().getComboBoxPatients().getSelectedIndex()).getPatientId())
 				.setActive(true);
 		JOptionPane.showMessageDialog(null, "Patient ID: "
-				+ guiController.getClinicalTrial().getAllPatients().get(guiController.getDisplayPatientListView().getComboBoxPatientsIds().getSelectedIndex()).getPatientId()
+				+ guiController.getClinicalTrial().getAllPatients().get(guiController.getDisplayPatientListView().getComboBoxPatients().getSelectedIndex()).getPatientId()
 				+ "\nTrial has been activated");
 	} catch (ArrayIndexOutOfBoundsException ex) {
 		JOptionPane.showMessageDialog(null,

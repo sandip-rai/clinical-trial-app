@@ -17,12 +17,10 @@ import trial.SystemSettings;
 public class SystemSettingsView implements View {
 	// Check boxes
 	JCheckBox checkBoxJsonPatients = new JCheckBox("Add patients to the trial when importing from JSON files.");
-	JCheckBox checkBoxXmlPatients = new JCheckBox("Add unknown patients to the trial when importing from XML files");
-	// must be public to enable listener to change their state
-	public JCheckBox checkBoxXmlReadings = new JCheckBox("Add Readings from unkown patients importing from XML files");
-	public JCheckBox checkBoxJsonReadings = new JCheckBox(
-			"Add Readings from unkown patients importing from JSON files");
-
+	JCheckBox checkBoxJsonReadings = new JCheckBox("Add Readings from unkown patients imported from JSON files.");
+	JCheckBox checkBoxXmlPatients = new JCheckBox("Add unknown patients to the trial when importing from XML files.");
+	JCheckBox checkBoxXmlReadings = new JCheckBox("Add Readings from unkown patients imported from XML files.");
+	
 	// number of panels
 	final int NUMBER_OF_PANELS = 4;
 	ArrayList<JPanel> panels;
@@ -107,6 +105,14 @@ public class SystemSettingsView implements View {
 
 	public void xmlAddReadingListener(ItemListener listenForAddPatient) {
 		checkBoxXmlReadings.addItemListener(listenForAddPatient);
+	}
+	
+	public JCheckBox getCheckBoxJsonReadings(){
+		return checkBoxJsonReadings;
+	}
+	
+	public JCheckBox getCheckBoxXmlReadings(){
+		return checkBoxXmlReadings;
 	}
 
 	@Override

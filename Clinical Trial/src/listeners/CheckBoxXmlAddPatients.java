@@ -16,12 +16,12 @@ public class CheckBoxXmlAddPatients implements ItemListener{
 		SystemSettings settings = guiController.getClinicalTrial().getSettings();
 		if (e.getStateChange() == 1) {
 			settings.setXmlAddUnknownPatients(true);
-			guiController.getSystemSettingView().checkBoxXmlReadings.setEnabled(true);
+			guiController.getSystemSettingView().getCheckBoxXmlReadings().setEnabled(true);
 		}else {
 			settings.setXmlAddUnknownPatients(false);
 			settings.setXmlAddUnknownReadings(false);
-			guiController.getSystemSettingView().checkBoxXmlReadings.setEnabled(false);
-			guiController.getSystemSettingView().checkBoxXmlReadings.setSelected(false);
+			guiController.getSystemSettingView().getCheckBoxXmlReadings().setEnabled(false);
+			guiController.getSystemSettingView().getCheckBoxXmlReadings().setSelected(false);
 		}
 	}		
 

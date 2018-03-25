@@ -40,9 +40,8 @@ public class GuiController {
 		
 		
 		//Adding listeners to the buttons in DisplayPatientListView
-		this.displayPatientListView.addButtonResumeTrialListener(new ButtonResumeTrialListener(this));
-		this.displayPatientListView.addButtonEndTrialListener(new ButtonEndTrialListener(this));
 		this.displayPatientListView.addButtonShowInfoListener(new ButtonShowInfoListener(this));
+		this.displayPatientListView.addComboBoxPatientsListener(new ComboBoxPatientIdsListener(this));
 		
 		//Adding listeners to the buttons in DisplayPatientInfoView
 		this.displayPatientInfoView.addButtonBackInfoListener(new ButtonPatientInfoListener(this));

@@ -1,29 +1,24 @@
 package views;
 
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
+import javax.swing.*;
 import gui.MenuBar;
 import gui.PanelAndFrame;
-import trial.ClinicalTrial;
-import trial.Patient;
+import trial.*;
+
 
 public class DisplayPatientListView {
-	private JComboBox<String> comboBoxPatientsIds = new JComboBox<String>();
+	private JComboBox<Patient> comboBoxPatients = new JComboBox<Patient>();
 	// Create labels and buttons
 	JLabel label = new JLabel("Patients List: Select a Patient");
+	//must be public to enable controller to modify status
+	JCheckBox patientIsActive = new JCheckBox("Active");
 	JButton buttonShowInfo = new JButton("Show Patient's Info");
-	JButton buttonResumeTrial = new JButton("Resume Patient Trial");
-	JButton buttonEndTrial = new JButton("End Patient Trial");
 
 	// Create an ArrayList to hold all panels
-	final int NUMBER_OF_PANELS = 2;
+	final int NUMBER_OF_PANELS = 3;
 	ArrayList<JPanel> panels;
 	MenuBar menuBar; // Initializing the menubar of the gui package
 
@@ -33,21 +28,19 @@ public class DisplayPatientListView {
 	/**
 	 * Constructor
 	 */
-	public DisplayPatientListView() {
-		/**
-		 * //Fill the comboBox with the list of patients in the ClinicalTrial
-		 * for (Patient patient : ClinicalTrial.getAllPatients()) {
-		 * comboBoxPatientsIds.addItem(patient.getPatientId()); }
-		 **/
-
+	public DisplayPatientListView(ClinicalTrial clinicalTrial) {
+		comboBoxPatients.setRenderer(new PatientRenderer());
 		// Create JPanels
 		panels = PanelAndFrame.setupPanels(NUMBER_OF_PANELS);
+		
+		//initialize patient data
+		patientIsActive.setHorizontalTextPosition(SwingConstants.LEFT);		
+		patientIsActive.setSelected(comboBoxPatients.getSelectedItem().getActive());
 
 		// Add components to the panels
 		panels.get(0).add(label);
-		panels.get(1).add(comboBoxPatientsIds);
-		panels.get(1).add(buttonResumeTrial);
-		panels.get(1).add(buttonEndTrial);
+		panels.get(1).add(comboBoxPatients);
+		panels.get(1).add(patientIsActive);
 		panels.get(1).add(buttonShowInfo);
 	}
 
@@ -64,9 +57,9 @@ public class DisplayPatientListView {
 	 * Setup the frame for the view
 	 */
 	public void setupFrame(ClinicalTrial clinicalTrial){
-		comboBoxPatientsIds.removeAllItems();
+		comboBoxPatients.removeAllItems();
 		for (Patient patient : clinicalTrial.getAllPatients()) {
-			comboBoxPatientsIds.addItem(patient.getPatientId());
+			comboBoxPatients.addItem(patient);
 		}
 		//Setup the frames and panels
 		PanelAndFrame.setupFrame(frame, panels, menuBar);		
@@ -104,8 +97,8 @@ public class DisplayPatientListView {
 	 * 
 	 * @return the comboBox having the patient ids
 	 */
-	public JComboBox<String> getComboBoxPatientsIds() {
-		return comboBoxPatientsIds;
+	public JComboBox<Patient> getComboBoxPatients() {
+		return comboBoxPatients;
 	}
 
 	/**
@@ -117,26 +110,26 @@ public class DisplayPatientListView {
 	public void addButtonShowInfoListener(ActionListener listenForButtonShowInfo) {
 		buttonShowInfo.addActionListener(listenForButtonShowInfo);
 	}
-
-	/**
-	 * Listener for the resumeTrial button
-	 * 
-	 * @param listenForButtonResumeTrial
-	 *            the actionListener to listen for resumeTrial button
-	 */
-	public void addButtonResumeTrialListener(ActionListener listenForButtonResumeTrial) {
-		buttonResumeTrial.addActionListener(listenForButtonResumeTrial);
+	
+	public void addComboBoxPatientsListener(ActionListener ListenForPatientIds) {
+		comboBoxPatients.addActionListener(ListenForPatientIds);
 	}
-
-	/**
-	 * Listener for the endTrial Button
-	 * 
-	 * @param listenForButtonEndTrial
-	 *            the actionListener to listen for endTrial button
-	 */
-	public void addButtonEndTrialListener(ActionListener listenForButtonEndTrial) {
-		buttonEndTrial.addActionListener(listenForButtonEndTrial);
+	
+	public void patientIsActiveListener(ItemListener listenForPatientIsActive) {
+		patientIsActive.addItemListener(listenForPatientIsActive);
 	}
+	
+
+//
+//	/**
+//	 * Listener for the endTrial Button
+//	 * 
+//	 * @param listenForButtonEndTrial
+//	 *            the actionListener to listen for endTrial button
+//	 */
+//	public void addButtonEndTrialListener(ActionListener listenForButtonEndTrial) {
+//		buttonEndTrial.addActionListener(listenForButtonEndTrial);
+//	}
 
 	/**
 	 * Visibility setter for the frame
@@ -146,5 +139,13 @@ public class DisplayPatientListView {
 	 */
 	public void setVisible(Boolean b) {
 		frame.setVisible(b);
+	}
+	
+	public void setActive(boolean checked) {
+		patientIsActive.setSelected(checked);
+	}
+	
+	public Patient getSelectedPatient() {
+		return patient;
 	}
 }

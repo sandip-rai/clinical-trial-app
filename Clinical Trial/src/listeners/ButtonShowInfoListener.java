@@ -34,7 +34,7 @@ GuiController guiController; //Initialize
 			
 			guiController.getDisplayPatientInfoView().setSelectedPatient((
 				guiController.getClinicalTrial().getAllPatients().get(guiController.getDisplayPatientListView().
-						getComboBoxPatientsIds().getSelectedIndex()).getPatientId()));
+						getComboBoxPatients().getSelectedIndex()).getPatientId()));
 			//Display the patient info
 			guiController.getDisplayPatientInfoView().displayPatientInfo(guiController.getClinicalTrial());
 			guiController.getDisplayPatientInfoView().setVisible(true);
