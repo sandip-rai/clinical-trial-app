@@ -19,7 +19,7 @@ public class Reading {
 	private Clinic clinic;
 
 	//Constructor for every reading value except of blood_pressure type
-	protected Reading(String readingId, String type, double value, Date date, Clinic clinic) {
+	public Reading(String readingId, String type, double value, Date date, Clinic clinic) {
 		this.readingId = readingId;
 		this.type = type;
 		this.value = value;
@@ -27,7 +27,7 @@ public class Reading {
 	}
 
 	//Constructor for the reading value of blood_pressure type
-	protected Reading(String readingId, String type, String bpValue, Date date, Clinic clinic) {
+	public Reading(String readingId, String type, String bpValue, Date date, Clinic clinic) {
 		this.readingId = readingId;
 		this.type = type;
 		this.bpValue = bpValue;
