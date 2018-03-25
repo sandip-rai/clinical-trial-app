@@ -5,12 +5,15 @@ import trial.Patient;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+
 import javax.swing.*;
 
 import gui.MenuBar;
 import gui.PanelAndFrame;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainMenuView implements View {
     private JComboBox<String> comboBoxPatientsIds = new JComboBox<>();
@@ -83,6 +86,10 @@ public class MainMenuView implements View {
 	   for (Patient patient : clinicalTrial.getAllPatients()) {
            comboBoxPatientsIds.addItem(patient.getPatientId()); // Fill the comboBox from the ClinicalTrial arrayList
        }
+	   
+	   Date date = new Date();
+	   SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy HH:mm");
+	   dateInput.setText(formatter.format(date));
        PanelAndFrame.setupFrame(frame, panels, menuBar);
    }
    
