@@ -25,7 +25,11 @@ public class FileAdapter {
 	public boolean writeFile(ClinicalTrial clinicalTrial) {
 		String path = getPath(true);
 		JsonHandler json = new JsonHandler(clinicalTrial);
-		return json.WritePatientReadings(path);		
+		if(path != null){
+			return json.WritePatientReadings(path);	
+		} else {
+			return false;
+		}
 	}
 	
 	//Parses file extension, calls json or xml reading method accordingly
