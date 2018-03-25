@@ -18,13 +18,12 @@ public class Driver {
     	MainMenuView mainMenuView = new MainMenuView();
     	AddPatientView addPatientView = new AddPatientView();
     	SystemSettingsView systemSettingsView = new SystemSettingsView(clinicalTrial);
-    	DisplayPatientListView displayPatientListView = new DisplayPatientListView();
-    	DisplayPatientInfoView displayPatientInfoView = new DisplayPatientInfoView();
+    	DisplayPatientListView displayPatientListView = new DisplayPatientListView(clinicalTrial);
     	
  
     	
     	GuiController guiController =new GuiController(mainMenuView, addPatientView
-    			, systemSettingsView, fileAdapter, clinicalTrial, displayPatientListView, displayPatientInfoView);
+    			, systemSettingsView, fileAdapter, clinicalTrial, displayPatientListView);
     	
     	mainMenuView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));
     	addPatientView.setMenuBar(PanelAndFrame.supplyMenuBar(guiController));

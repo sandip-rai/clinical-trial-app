@@ -20,7 +20,7 @@ public class Patient {
 	 */
 	public Patient(String patientId) {
 		this.patientId = patientId;
-		this.setActive(false); //Needs to be false as no patient is in the trial at first; This will be set to true once a patient enters a trial
+		this.setActive(true); 
 		this.readings = new ArrayList<Reading>(); //Creates an arrayList of reading
 	}
 
@@ -116,7 +116,11 @@ public class Patient {
 	 */
 	@Override
 	public String toString() {
-		return "Patient [patientId=" + patientId + ", active=" + active + ", readings=" + readings + "]";
+		String string = new String();
+		for (Reading reading : readings) {
+			string += reading.toString();
+		}
+		return string;
 	}
 
 
