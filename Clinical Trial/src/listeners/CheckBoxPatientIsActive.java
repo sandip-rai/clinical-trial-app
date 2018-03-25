@@ -13,7 +13,7 @@ public class CheckBoxPatientIsActive implements ItemListener{
 	
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		Patient patient = guiController.getDisplayPatientListView().getSelectedPatient();
+		Patient patient = (Patient) guiController.getDisplayPatientListView().getComboBoxPatients().getSelectedItem();
 		if (e.getStateChange() == 1) {
 			patient.setActive(true);
 		}else {

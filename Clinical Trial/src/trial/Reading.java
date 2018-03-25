@@ -79,13 +79,13 @@ public class Reading {
 	 * toString method to print the String representation of the Reading object
 	 */
 	public String toString() {
-		String string = "{Reading ID: " + readingId + ", " + "Type: " + type + ", ";
+		String string = "Reading ID: " + readingId + "\n" + "Type: " + type + "\n";
 		if (bpValue == null) { //for every value except blood_pressure
-			string = string + "Value: " + value + ", ";
+			string = string + "Value: " + value + "\n";
 		}else{//for only blood_pressure value
-			string = string + "Value: " + bpValue + ", ";
+			string = string + "Value: " + bpValue + "\n";
 		}
-		string = string + "Date: " + date + "} ";
+		string = string + "Date: " + date + "\n\n";
 		
 		return string;
 	}

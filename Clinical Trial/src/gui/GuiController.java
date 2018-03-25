@@ -11,19 +11,17 @@ public class GuiController {
     private FileAdapter fileAdapter;
     private ClinicalTrial clinicalTrial;
     private DisplayPatientListView displayPatientListView;
-    private DisplayPatientInfoView displayPatientInfoView;
  
 
 	//Constructor
     GuiController(MainMenuView mainMenuView, AddPatientView addPatientView, SystemSettingsView systemSettingsView, FileAdapter fileAdapter, ClinicalTrial clinicalTrial,
-    	    DisplayPatientListView displayPatientListView, DisplayPatientInfoView displayPatientInfoView) {
+    	    DisplayPatientListView displayPatientListView) {
         this.mainMenuView = mainMenuView;
         this.addPatientView = addPatientView;
         this.systemSettingsView = systemSettingsView;
         this.fileAdapter = fileAdapter;
         this.clinicalTrial = clinicalTrial;
         this.displayPatientListView = displayPatientListView;
-        this.displayPatientInfoView = displayPatientInfoView;
         
         //Tell the mainMenuView to listen for their buttons
         this.mainMenuView.addButtonStartTrialListener(new ButtonStartTrialListener(this));
@@ -40,11 +38,8 @@ public class GuiController {
 		
 		
 		//Adding listeners to the buttons in DisplayPatientListView
-		this.displayPatientListView.addButtonShowInfoListener(new ButtonShowInfoListener(this));
-		this.displayPatientListView.addComboBoxPatientsListener(new ComboBoxPatientIdsListener(this));
-		
-		//Adding listeners to the buttons in DisplayPatientInfoView
-		this.displayPatientInfoView.addButtonBackInfoListener(new ButtonPatientInfoListener(this));
+		this.displayPatientListView.addComboBoxPatientsListener(new ComboBoxPatientsListener(this));
+		this.displayPatientListView.addPatientIsActiveListener(new CheckBoxPatientIsActive(this));
     
     
     }
@@ -74,9 +69,6 @@ public class GuiController {
 		return displayPatientListView;
 	}
 
-	public DisplayPatientInfoView getDisplayPatientInfoView() {
-		return displayPatientInfoView;
-	}
 
 	public ClinicalTrial getClinicalTrial() {
 		return clinicalTrial;

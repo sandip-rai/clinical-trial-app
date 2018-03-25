@@ -48,9 +48,7 @@ public class ClinicalTrial {
 				//a patient with that ID was found return false without adding a new patient
 				return false;
 			}
-		}
-		
-		
+		}		
 		//if no patient was found then add a new patient to the trial
 		Patient patient = new Patient(patientId);
 		allPatients.add(patient);

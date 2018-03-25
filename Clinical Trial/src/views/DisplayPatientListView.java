@@ -8,14 +8,12 @@ import gui.MenuBar;
 import gui.PanelAndFrame;
 import trial.*;
 
-
 public class DisplayPatientListView {
 	private JComboBox<Patient> comboBoxPatients = new JComboBox<Patient>();
 	// Create labels and buttons
 	JLabel label = new JLabel("Patients List: Select a Patient");
-	//must be public to enable controller to modify status
 	JCheckBox patientIsActive = new JCheckBox("Active");
-	JButton buttonShowInfo = new JButton("Show Patient's Info");
+	JTextArea patientInfo = new JTextArea();
 
 	// Create an ArrayList to hold all panels
 	final int NUMBER_OF_PANELS = 3;
@@ -29,19 +27,15 @@ public class DisplayPatientListView {
 	 * Constructor
 	 */
 	public DisplayPatientListView(ClinicalTrial clinicalTrial) {
-		comboBoxPatients.setRenderer(new PatientRenderer());
 		// Create JPanels
 		panels = PanelAndFrame.setupPanels(NUMBER_OF_PANELS);
-		
-		//initialize patient data
-		patientIsActive.setHorizontalTextPosition(SwingConstants.LEFT);		
-		patientIsActive.setSelected(comboBoxPatients.getSelectedItem().getActive());
 
 		// Add components to the panels
 		panels.get(0).add(label);
 		panels.get(1).add(comboBoxPatients);
 		panels.get(1).add(patientIsActive);
-		panels.get(1).add(buttonShowInfo);
+		panels.get(2).add(patientInfo);
+
 	}
 
 	/**
@@ -56,13 +50,21 @@ public class DisplayPatientListView {
 	/**
 	 * Setup the frame for the view
 	 */
-	public void setupFrame(ClinicalTrial clinicalTrial){
+	@SuppressWarnings("unchecked")
+	public void setupFrame(ClinicalTrial clinicalTrial) {
+		ArrayList<Patient> allPatients = clinicalTrial.getAllPatients();
 		comboBoxPatients.removeAllItems();
-		for (Patient patient : clinicalTrial.getAllPatients()) {
+		for (Patient patient : allPatients) {
 			comboBoxPatients.addItem(patient);
 		}
-		//Setup the frames and panels
-		PanelAndFrame.setupFrame(frame, panels, menuBar);		
+		// initialize patient data
+		patientIsActive.setHorizontalTextPosition(SwingConstants.LEFT);
+		patientIsActive.setSelected(((Patient)comboBoxPatients.getSelectedItem()).isActive());
+		comboBoxPatients.setRenderer(new PatientRenderer());
+		patientInfo.setText(comboBoxPatients.getSelectedItem().toString());
+		patientInfo.setEditable(false);
+		// Setup the frames and panels
+		PanelAndFrame.setupFrame(frame, panels, menuBar);
 	}
 
 	/**
@@ -101,35 +103,35 @@ public class DisplayPatientListView {
 		return comboBoxPatients;
 	}
 
-	/**
-	 * Listener for the showInfo button
-	 * 
-	 * @param listenForButtonShowInfo
-	 *            the actionListener to listen for showInfo button
-	 */
-	public void addButtonShowInfoListener(ActionListener listenForButtonShowInfo) {
-		buttonShowInfo.addActionListener(listenForButtonShowInfo);
-	}
-	
+//	/**
+//	 * Listener for the showInfo button
+//	 * 
+//	 * @param listenForButtonShowInfo
+//	 *            the actionListener to listen for showInfo button
+//	 */
+//	public void addButtonShowInfoListener(ActionListener listenForButtonShowInfo) {
+//		buttonShowInfo.addActionListener(listenForButtonShowInfo);
+//	}
+
 	public void addComboBoxPatientsListener(ActionListener ListenForPatientIds) {
 		comboBoxPatients.addActionListener(ListenForPatientIds);
 	}
-	
-	public void patientIsActiveListener(ItemListener listenForPatientIsActive) {
+
+	public void addPatientIsActiveListener(ItemListener listenForPatientIsActive) {
 		patientIsActive.addItemListener(listenForPatientIsActive);
 	}
-	
 
-//
-//	/**
-//	 * Listener for the endTrial Button
-//	 * 
-//	 * @param listenForButtonEndTrial
-//	 *            the actionListener to listen for endTrial button
-//	 */
-//	public void addButtonEndTrialListener(ActionListener listenForButtonEndTrial) {
-//		buttonEndTrial.addActionListener(listenForButtonEndTrial);
-//	}
+	//
+	// /**
+	// * Listener for the endTrial Button
+	// *
+	// * @param listenForButtonEndTrial
+	// * the actionListener to listen for endTrial button
+	// */
+	// public void addButtonEndTrialListener(ActionListener listenForButtonEndTrial)
+	// {
+	// buttonEndTrial.addActionListener(listenForButtonEndTrial);
+	// }
 
 	/**
 	 * Visibility setter for the frame
@@ -140,12 +142,12 @@ public class DisplayPatientListView {
 	public void setVisible(Boolean b) {
 		frame.setVisible(b);
 	}
-	
+
 	public void setActive(boolean checked) {
 		patientIsActive.setSelected(checked);
 	}
 	
-	public Patient getSelectedPatient() {
-		return patient;
+	public void setPatientInfo(String text) {
+		patientInfo.setText(text);
 	}
 }
