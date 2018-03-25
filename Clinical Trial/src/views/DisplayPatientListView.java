@@ -57,9 +57,11 @@ public class DisplayPatientListView {
 		}
 		// initialize patient data
 		patientIsActive.setHorizontalTextPosition(SwingConstants.LEFT);
-		patientIsActive.setSelected(((Patient)comboBoxPatients.getSelectedItem()).isActive());
+		if((Patient) comboBoxPatients.getSelectedItem() != null){
+			patientIsActive.setSelected(((Patient)comboBoxPatients.getSelectedItem()).isActive());
+			patientInfo.setText(comboBoxPatients.getSelectedItem().toString());
+		}
 		comboBoxPatients.setRenderer(new PatientRenderer());
-		patientInfo.setText(comboBoxPatients.getSelectedItem().toString());
 		patientInfo.setEditable(false);
 		// Setup the frames and panels
 		PanelAndFrame.setupFrame(frame, panels, menuBar);
