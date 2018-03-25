@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gson_lib"/>
-	<classpathentry kind="lib" path="C:/Users/Adam/git/project1-ICS372/gson-2.6.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/tonyp/Dropbox/Spring 2018/Code/project1-ICS372/gson-2.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
