@@ -5,6 +5,7 @@ public class SystemSettings {
 	private boolean jsonAddUnknownReadings = false;
 	private boolean xmlAddUnknownPatients = false;
 	private boolean xmlAddUnknownReadings = false;
+	private String dateFormat = "ddMMMyyyy HH:mm";
 	
 	public boolean jsonAddUnknownPatients() {
 		return jsonAddUnknownPatients;
@@ -29,5 +30,11 @@ public class SystemSettings {
 	}
 	public void setXmlAddUnknownReadings(boolean xmlAddUnknownReadings) {
 		this.xmlAddUnknownReadings = xmlAddUnknownReadings;
+	}
+	public String getDateFormat() {
+		return dateFormat;
+	}
+	public void setDateFormat(String dateFormat) {
+		this.dateFormat = dateFormat;
 	}
 }

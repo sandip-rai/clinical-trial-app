@@ -27,17 +27,19 @@ public class MainMenuView implements View {
 
 	// Creates labels and user input textFeild
     private JLabel addReading = new JLabel("Add a new reading:");
-    private JLabel id = new JLabel("Reading ID:");
-    private JLabel date = new JLabel("Reading Date:");
-    private JLabel type = new JLabel("Reading Type:");
-    private JLabel value = new JLabel("Reading Value:");
+    private JLabel id = new JLabel("Reading ID: ");
+    private JLabel date = new JLabel("Date: ");
+    private JLabel type = new JLabel("Type: ");
+    private JLabel value = new JLabel("Value: ");
+    private JLabel clinic = new JLabel("Clinic: ");
     private JTextField valueInput = new JTextField(16);
 	private JTextField idInput = new JTextField(16);
 	private JTextField dateInput = new JTextField(16);
 	private JTextField pastReadingDisplay = new JTextField(16);
+	private JTextField clinicInput = new JTextField(16);
 
     //create a array list to hold all the panels
-    final int NUMBER_OF_PANELS = 7;
+    final int NUMBER_OF_PANELS = 8;
     ArrayList<JPanel> panels;
     MenuBar menuBar;
     //Create JFrame
@@ -70,7 +72,9 @@ public class MainMenuView implements View {
         panels.get(4).add(comboBoxReadingType);
         panels.get(5).add(value);
         panels.get(5).add(valueInput);
-        panels.get(6).add(buttonAddReading);
+        panels.get(6).add(clinic);
+        panels.get(6).add(clinicInput);
+        panels.get(7).add(buttonAddReading);
         
     }
     
@@ -88,7 +92,8 @@ public class MainMenuView implements View {
        }
 	   
 	   Date date = new Date();
-	   SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy HH:mm");
+	   String dateFormat = clinicalTrial.getSettings().getDateFormat();
+	   SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 	   dateInput.setText(formatter.format(date));
        PanelAndFrame.setupFrame(frame, panels, menuBar);
    }
