@@ -56,7 +56,6 @@ public class JsonHandler extends FileHandler {
 			writer.close();
 			return true; // If file is written and writer closed
 		} catch (IOException e) {
-			e.printStackTrace();
 			return false; // If exception occurs
 		}
 	}

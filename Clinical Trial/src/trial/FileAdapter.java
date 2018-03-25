@@ -6,10 +6,13 @@ import javax.swing.JFileChooser;
 
 public class FileAdapter {		
 	
-	private String getPath() {		
+	private String getPath(boolean showSave) {		
 		JFileChooser fileChooser = new JFileChooser();
 		// Open the file selection dialog at the current project directory
 		fileChooser.setCurrentDirectory(new File("."));
+		if (showSave) {
+			fileChooser.showSaveDialog(null);
+		}
 		int result = fileChooser.showOpenDialog(null);
 		if (result == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fileChooser.getSelectedFile(); // Get the file
@@ -20,16 +23,23 @@ public class FileAdapter {
 	}	
 	
 	public boolean writeFile(ClinicalTrial clinicalTrial) {
-		String path = getPath();
+		String path = getPath(true);
 		JsonHandler json = new JsonHandler(clinicalTrial);
 		return json.WritePatientReadings(path);		
 	}
 	
 	//Parses file extension, calls json or xml reading method accordingly
 	public boolean readFile(ClinicalTrial clinicalTrial) {
-		String path = getPath();
-		int i = path.lastIndexOf('.');
-		String fileType = path.substring(i);
+		String path = getPath(false);
+		String fileType;
+		try {
+			int i = path.lastIndexOf('.');
+			fileType = path.substring(i);
+		} catch (NullPointerException e) {
+			//if no file was chosen return false
+			return false;
+		}
+		
 		if (fileType.equals(".json")) {
 			System.out.println("success");
 			Boolean addUnkownPatients = clinicalTrial.getSettings().jsonAddUnknownPatients();
