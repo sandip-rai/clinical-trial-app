@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import gui.GuiController;
+import trial.Clinic;
 
 //inner class for buttonAddReading to perform actionPerformed(ActionEvent e)
 public class ButtonAddReadingListener implements ActionListener {
@@ -25,6 +26,8 @@ public class ButtonAddReadingListener implements ActionListener {
         String readingValue = guiController.getMainMenuView().getValueInput().getText();
         String readingDate = guiController.getMainMenuView().getDateInput().getText();
         String dateFormat = guiController.getClinicalTrial().getSettings().getDateFormat();
+        //TODO import clinic
+        Clinic clinic = null;
         try {
             // Prompt the user if reading values aren't filled
             if (readingId.equals("") || readingValue.equals("") || readingDate.equals("")) {
@@ -35,7 +38,7 @@ public class ButtonAddReadingListener implements ActionListener {
                 // Get the patient from the guiController.getClinicalTrial() arraylist and
                 // add the new readings to that patient
                 guiController.getClinicalTrial().findPatient(guiController.getMainMenuView().getComboBoxPatientsIds().getSelectedItem().toString())
-                        .addNewReadings(readingId, readingType, readingValue, date);
+                        .addNewReadings(readingId, readingType, readingValue, date, clinic);
 
                 // Clear the textfields for new input
                 guiController.getMainMenuView().getIdInput().setText("");

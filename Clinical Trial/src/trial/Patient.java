@@ -47,9 +47,9 @@ public class Patient {
 	 * @param value the reading value number
 	 * @param date the date when reading was taken
 	 */
-	public void addReading(String readingId, String type, double value, Date date) {
+	public void addReading(String readingId, String type, double value, Date date, Clinic clinic) {
 		if (active) {
-			Reading reading = new Reading(readingId, type, value, date);
+			Reading reading = new Reading(readingId, type, value, date, clinic);
 			readings.add(reading);
 		}
 	}
@@ -61,9 +61,9 @@ public class Patient {
 	 * @param value the reading value number
 	 * @param date the date when reading was taken
 	 */
-	public void addReading(String readingId, String type, String bpValue, Date date) {
+	public void addReading(String readingId, String type, String bpValue, Date date, Clinic clinic) {
 		if (active) {
-			Reading reading = new Reading(readingId, type, bpValue, date);
+			Reading reading = new Reading(readingId, type, bpValue, date, clinic);
 			readings.add(reading);
 		}
 	}
@@ -75,18 +75,18 @@ public class Patient {
 	 * @param value the reading value
 	 * @param date the date of reading
 	 */
-	public void addNewReadings(String readingId, String type, String value, Date date) {
+	public void addNewReadings(String readingId, String type, String value, Date date, Clinic clinic) {
 		System.out.println("new String value reading");
 		if (active) { //Only add if the patient is active i.e on trial
 			try {
 				double numValue = Integer.parseInt(value); //Every reading value except of blood_pressure type will be parsed into a double
-				Reading reading = new Reading(readingId, type, numValue, date); //Create the reading object with the passed values
+				Reading reading = new Reading(readingId, type, numValue, date, clinic); //Create the reading object with the passed values
 				readings.add(reading); //add the new reading to the readings ArrayList of the patient object
 				JOptionPane.showMessageDialog(null, "New Reading has been added."); //Prompt if reading added
 			}
 			catch (java.lang.NumberFormatException e) { //For the reading value of blood_pressure type which will be string
 				String bpValue = value; //assign to the bpValue string
-				Reading reading = new Reading(readingId, type, bpValue, date); //create reading object
+				Reading reading = new Reading(readingId, type, bpValue, date, clinic); //create reading object
 				readings.add(reading); //add the new reading to the reading ArrayList
 				JOptionPane.showMessageDialog(null, "New Reading has been added."); //Prompt if the reading is added
 			}

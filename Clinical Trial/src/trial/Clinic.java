@@ -4,14 +4,14 @@ public class Clinic {
 
 	// data fields for Clinic class
 	private String name;
-	private String ID;
+	private String id;
 	
 	// constructor for clinic 
 	public Clinic(String name, String id){
 			
 		this.name= name;
 		
-		this.ID= id;		
+		this.id= id;		
 	}
 
 	// getters and setters
@@ -23,18 +23,18 @@ public class Clinic {
 		this.name = name;
 	}
 
-	public String getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String id) {
+		this.id = id;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Clinic [name=" + name + ", ID=" + ID + "]";
+		return "Clinic Name: " + name + "\nClinic ID: " + id;
 	}
 	
 	

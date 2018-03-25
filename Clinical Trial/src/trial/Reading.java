@@ -16,10 +16,10 @@ public class Reading {
 	private String bpValue;
 	private Date date;
 	private String clinicId;
-	private String clinicName;
+	private Clinic clinic;
 
 	//Constructor for every reading value except of blood_pressure type
-	protected Reading(String readingId, String type, double value, Date date) {
+	protected Reading(String readingId, String type, double value, Date date, Clinic clinic) {
 		this.readingId = readingId;
 		this.type = type;
 		this.value = value;
@@ -27,7 +27,7 @@ public class Reading {
 	}
 
 	//Constructor for the reading value of blood_pressure type
-	protected Reading(String readingId, String type, String bpValue, Date date) {
+	protected Reading(String readingId, String type, String bpValue, Date date, Clinic clinic) {
 		this.readingId = readingId;
 		this.type = type;
 		this.bpValue = bpValue;
@@ -85,7 +85,8 @@ public class Reading {
 		}else{//for only blood_pressure value
 			string = string + "Value: " + bpValue + "\n";
 		}
-		string = string + "Date: " + date + "\n\n";
+		string = string + "Date: " + date + "\n";
+		string = string + "Clinic: " + clinic.getName() + "\n\n";
 		
 		return string;
 	}
@@ -94,7 +95,10 @@ public class Reading {
 		return clinicId;
 	}
 	
-	public String getClinicName() {
-		return clinicName;
+	public Clinic getClinic() {
+		if (clinic == null) {
+			return new Clinic("Unknown", "Unkown");
+		}
+		return clinic;
 	}
 }

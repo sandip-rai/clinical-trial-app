@@ -56,13 +56,12 @@ public class FileHandler {
 	}
 	
 	protected void addPatientsToTrial(ArrayList<FileReading> readings, boolean active) {
-		for (FileReading readingJson : readings) {
-			if (clinicalTrial.findPatient(readingJson.patient_id) == null) {
-				Patient patient = new Patient(readingJson.patient_id);
+		for (FileReading reading : readings) {
+			if (clinicalTrial.findPatient(reading.patient_id) == null) {
+				Patient patient = new Patient(reading.patient_id);
 				patient.setActive(active);
 				clinicalTrial.getAllPatients().add(patient);
 			}
-
 		}
 	}
 	
@@ -83,13 +82,16 @@ public class FileHandler {
 			String readingId = reading.reading_id;
 			String type = reading.reading_type;
 			Date date = new Date(Long.parseLong(reading.reading_date));
+			String clinicId = reading.clinic_id;
+			String clinicName = reading.clinic_name;
+			Clinic clinic = clinicalTrial.findClinic(clinicId, clinicName);
 			try { // Try for every reading value except blood_pressure type
 				double value = Integer.parseInt(reading.reading_value);
-				patient.addReading(readingId, type, value, date);
+				patient.addReading(readingId, type, value, date, clinic);
 			} catch (java.lang.NumberFormatException e) { // Do this for reading value if the reading type is of
 															// blood_pressure
 				String value = reading.reading_value; // blood_pressure reading value is of String type
-				patient.addReading(readingId, type, value, date);
+				patient.addReading(readingId, type, value, date, clinic);
 			}
 		}
 	}
