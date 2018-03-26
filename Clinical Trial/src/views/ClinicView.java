@@ -22,7 +22,7 @@ public class ClinicView implements View {
 	private JLabel clinicIdLabel = new JLabel("Clinic Id (optional):");
     private JTextField clinicId = new JTextField(16);
     private JButton buttonAddClinic = new JButton("Add Clinic");
-    private JTextField addClinicText = new JTextField("Click Add button to add new Patient");
+    private JTextField addClinicText = new JTextField("Click Add button to add new Clinic");
 	private JButton buttonBack = new JButton("Back");
     
     //create a array list to hold all the panels
@@ -111,6 +111,10 @@ public class ClinicView implements View {
 
 	public void setClinicId(JTextField clinicId) {
 		this.clinicId = clinicId;
+	}
+	
+	public JTextField getAddClinicText() {
+		return addClinicText;
 	}
 
 }

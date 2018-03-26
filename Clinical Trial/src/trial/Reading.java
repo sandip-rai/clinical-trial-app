@@ -24,6 +24,7 @@ public class Reading {
 		this.type = type;
 		this.value = value;
 		this.date = date;
+		this.clinic = clinic;
 	}
 
 	// Constructor for the reading value of blood_pressure type
@@ -32,6 +33,7 @@ public class Reading {
 		this.type = type;
 		this.bpValue = bpValue;
 		this.date = date;
+		this.clinic = clinic;
 	}
 
 	/**
