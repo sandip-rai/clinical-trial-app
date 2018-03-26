@@ -15,8 +15,11 @@ public class XmlHandler extends Handler {
 		try {
 			jaxbContext = JAXBContext.newInstance(ReadingSet.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			ReadingSet ReadingSet = (ReadingSet) jaxbUnmarshaller.unmarshal(new File(file));
-			System.out.println(ReadingSet.getClinic());
+			ReadingSet readingSet = (ReadingSet) jaxbUnmarshaller.unmarshal(new File(file));
+			System.out.println(readingSet.getClinic().getName());
+			System.out.println(readingSet.getClinic().getId());
+			System.out.println(readingSet.getReadings());
+			System.out.println(readingSet.getReadings().get(0).getId());
 			return true;
 		} catch (JAXBException e) {
 			e.printStackTrace();

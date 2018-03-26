@@ -1,15 +1,18 @@
 package file.xml;
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
 
 
-@XmlRootElement 
+@XmlRootElement(name="ReadingSet")
 class ReadingSet {
-		private Clinic clinic;
 		private ArrayList<Reading> readings;
+		private Clinic clinic;
 		
-		
+		@XmlElement( name = "Clinic" )
 		protected Clinic getClinic() { 
 		    return clinic;  
 		}  
@@ -17,11 +20,15 @@ class ReadingSet {
 		    this.clinic = clinic;  
 		}  
 		
+		
+		@XmlElement(name = "Reading")
 		protected ArrayList<Reading> getReadings(){
 			return readings;
 		}
 		
 		protected void setReadings(ArrayList<Reading> readings) {
 			this.readings = readings;
-		}		
+		}
+		
+				
 	}
