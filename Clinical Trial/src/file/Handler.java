@@ -105,11 +105,14 @@ public class Handler {
 				// set reading variables
 				String readingId = reading.reading_id;
 				String type = reading.reading_type;
-				Date date = new Date(Long.parseLong(reading.reading_date));
+				Date date = null;
+				if (reading.reading_date != null) {
+					date = new Date(Long.parseLong(reading.reading_date));
+				}
 				String clinicId = reading.clinic_id;
 				Patient patient = clinicalTrial.findPatient(reading.patient_id); // Get a patient from the arrayList
 				Clinic clinic = clinicalTrial.findClinic(clinicId);
-				String value = reading.reading_value; 
+				String value = reading.reading_value;
 				patient.addReading(readingId, type, value, date, clinic);
 			}
 		}
@@ -124,7 +127,7 @@ public class Handler {
 	 */
 	private boolean validReading(FileReading reading) {
 		try {
-			String type = reading.reading_type;				
+			String type = reading.reading_type;
 			String value = reading.reading_value;
 			Patient patient = clinicalTrial.findPatient(reading.patient_id);
 			String clinicId = reading.clinic_id;

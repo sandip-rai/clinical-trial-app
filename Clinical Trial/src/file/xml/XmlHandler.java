@@ -7,8 +7,14 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import file.Handler;
+import trial.ClinicalTrial;
 
 public class XmlHandler extends Handler {
+	
+	public XmlHandler(ClinicalTrial clinicalTrial){
+		this.clinicalTrial = clinicalTrial;
+	}
+	
 	/*
 	 * 
 	 * Read the xml file, and please note that this also adds a clinic id.

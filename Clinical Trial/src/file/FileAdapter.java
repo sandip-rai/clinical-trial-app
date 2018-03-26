@@ -57,7 +57,7 @@ public class FileAdapter {
 		else if (fileType.equals(".xml")) {
 			Boolean addUnkownPatients = clinicalTrial.getSettings().xmlAddUnknownPatients();
 			Boolean addUnknownReadings = clinicalTrial.getSettings().xmlAddUnknownPatients();
-			XmlHandler xml = new XmlHandler();
+			XmlHandler xml = new XmlHandler(clinicalTrial);
 			return xml.readXMLFile(path, addUnkownPatients, addUnknownReadings);
 		}
 		else
