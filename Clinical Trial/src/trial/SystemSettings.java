@@ -5,8 +5,8 @@ public class SystemSettings {
 	private boolean jsonAddUnknownReadings = false;
 	private boolean xmlAddUnknownPatients = false;
 	private boolean xmlAddUnknownReadings = false;
-	private boolean jsonAddUnknownClinics = false;
-	private boolean xmlAddUnknownClinics = false;
+	private boolean addUnknownClinics = false;
+
 	private String dateFormat = "ddMMMyyyy HH:mm";
 	
 	public boolean jsonAddUnknownPatients() {
@@ -39,16 +39,11 @@ public class SystemSettings {
 	public void setDateFormat(String dateFormat) {
 		this.dateFormat = dateFormat;
 	}
-	public boolean isXmlAddUnknownClinics() {
-		return xmlAddUnknownClinics;
+	public boolean addUnknownClinics() {
+		return addUnknownClinics;
 	}
-	public void setXmlAddUnknownClinics(boolean xmlAddUnknownClinics) {
-		this.xmlAddUnknownClinics = xmlAddUnknownClinics;
+	public void setXmlAddUnknownClinics(boolean addUnknownClinics) {
+		this.addUnknownClinics = addUnknownClinics;
 	}
-	public boolean isJsonAddUnknownClinics() {
-		return jsonAddUnknownClinics;
-	}
-	public void setJsonAddUnknownClinics(boolean jsonAddUnknownClinics) {
-		this.jsonAddUnknownClinics = jsonAddUnknownClinics;
-	}
+
 }

@@ -20,12 +20,7 @@ public class ButtonPatientInfoListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// Dispose all frames
-		guiController.getMainMenuView().getFrame().dispose();
-		guiController.getAddPatientView().getFrame().dispose();
-		guiController.getSystemSettingView().getFrame().dispose();
-		guiController.getDisplayPatientListView().getFrame().dispose();
-
+		guiController.disposeAllViews();
 		// Setup the DisplayPatientListView frame
 		guiController.getDisplayPatientListView().setupFrame(guiController.getClinicalTrial());
 		guiController.getDisplayPatientListView().setVisible(true);

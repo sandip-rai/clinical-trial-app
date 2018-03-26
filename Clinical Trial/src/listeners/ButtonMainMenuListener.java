@@ -15,10 +15,7 @@ public class ButtonMainMenuListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		guiController.getMainMenuView().getFrame().dispose();
-		guiController.getAddPatientView().getFrame().dispose();
-		guiController.getSystemSettingView().getFrame().dispose();
-		guiController.getDisplayPatientListView().getFrame().dispose();
+		guiController.disposeAllViews();
 		guiController.getMainMenuView().setupFrame(guiController.getClinicalTrial());
 		guiController.getMainMenuView().setVisible(true);
 	}

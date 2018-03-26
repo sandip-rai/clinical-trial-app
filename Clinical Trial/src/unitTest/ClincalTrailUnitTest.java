@@ -45,8 +45,9 @@ public class ClincalTrailUnitTest {
 		String name = "Clinic-A";
 		//object 
 		ClinicalTrial  clt = new ClinicalTrial();
-		
-		Assert.assertTrue(clt.addClinic(name, id));
+		Clinic clinic = clt.addClinic(name, id);
+		Assert.assertEquals(id, clinic.getId());
+		Assert.assertEquals(name, clinic.getName());
 	}
 	
 	

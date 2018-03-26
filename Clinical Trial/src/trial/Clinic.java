@@ -16,6 +16,9 @@ public class Clinic {
 
 	// getters and setters
 	public String getName() {
+		if (name == null) {
+			return getId();
+		}
 		return name;
 	}
 
@@ -24,6 +27,9 @@ public class Clinic {
 	}
 
 	public String getId() {
+		if (id == null) {
+			return "Unknown";
+		}
 		return id;
 	}
 
@@ -34,7 +40,7 @@ public class Clinic {
 
 	@Override
 	public String toString() {
-		return "Clinic Name: " + name + "\nClinic ID: " + id;
+		return "Clinic Name: " + getName() + "\nClinic ID: " + getId();
 	}
 	
 	

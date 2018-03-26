@@ -1,7 +1,10 @@
 package views;
 
+import trial.Clinic;
+import trial.ClinicRenderer;
 import trial.ClinicalTrial;
 import trial.Patient;
+import trial.PatientRenderer;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
@@ -16,14 +19,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MainMenuView implements View {
-    private JComboBox<String> comboBoxPatientsIds = new JComboBox<>();
+    private JComboBox<Patient> comboBoxPatients = new JComboBox<>();
     // buttons for the view
-    private JButton buttonStartTrial = new JButton("Start Patient Trial");
-    private JButton buttonAddReading = new JButton("Add");
+    private JButton buttonStartTrial = new JButton("Add new Patient");
+    private JButton buttonAddReading = new JButton("Save Reading");
+    private JButton buttonAddClinic = new JButton("Add new Clinic");
 
     // Array to hold the reading types which will be showed in the comboBox
     private final String[] readingTypes = new String[]{"Weight", "Steps", "Temp", "Blood Pressure"};
     private JComboBox<String> comboBoxReadingType = new JComboBox<String>(readingTypes);
+    private JComboBox<Clinic> comboBoxClinics = new JComboBox<Clinic>();
 
 	// Creates labels and user input textFeild
     private JLabel addReading = new JLabel("Add a new reading:");
@@ -31,12 +36,10 @@ public class MainMenuView implements View {
     private JLabel date = new JLabel("Date: ");
     private JLabel type = new JLabel("Type: ");
     private JLabel value = new JLabel("Value: ");
-    private JLabel clinic = new JLabel("Clinic: ");
     private JTextField valueInput = new JTextField(16);
 	private JTextField idInput = new JTextField(16);
 	private JTextField dateInput = new JTextField(16);
 	private JTextField pastReadingDisplay = new JTextField(16);
-	private JTextField clinicInput = new JTextField(16);
 
     //create a array list to hold all the panels
     final int NUMBER_OF_PANELS = 8;
@@ -46,24 +49,16 @@ public class MainMenuView implements View {
     private JFrame frame = new JFrame();
 
 
-   public MainMenuView() {
-	    
-        comboBoxPatientsIds.addItem("New patient"); // Display New Patient for the dropdown list in the first place
-        /**
-        for (Patient patient : ClinicalTrial.getAllPatients()) {
-            comboBoxPatientsIds.addItem(patient.getPatientId()); // Fill the comboBox from the ClinicalTrial arrayList
-        }
-        **/
-        
+   public MainMenuView() {      
         // Set all labels not editable
         pastReadingDisplay.setEditable(false);
         
 		// Create JPanels
         panels = PanelAndFrame.setupPanels(NUMBER_OF_PANELS);
         //add components to panels
-        panels.get(0).add(comboBoxPatientsIds);
-        panels.get(0).add(buttonStartTrial);
-        panels.get(1).add(addReading);
+        panels.get(0).add(addReading);
+        panels.get(1).add(comboBoxPatients);
+        panels.get(1).add(buttonStartTrial);
         panels.get(2).add(id);
         panels.get(2).add(idInput);
         panels.get(3).add(date);
@@ -72,8 +67,8 @@ public class MainMenuView implements View {
         panels.get(4).add(comboBoxReadingType);
         panels.get(5).add(value);
         panels.get(5).add(valueInput);
-        panels.get(6).add(clinic);
-        panels.get(6).add(clinicInput);
+        panels.get(6).add(comboBoxClinics);
+        panels.get(6).add(buttonAddClinic);
         panels.get(7).add(buttonAddReading);
         
     }
@@ -84,13 +79,17 @@ public class MainMenuView implements View {
    }
    
    //setup Frame
-   public void setupFrame(ClinicalTrial clinicalTrial){
-       comboBoxPatientsIds.removeAllItems();
-       comboBoxPatientsIds.addItem("New patient");
+   @SuppressWarnings("unchecked")
+public void setupFrame(ClinicalTrial clinicalTrial){
+       comboBoxPatients.removeAllItems();
 	   for (Patient patient : clinicalTrial.getAllPatients()) {
-           comboBoxPatientsIds.addItem(patient.getPatientId()); // Fill the comboBox from the ClinicalTrial arrayList
+           comboBoxPatients.addItem(patient); // Fill the comboBox from the ClinicalTrial arrayList
        }
-	   
+	   for (Clinic clinic : clinicalTrial.getAllClinics()) {
+		   comboBoxClinics.addItem(clinic); // Fill the comboBox from the ClinicalTrial arrayList
+       }
+	   comboBoxPatients.setRenderer(new PatientRenderer());
+	   comboBoxClinics.setRenderer(new ClinicRenderer());
 	   Date date = new Date();
 	   String dateFormat = clinicalTrial.getSettings().getDateFormat();
 	   SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
@@ -134,8 +133,8 @@ public class MainMenuView implements View {
 	}
     
     //getter for comboBoxPatientsIds
-    public JComboBox<String> getComboBoxPatientsIds(){
-    	return comboBoxPatientsIds;
+    public JComboBox<Patient> getComboBoxPatients(){
+    	return comboBoxPatients;
     }
 
     public void addButtonStartTrialListener(ActionListener listenForButtonStartTrial) {
@@ -145,6 +144,10 @@ public class MainMenuView implements View {
     public void addButtonAddReadingListener(ActionListener listenForButtonAddReading) {
         buttonAddReading.addActionListener(listenForButtonAddReading);
     }
+    
+    public void addButtonAddClinicListener(ActionListener listenForButtonAddClinic) {
+    	buttonAddClinic.addActionListener(listenForButtonAddClinic);
+    }
 
     public void displayErrorMessage(Component component, String errorMessage) {
         JOptionPane.showMessageDialog(component, errorMessage);
@@ -153,5 +156,9 @@ public class MainMenuView implements View {
 	@Override
 	public void setVisible(Boolean b) {
 		frame.setVisible(b);
+	}
+
+	public JComboBox<Clinic> getComboBoxClinics() {
+		return comboBoxClinics;
 	}
 }

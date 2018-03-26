@@ -84,7 +84,13 @@ public class FileHandler {
 			Date date = new Date(Long.parseLong(reading.reading_date));
 			String clinicId = reading.clinic_id;
 			String clinicName = reading.clinic_name;
-			Clinic clinic = clinicalTrial.findClinic(clinicId, clinicName);
+			Clinic clinic = clinicalTrial.findClinic(clinicId);
+			boolean addClinic = clinicalTrial.getSettings().addUnknownClinics();
+			if (clinic == null && addClinic ) {
+				clinic = clinicalTrial.addClinic(clinicName, clinicId);
+			}else if (clinic == null && !addClinic ) {
+				return;
+			}
 			try { // Try for every reading value except blood_pressure type
 				double value = Integer.parseInt(reading.reading_value);
 				patient.addReading(readingId, type, value, date, clinic);
