@@ -5,8 +5,10 @@ package gui;
  */
 
 import javax.swing.*;
-import listeners.*;
-import views.View;
+
+import gui.listeners.*;
+import gui.views.View;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;

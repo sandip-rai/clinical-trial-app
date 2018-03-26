@@ -43,7 +43,7 @@ public class Reading {
 			type = "Blood Pressure";
 		}
 		if (type.equals("Weight") || type.equals("Steps") || type.equals("Temperature")
-				|| type.equalsIgnoreCase("BloodPressure")) {
+				|| type.equalsIgnoreCase("Blood Pressure")) {
 			return type;
 		}
 		return null;

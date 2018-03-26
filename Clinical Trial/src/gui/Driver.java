@@ -1,8 +1,7 @@
 package gui;
-
-import FileHandler.FileAdapter;
+import file.FileAdapter;
+import gui.views.*;
 import trial.ClinicalTrial;
-import views.*;
 
 /**
  * Driver class having the main method.

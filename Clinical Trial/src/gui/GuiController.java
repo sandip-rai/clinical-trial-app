@@ -1,9 +1,9 @@
 package gui;
 
 import trial.*;
-import views.*;
-import FileHandler.FileAdapter;
-import listeners.*;
+import file.FileAdapter;
+import gui.listeners.*;
+import gui.views.*;
 
 public class GuiController {
 	private MainMenuView mainMenuView;
