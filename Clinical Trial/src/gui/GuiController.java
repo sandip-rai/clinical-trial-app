@@ -39,6 +39,9 @@ public class GuiController {
 		this.systemSettingsView.jsonAddReadingListener(new CheckBoxJsonAddReadings(this));
 		this.systemSettingsView.xmlAddPatientListener(new CheckBoxXmlAddPatients(this));
 		this.systemSettingsView.xmlAddReadingListener(new CheckBoxXmlAddReadings(this));
+		this.systemSettingsView.dateFormatListener(new JTextFieldDateFormatListener(this));
+		this.systemSettingsView.addClinicsListener(new CheckBoxAddClinics(this));
+		this.systemSettingsView.buttonResetListener(new ButtonResetAllSettingsListener(this));
 
 		//displayPatientListView listeners
 		this.displayPatientListView.addComboBoxPatientsListener(new ComboBoxPatientsListener(this));
@@ -47,6 +50,7 @@ public class GuiController {
 		// Add listeners for ClinicView
 		this.clinicView.addButtonBackListener(new ButtonMainMenuListener(this));
 		this.clinicView.addButtonAddClinicListener(new ButtonAddClinicListener(this));
+
 	}
 
 	void run(View view) {

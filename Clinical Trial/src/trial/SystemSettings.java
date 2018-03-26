@@ -3,9 +3,9 @@ package trial;
 public class SystemSettings {
 	private boolean jsonAddUnknownPatients = false;
 	private boolean jsonAddUnknownReadings = false;
-	private boolean xmlAddUnknownPatients = false;
-	private boolean xmlAddUnknownReadings = false;
-	private boolean addUnknownClinics = false;
+	private boolean xmlAddUnknownPatients = true;
+	private boolean xmlAddUnknownReadings = true;
+	private boolean addUnknownClinics = true;
 
 	private String dateFormat = "ddMMMyyyy HH:mm";
 	
@@ -42,7 +42,7 @@ public class SystemSettings {
 	public boolean addUnknownClinics() {
 		return addUnknownClinics;
 	}
-	public void setXmlAddUnknownClinics(boolean addUnknownClinics) {
+	public void setAddUnknownClinics(boolean addUnknownClinics) {
 		this.addUnknownClinics = addUnknownClinics;
 	}
 

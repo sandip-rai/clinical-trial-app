@@ -17,7 +17,7 @@ public class Driver {
 		// views
 		MainMenuView mainMenuView = new MainMenuView();
 		AddPatientView addPatientView = new AddPatientView();
-		SystemSettingsView systemSettingsView = new SystemSettingsView(clinicalTrial);
+		SystemSettingsView systemSettingsView = new SystemSettingsView();
 		DisplayPatientListView displayPatientListView = new DisplayPatientListView(clinicalTrial);
 		ClinicView clinicView = new ClinicView(clinicalTrial);
 		

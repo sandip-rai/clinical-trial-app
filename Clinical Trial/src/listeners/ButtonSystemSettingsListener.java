@@ -16,7 +16,7 @@ public class ButtonSystemSettingsListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		guiController.disposeAllViews();
-		guiController.getSystemSettingView().setupFrame();
+		guiController.getSystemSettingView().setupFrame(guiController.getClinicalTrial());
 		guiController.getSystemSettingView().setVisible(true);
 	}
 
