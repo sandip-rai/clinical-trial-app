@@ -1,7 +1,11 @@
-package trial;
+package FileHandler;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import trial.Clinic;
+import trial.ClinicalTrial;
+import trial.Patient;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -48,7 +52,6 @@ public class FileHandler {
 			this.clinic_id = clinic_id;
 			this.clinic_name = clinic_name;
 		}
-
 	}
 
 	/**

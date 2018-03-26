@@ -2,6 +2,7 @@ package gui;
 
 import trial.*;
 import views.*;
+import FileHandler.FileAdapter;
 import listeners.*;
 
 public class GuiController {

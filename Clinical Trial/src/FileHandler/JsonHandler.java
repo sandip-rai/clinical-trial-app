@@ -1,4 +1,4 @@
-package trial;
+package FileHandler;
 /**
  * FileHandler class handles the json file reading and writing the output to a new json file.
  */
@@ -10,6 +10,10 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.*;
 import com.google.gson.*;
+
+import trial.ClinicalTrial;
+import trial.Patient;
+import trial.Reading;
 
 
 public class JsonHandler extends FileHandler {

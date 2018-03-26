@@ -1,8 +1,10 @@
-package trial;
+package FileHandler;
 
 import java.io.File;
 
 import javax.swing.JFileChooser;
+
+import trial.ClinicalTrial;
 
 public class FileAdapter {		
 	
@@ -45,7 +47,6 @@ public class FileAdapter {
 		}
 		
 		if (fileType.equals(".json")) {
-			System.out.println("success");
 			Boolean addUnkownPatients = clinicalTrial.getSettings().jsonAddUnknownPatients();
 			Boolean addUnknownReadings = clinicalTrial.getSettings().jsonAddUnknownReadings();
 			JsonHandler json = new JsonHandler(clinicalTrial);

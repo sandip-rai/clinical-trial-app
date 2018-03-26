@@ -1,7 +1,7 @@
 package gui;
 
+import FileHandler.FileAdapter;
 import trial.ClinicalTrial;
-import trial.FileAdapter;
 import views.*;
 
 /**
