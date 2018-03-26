@@ -38,7 +38,11 @@ public class ButtonAddReadingListener implements ActionListener {
 				Date date = formatter.parse(readingDate); // Change date from String to Date
 				// Get the patient from the guiController.getClinicalTrial() arraylist and
 				// add the new readings to that patient
-				patient.addNewReadings(readingId, readingType, readingValue, date, clinic);
+				if(patient.addNewReadings(readingId, readingType, readingValue, date, clinic)) {
+					JOptionPane.showMessageDialog(null, "New Reading has been added."); //Prompt if the reading is added
+				}else {
+					JOptionPane.showMessageDialog(null, "Patient is not currently in the trial."); //Prompt if patient is not active in trial
+				}
 
 				// Clear the textfields for new input
 				guiController.getMainMenuView().getIdInput().setText("");

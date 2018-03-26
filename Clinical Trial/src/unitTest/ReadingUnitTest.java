@@ -11,7 +11,7 @@ import org.junit.Assert;
 public class ReadingUnitTest {
 	String rid;
 	String t;
-	double v;
+	String v;
 	String bpv;
 	Date d;
 	String cid;
@@ -21,7 +21,7 @@ public class ReadingUnitTest {
 	public void testAll() {
 		rid = "001";
 		t = "Weight";
-		v = 180.1;
+		v = "180.1";
 		bpv = null;
 		d = new Date();
 		cid = "001";
@@ -35,7 +35,7 @@ public class ReadingUnitTest {
 		
 		Assert.assertEquals("001", r.getReadingId());
 		Assert.assertEquals("Weight", r.getType());
-		Assert.assertEquals(180.1, r.getValue());
+		Assert.assertEquals("180.1", r.getValue());
 		Assert.assertEquals(d, r.getDate());
 		Assert.assertEquals(c, r.getClinic());
 		
@@ -53,7 +53,7 @@ public class ReadingUnitTest {
 		
 		Assert.assertEquals("002", r1.getReadingId());
 		Assert.assertEquals("BP", r1.getType());
-		Assert.assertEquals("135/85", r1.getBpValue());
+		Assert.assertEquals("135/85", r1.getValue());
 		Assert.assertEquals(dd, r1.getDate());
 		Assert.assertEquals(c, r1.getClinic());
 		

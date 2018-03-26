@@ -59,7 +59,9 @@ public class DisplayPatientListView {
 		patientIsActive.setHorizontalTextPosition(SwingConstants.LEFT);
 		if((Patient) comboBoxPatients.getSelectedItem() != null){
 			patientIsActive.setSelected(((Patient)comboBoxPatients.getSelectedItem()).isActive());
-			patientInfo.setText(comboBoxPatients.getSelectedItem().toString());
+			String format = clinicalTrial.getSettings().getDateFormat();
+			String text =  ((Patient) comboBoxPatients.getSelectedItem()).toString(format);
+			patientInfo.setText(text);
 		}
 		comboBoxPatients.setRenderer(new PatientRenderer());
 		patientInfo.setEditable(false);

@@ -1,5 +1,6 @@
 package trial;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,14 +13,17 @@ public class Reading {
 	// Initializing parameters
 	private String readingId;
 	private String type;
-	private double value;
-	private String bpValue;
+	private String value;
 	private Date date;
 	private String clinicId;
 	private Clinic clinic;
 
 	// Constructor for every reading value except of blood_pressure type
-	public Reading(String readingId, String type, double value, Date date, Clinic clinic) {
+	public Reading(String readingId, String type, String value, Date date, Clinic clinic) {
+		type = validType(type);
+		if (type == null) {
+			throw new IllegalArgumentException("Reading type not supported.");
+		}
 		this.readingId = readingId;
 		this.type = type;
 		this.value = value;
@@ -27,13 +31,37 @@ public class Reading {
 		this.clinic = clinic;
 	}
 
-	// Constructor for the reading value of blood_pressure type
-	public Reading(String readingId, String type, String bpValue, Date date, Clinic clinic) {
-		this.readingId = readingId;
-		this.type = type;
-		this.bpValue = bpValue;
-		this.date = date;
-		this.clinic = clinic;
+	private String validType(String type) {
+		type = type.toLowerCase();
+		if (type.equals("weight")) {
+			type = "Weight";
+		} else if (type.equals("steps")) {
+			type = "Steps";
+		} else if (type.equals("temp") || type.equals("temperature")) {
+			type = "Temperature";
+		} else if (type.equals("blood_press") || type.equals("blood pressure") || type.equals("bloodpressure")) {
+			type = "Blood Pressure";
+		}
+		if (type.equals("Weight") || type.equals("Steps") || type.equals("Temperature")
+				|| type.equalsIgnoreCase("BloodPressure")) {
+			return type;
+		}
+		return null;
+	}
+
+	/**
+	 * toString method to print the String representation of the Reading object
+	 */
+	public String toString(String dateFormat) {
+		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+		String string = "Reading ID: " + readingId + "\n" + "Type: " + type + "\n" + "Value: " + value + "\n" + "Date: "
+				+ formatter.format(date) + "\n";
+		if (clinic != null) {
+			string = string + "Clinic: " + clinic.toString() + "\n\n";
+		} else {
+			string = string + "Clinic: Unkown\n\n";
+		}
+		return string;
 	}
 
 	/**
@@ -55,21 +83,12 @@ public class Reading {
 	}
 
 	/**
-	 * Getter for value of every type except blood_pressure
+	 * Getter for value of every type
 	 * 
 	 * @return value of the reading of the patient
 	 */
-	public double getValue() {
+	public String getValue() {
 		return value;
-	}
-
-	/**
-	 * Getter for reading value of blood_pressure type
-	 * 
-	 * @return value of the blood_pressure reading of the patient
-	 */
-	public String getBpValue() {
-		return bpValue;
 	}
 
 	/**
@@ -79,25 +98,6 @@ public class Reading {
 	 */
 	public Date getDate() {
 		return date;
-	}
-
-	/**
-	 * toString method to print the String representation of the Reading object
-	 */
-	public String toString() {
-		String string = "Reading ID: " + readingId + "\n" + "Type: " + type + "\n";
-		if (bpValue == null) { // for every value except blood_pressure
-			string = string + "Value: " + value + "\n";
-		} else {// for only blood_pressure value
-			string = string + "Value: " + bpValue + "\n";
-		}
-		string = string + "Date: " + date + "\n";
-		if (clinic != null) {
-			string = string + "Clinic: " + clinic.toString() + "\n\n";
-		}else {
-			string = string + "Clinic: Unkown\n\n";
-		}
-		return string;
 	}
 
 	public String getClinicId() {

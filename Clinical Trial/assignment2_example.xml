@@ -1,0 +1,19 @@
+<ReadingSet>
+	<Clinic id="485">Sound as a Bell Health System</Clinic> 
+	<Reading type="Temperature" id="15dde">
+		<Value unit="Fahrenheit">102.6</Value>
+		<Patient>15566</Patient>
+	</Reading>
+	<Reading type="BloodPressure" id="52523">
+		<Value>150/73</Value>
+		<Patient>15566</Patient>
+	</Reading>
+	<Reading type="Steps" id="151e5dde">
+		<Value>3664</Value>
+		<Patient>6</Patient>
+	</Reading>
+	<Reading type="Weight" id="ern222">
+		<Value unit="lbs">150</Value>
+		<Patient>85545</Patient>
+	</Reading>	
+</ReadingSet>

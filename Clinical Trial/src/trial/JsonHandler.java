@@ -70,14 +70,8 @@ public class JsonHandler extends FileHandler {
 				String reading_type = reading.getType();
 				String reading_id = reading.getReadingId();
 				String reading_date = Long.toString(reading.getDate().getTime());
-				String reading_value = new String();
-				if (reading_type.equals("blood_press")) {
-					reading_value = reading.getBpValue();
-				} else {
-					reading_value = Double.toString(reading.getValue());
-				}
-				FileReading readingJson = new FileReading(patient_id, reading_type, reading_id, reading_value,
-						reading_date);
+				String reading_value = reading.getValue();
+				FileReading readingJson = new FileReading(patient_id, reading_type, reading_id, reading_value, reading_date, null, null);
 				allReadings.add(readingJson);
 			}
 		}
