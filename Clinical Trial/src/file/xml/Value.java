@@ -1,20 +1,20 @@
 package file.xml;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlValue;
 
 public class Value {
-	private Value value;
+	private String value;
 	private String unit;
 	
-	@XmlElement
-	public Value getValue() {
+	@XmlValue
+	public String getValue() {
 		return value;
 	}
-	public void setValue(Value value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
-	@XmlAttribute
+	@XmlAttribute(name = "unit")
 	public String getUnit() {
 		return unit;
 	}

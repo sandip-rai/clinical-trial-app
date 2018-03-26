@@ -6,8 +6,8 @@ import javax.xml.bind.annotation.XmlElement;
 public class Reading {
 	private String id;
 	private String type;
-	private String Value;
-	private String unit;
+	//private String Value;
+	private Value value;
 	private String Date;
 	private String patient;
 	
@@ -26,20 +26,7 @@ public class Reading {
 	public void setType(String type) {
 		this.type = type;
 	}
-	@XmlElement(name = "Value")
-	public String getValue() {
-		return Value;
-	}
-	public void setValue(String value) {
-		Value = value;
-	}
-	@XmlAttribute(name = "unit")
-	public String getUnit() {
-		return unit;
-	}
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
+	@XmlElement(name = "Date")
 	public String getDate() {
 		return Date;
 	}
@@ -52,6 +39,13 @@ public class Reading {
 	}
 	public void setPatient(String patient) {
 		this.patient = patient;
+	}
+	@XmlElement( name = "Value" )
+	public Value getValue() {
+		return value;
+	}
+	public void setValue(Value value) {
+		this.value = value;
 	}
 	
 	

@@ -84,7 +84,7 @@ public class Handler {
 	 */
 	public void addPatientsToTrial(ArrayList<FileReading> readings, boolean active) {
 		for (FileReading reading : readings) {
-			if (clinicalTrial.findPatient(reading.patient_id) == null) {
+			if (validReading(reading) && clinicalTrial.findPatient(reading.patient_id) == null) {
 				Patient patient = new Patient(reading.patient_id);
 				patient.setActive(active);
 				clinicalTrial.getAllPatients().add(patient);
@@ -109,7 +109,7 @@ public class Handler {
 				String clinicId = reading.clinic_id;
 				Patient patient = clinicalTrial.findPatient(reading.patient_id); // Get a patient from the arrayList
 				Clinic clinic = clinicalTrial.findClinic(clinicId);
-				String value = reading.reading_value; // blood_pressure reading value is of String type
+				String value = reading.reading_value; 
 				patient.addReading(readingId, type, value, date, clinic);
 			}
 		}
@@ -123,20 +123,24 @@ public class Handler {
 	 * @return true, if reading is valid
 	 */
 	private boolean validReading(FileReading reading) {
-		String type = reading.reading_type;
-		Date date = new Date(Long.parseLong(reading.reading_date));
-		Patient patient = clinicalTrial.findPatient(reading.patient_id);
-		String clinicId = reading.clinic_id;
-		String clinicName = reading.clinic_name;
-		Clinic clinic = clinicalTrial.findClinic(clinicId);
-		boolean addClinic = clinicalTrial.getSettings().addUnknownClinics();
-		if (clinic == null && addClinic) {
-			clinic = clinicalTrial.addClinic(clinicName, clinicId);
-		}
-		if (type == null || date == null || patient == null || clinic == null) {
+		try {
+			String type = reading.reading_type;				
+			String value = reading.reading_value;
+			Patient patient = clinicalTrial.findPatient(reading.patient_id);
+			String clinicId = reading.clinic_id;
+			String clinicName = reading.clinic_name;
+			Clinic clinic = clinicalTrial.findClinic(clinicId);
+			boolean addClinic = clinicalTrial.getSettings().addUnknownClinics();
+			if (clinic == null && addClinic) {
+				clinic = clinicalTrial.addClinic(clinicName, clinicId);
+			}
+			if (type == null || value == null || patient == null || clinic == null) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (NullPointerException e) {
 			return false;
-		} else {
-			return true;
 		}
 	}
 }

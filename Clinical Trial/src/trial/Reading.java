@@ -53,9 +53,15 @@ public class Reading {
 	 * toString method to print the String representation of the Reading object
 	 */
 	public String toString(String dateFormat) {
-		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+		String date;
+		if (this.date != null) {
+			SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+			date = formatter.format(this.date);
+		}else {
+			date = "Unknown";
+		}
 		String string = "Reading ID: " + readingId + "\n" + "Type: " + type + "\n" + "Value: " + value + "\n" + "Date: "
-				+ formatter.format(date) + "\n";
+				+ date + "\n";
 		if (clinic != null) {
 			string = string + "Clinic: " + clinic.toString() + "\n\n";
 		} else {
