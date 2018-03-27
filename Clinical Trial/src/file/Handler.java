@@ -113,7 +113,9 @@ public class Handler {
 				Patient patient = clinicalTrial.findPatient(reading.patient_id); // Get a patient from the arrayList
 				Clinic clinic = clinicalTrial.findClinic(clinicId);
 				String value = reading.reading_value;
-				patient.addReading(readingId, type, value, date, clinic);
+				if (patient != null) {
+					patient.addReading(readingId, type, value, date, clinic);
+				}
 			}
 		}
 	}
@@ -126,23 +128,21 @@ public class Handler {
 	 * @return true, if reading is valid
 	 */
 	private boolean validReading(FileReading reading) {
-		try {
-			String type = reading.reading_type;
-			String value = reading.reading_value;
-			Patient patient = clinicalTrial.findPatient(reading.patient_id);
-			String clinicId = reading.clinic_id;
-			String clinicName = reading.clinic_name;
-			Clinic clinic = clinicalTrial.findClinic(clinicId);
-			boolean addClinic = clinicalTrial.getSettings().addUnknownClinics();
-			if (clinic == null && addClinic) {
-				clinic = clinicalTrial.addClinic(clinicName, clinicId);
-			}
-			if (type == null || value == null || patient == null || clinic == null) {
-				return false;
-			} else {
-				return true;
-			}
-		} catch (NullPointerException e) {
+		String type = reading.reading_type;
+		String value = reading.reading_value;
+		Patient patient = clinicalTrial.findPatient(reading.patient_id);
+		String clinicId = reading.clinic_id;
+		String clinicName = reading.clinic_name;
+		Clinic clinic = clinicalTrial.findClinic(clinicId);
+		boolean addClinic = clinicalTrial.getSettings().addUnknownClinics();
+		if (clinic == null && addClinic) {
+			clinic = clinicalTrial.addClinic(clinicName, clinicId);
+		}
+		if (type != null || value != null || patient != null || clinic != null) {
+			System.out.println("valid");
+			return true;
+		} else {
+			System.out.println("invalid");
 			return false;
 		}
 	}
