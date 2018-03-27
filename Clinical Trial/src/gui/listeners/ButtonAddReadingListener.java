@@ -23,7 +23,6 @@ public class ButtonAddReadingListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// Get the new entered values
 		Patient patient = (Patient) guiController.getMainMenuView().getComboBoxPatients().getSelectedItem();
-		String readingId = guiController.getMainMenuView().getIdInput().getText();
 		String readingType = (String) guiController.getMainMenuView().getComboBoxReadingType().getSelectedItem();
 		String readingValue = guiController.getMainMenuView().getValueInput().getText();
 		String readingDate = guiController.getMainMenuView().getDateInput().getText();
@@ -38,14 +37,13 @@ public class ButtonAddReadingListener implements ActionListener {
 				Date date = formatter.parse(readingDate); // Change date from String to Date
 				// Get the patient from the guiController.getClinicalTrial() arraylist and
 				// add the new readings to that patient
-				if(patient.addReading(readingId, readingType, readingValue, date, clinic)) {
+				if(patient.addReading(null, readingType, readingValue, date, clinic)) {
 					JOptionPane.showMessageDialog(null, "New reading has been added."); //Prompt if the reading is added
 				}else {
 					JOptionPane.showMessageDialog(null, "Invalid reading."); //Prompt if patient is not active in trial
 				}
 
 				// Clear the textfields for new input
-				guiController.getMainMenuView().getIdInput().setText("");
 				guiController.getMainMenuView().getValueInput().setText("");
 			}
 		} catch (NullPointerException ex) { // Catch the error if no patient is selected for adding readings.
