@@ -28,6 +28,7 @@ local.properties
 # Java
 .factorypath
 *.class
+*.DS_Store
 
 # PDT-specific (PHP Development Tools)
 .buildpath
