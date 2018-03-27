@@ -78,8 +78,10 @@ public class JsonHandler extends Handler {
 					reading_date = Long.toString(reading.getDate().getTime());
 				}
 				String reading_value = reading.getValue();
+				String clinic_id = reading.getClinic().getId();
+				String clinic_name = reading.getClinic().getName();
 				FileReading readingJson = new FileReading(patient_id, reading_type, reading_id, reading_value,
-						reading_date, null, null);
+						reading_date, clinic_id, clinic_name);
 				allReadings.add(readingJson);
 			}
 		}

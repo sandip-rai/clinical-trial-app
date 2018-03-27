@@ -15,7 +15,6 @@ public class Reading {
 	private String type;
 	private String value;
 	private Date date;
-	private String clinicId;
 	private Clinic clinic;
 
 	// Constructor for every reading value except of blood_pressure type
@@ -104,10 +103,6 @@ public class Reading {
 	 */
 	public Date getDate() {
 		return date;
-	}
-
-	public String getClinicId() {
-		return clinicId;
 	}
 
 	public Clinic getClinic() {
