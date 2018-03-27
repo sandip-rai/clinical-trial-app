@@ -16,11 +16,10 @@ import trial.ClinicalTrial;
 import trial.Patient;
 import trial.Reading;
 
-
 public class JsonHandler extends Handler {
 	private final String SAVE_STATE_PATH = "SaveState.json";
-	
-	public JsonHandler(ClinicalTrial clinicalTrial){
+
+	public JsonHandler(ClinicalTrial clinicalTrial) {
 		this.clinicalTrial = clinicalTrial;
 	}
 
@@ -74,15 +73,19 @@ public class JsonHandler extends Handler {
 				String patient_id = patient.getPatientId();
 				String reading_type = reading.getType();
 				String reading_id = reading.getReadingId();
-				String reading_date = Long.toString(reading.getDate().getTime());
+				String reading_date = null;
+				if (reading.getDate() != null) {
+					reading_date = Long.toString(reading.getDate().getTime());
+				}
 				String reading_value = reading.getValue();
-				FileReading readingJson = new FileReading(patient_id, reading_type, reading_id, reading_value, reading_date, null, null);
+				FileReading readingJson = new FileReading(patient_id, reading_type, reading_id, reading_value,
+						reading_date, null, null);
 				allReadings.add(readingJson);
 			}
 		}
 		return allReadings;
 	}
-	
+
 	public boolean saveState() {
 		try {
 			Writer writer = new FileWriter(SAVE_STATE_PATH);
@@ -95,15 +98,15 @@ public class JsonHandler extends Handler {
 			return false; // If exception occurs
 		}
 	}
-	
+
 	public ClinicalTrial loadState() {
 		Gson gson = new GsonBuilder().serializeNulls().create();
 		try (Reader fileReader = new FileReader(SAVE_STATE_PATH)) {
 			// Create PatientReadingsJson object which creates an AarrayList
-			ClinicalTrial fileTrial = gson.fromJson(fileReader, ClinicalTrial.class);			
+			ClinicalTrial fileTrial = gson.fromJson(fileReader, ClinicalTrial.class);
 			return fileTrial; // If file has been read return the ClinicalTrial
 		} catch (IOException e) { // Catch if fileLocation doesn't exist
 			return new ClinicalTrial();
-		}		
+		}
 	}
 }
