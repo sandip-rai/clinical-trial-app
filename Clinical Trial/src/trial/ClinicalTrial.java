@@ -111,22 +111,23 @@ public class ClinicalTrial {
 	 */
 	public Clinic addClinic(String name, String id) {	
 		Clinic clinic;
-		if (name == null && id == null) {
+		boolean unkownClinic = name.toLowerCase().equals("unknown") && id.toLowerCase().equals("unknown");
+		boolean hasName = !(name.equals("")|| name == null);
+		boolean hasId = !(id.equals("") || id == null);
+		boolean clinicInTrial = !(findClinic(id) == null);
+		if (unkownClinic || (!hasName && !hasId)){
 			return clinic = new Clinic(null, null);
-		} else if (name != null && (id == null || id.equals(""))) {
+		} else if (hasName && !hasId) {
 			id = generateUniqueId();
 			clinic = new Clinic(name, id);
 			allClinics.add(clinic);
 			return clinic;
-		} else if (name == null && id != null && findClinic(id) == null ) {
-			clinic = new Clinic(null, id);
-			allClinics.add(clinic);
-			return clinic;
-		} else if (findClinic(id) == null) {
+		} else if (!clinicInTrial) {
 			clinic = new Clinic(name, id);
 			allClinics.add(clinic);
 			return clinic;
 		} else {
+			//if clinic is already in the trial return null
 			return null;
 		}
 	}

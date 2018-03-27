@@ -3,7 +3,7 @@ package file.xml;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-public class Reading {
+class Reading {
 	private String id;
 	private String type;
 	//private String Value;

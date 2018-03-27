@@ -3,7 +3,7 @@ package file.xml;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
-public class Value {
+class Value {
 	private String value;
 	private String unit;
 	

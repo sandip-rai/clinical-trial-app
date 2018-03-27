@@ -3,7 +3,7 @@ package file.xml;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
-public class Clinic {
+class Clinic {
 	private String name;
 	private String id;
 	
