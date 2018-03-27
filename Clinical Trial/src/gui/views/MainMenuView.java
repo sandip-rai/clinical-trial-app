@@ -42,7 +42,7 @@ public class MainMenuView implements View {
 	private JTextField pastReadingDisplay = new JTextField(16);
 
     //create a array list to hold all the panels
-    final int NUMBER_OF_PANELS = 8;
+    final int NUMBER_OF_PANELS = 7;
     ArrayList<JPanel> panels;
     MenuBar menuBar;
     //Create JFrame
@@ -59,17 +59,15 @@ public class MainMenuView implements View {
         panels.get(0).add(addReading);
         panels.get(1).add(comboBoxPatients);
         panels.get(1).add(buttonStartTrial);
-        panels.get(2).add(id);
-        panels.get(2).add(idInput);
-        panels.get(3).add(date);
-        panels.get(3).add(dateInput);
-        panels.get(4).add(type);
-        panels.get(4).add(comboBoxReadingType);
-        panels.get(5).add(value);
-        panels.get(5).add(valueInput);
-        panels.get(6).add(comboBoxClinics);
-        panels.get(6).add(buttonAddClinic);
-        panels.get(7).add(buttonAddReading);
+        panels.get(2).add(date);
+        panels.get(2).add(dateInput);
+        panels.get(3).add(type);
+        panels.get(3).add(comboBoxReadingType);
+        panels.get(4).add(value);
+        panels.get(4).add(valueInput);
+        panels.get(5).add(comboBoxClinics);
+        panels.get(5).add(buttonAddClinic);
+        panels.get(6).add(buttonAddReading);
         
     }
     

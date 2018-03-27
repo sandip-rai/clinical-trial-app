@@ -11,6 +11,7 @@ public class Patient {
 	private String patientId;
 	private boolean active;
 	private ArrayList<Reading> readings;
+	private int readingCount = 1;
 
 	/**
 	 * Class Constructor specifying the patient Id
@@ -41,30 +42,16 @@ public class Patient {
 	public ArrayList<Reading> getReadings() {
 		return readings;
 	}
-
-	/**
-	 * Creates a reading object for only the blood_pressure reading type
-	 * 
-	 * @param readingId
-	 *            the reading Id number
-	 * @param type
-	 *            the blood_pressure reading type
-	 * @param value
-	 *            the reading value number
-	 * @param date
-	 *            the date when reading was taken
-	 */
-	public void addReading(String readingId, String type, String value, Date date, Clinic clinic) {
-		if (active) {
-			//check for duplicate readings
-			for (Reading reading : readings) {
-				if (readingId.equals(reading.getReadingId())) {
-					return;
-				}
+	
+	private String getReadingUid() {
+		String Uid = "Reading" + readingCount++;
+		for (Reading reading : readings) {
+			if (Uid.equals(reading.getClinicId())) {
+				return getReadingUid();
 			}
-			Reading reading = new Reading(readingId, type, value, date, clinic);
-			readings.add(reading);
 		}
+
+		return Uid;
 	}
 
 	/**
@@ -80,9 +67,19 @@ public class Patient {
 	 * @param date
 	 *            the date of reading
 	 */
-	public Boolean addNewReadings(String readingId, String type, String value, Date date, Clinic clinic) {
+	public Boolean addReading(String readingId, String type, String value, Date date, Clinic clinic) {
 		if (active) { // Only add if the patient is active i.e in clinical trial
 			try {
+				if (readingId == null || readingId.equals("")) {
+					readingId = getReadingUid();
+				} else {
+					// check for duplicate readings
+					for (Reading reading : readings) {
+						if (readingId.equals(reading.getReadingId())) {
+							return false;
+						}
+					}
+				}
 				Reading reading = new Reading(readingId, type, value, date, clinic); // create reading object
 				readings.add(reading); // add the new reading to the reading ArrayList
 				return true;

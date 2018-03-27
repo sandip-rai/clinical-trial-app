@@ -31,23 +31,22 @@ public class ButtonAddReadingListener implements ActionListener {
 		Clinic clinic = (Clinic) guiController.getMainMenuView().getComboBoxClinics().getSelectedItem();
 		try {
 			// Prompt the user if reading values aren't filled
-			if (readingId.equals("") || readingValue.equals("") || readingDate.equals("")) {
+			if (readingValue.equals("") || readingDate.equals("")) {
 				JOptionPane.showMessageDialog(null, "Please fill in the values for every field.");
 			} else { // If all values are filled, add them to to corresponding Patient
 				SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 				Date date = formatter.parse(readingDate); // Change date from String to Date
 				// Get the patient from the guiController.getClinicalTrial() arraylist and
 				// add the new readings to that patient
-				if(patient.addNewReadings(readingId, readingType, readingValue, date, clinic)) {
-					JOptionPane.showMessageDialog(null, "New Reading has been added."); //Prompt if the reading is added
+				if(patient.addReading(readingId, readingType, readingValue, date, clinic)) {
+					JOptionPane.showMessageDialog(null, "New reading has been added."); //Prompt if the reading is added
 				}else {
-					JOptionPane.showMessageDialog(null, "Patient is not currently in the trial."); //Prompt if patient is not active in trial
+					JOptionPane.showMessageDialog(null, "Invalid reading."); //Prompt if patient is not active in trial
 				}
 
 				// Clear the textfields for new input
 				guiController.getMainMenuView().getIdInput().setText("");
 				guiController.getMainMenuView().getValueInput().setText("");
-				guiController.getMainMenuView().getDateInput().setText("");
 			}
 		} catch (NullPointerException ex) { // Catch the error if no patient is selected for adding readings.
 			guiController.getMainMenuView().displayErrorMessage(null, "Please select a Patient to add readings.");
