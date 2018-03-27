@@ -16,7 +16,7 @@ public class ButtonClinicViewListener implements ActionListener {
 	@Override
     public void actionPerformed(ActionEvent e) {
         	guiController.disposeAllViews();
-        	guiController.getAddPatientView().setupFrame();
+        	guiController.getClinicView().setupFrame();
         	guiController.getClinicView().setVisible(true);// Selecting new patient will call addPatient to allow to add new patient
     }
 }
