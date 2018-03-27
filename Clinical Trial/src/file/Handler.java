@@ -139,10 +139,8 @@ public class Handler {
 			clinic = clinicalTrial.addClinic(clinicName, clinicId);
 		}
 		if (type != null || value != null || patient != null || clinic != null) {
-			System.out.println("valid");
 			return true;
 		} else {
-			System.out.println("invalid");
 			return false;
 		}
 	}

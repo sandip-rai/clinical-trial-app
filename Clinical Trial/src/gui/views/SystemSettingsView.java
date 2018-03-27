@@ -17,7 +17,7 @@ public class SystemSettingsView implements View {
 	private JLabel dateFormatLable = new JLabel("Date Format");
 	private JTextField dateFormat = new JTextField(16);
 	private JCheckBox checkBoxAddClinics = new JCheckBox(
-			"Add unkown Clinics and Readings from unknown Clinics to the trial when importing from files.");
+			"Add clinics and readings from unknown clinics to the trial when importing.");
 
 	private JLabel jsonLable = new JLabel("JSON Settings");
 	private JCheckBox checkBoxJsonPatients = new JCheckBox("Add patients to the trial when importing from JSON files.");
@@ -27,7 +27,7 @@ public class SystemSettingsView implements View {
 	private JLabel xmlLable = new JLabel("XML Settings");
 	private JCheckBox checkBoxXmlPatients = new JCheckBox(
 			"Add unknown patients to the trial when importing from XML files.");
-	private JCheckBox checkBoxXmlReadings = new JCheckBox("Add Readings from unkown patients imported from XML files.");
+	private JCheckBox checkBoxXmlReadings = new JCheckBox("Add readings from unkown patients imported from XML files.");
 	private JButton buttonReset = new JButton("Reset to Default Settings");
 	// number of panels
 	final int NUMBER_OF_PANELS = 12;
