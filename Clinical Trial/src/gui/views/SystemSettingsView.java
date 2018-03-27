@@ -17,7 +17,7 @@ public class SystemSettingsView implements View {
 	private JLabel dateFormatLable = new JLabel("Date Format");
 	private JTextField dateFormat = new JTextField(16);
 	private JCheckBox checkBoxAddClinics = new JCheckBox(
-			"Add unrecognized Clinics to the trial when importing from files.");
+			"Add unkown Clinics and Readings from unknown Clinics to the trial when importing from files.");
 
 	private JLabel jsonLable = new JLabel("JSON Settings");
 	private JCheckBox checkBoxJsonPatients = new JCheckBox("Add patients to the trial when importing from JSON files.");

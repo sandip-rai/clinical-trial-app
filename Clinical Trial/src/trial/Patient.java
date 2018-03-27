@@ -56,6 +56,12 @@ public class Patient {
 	 */
 	public void addReading(String readingId, String type, String value, Date date, Clinic clinic) {
 		if (active) {
+			//check for duplicate readings
+			for (Reading reading : readings) {
+				if (readingId.equals(reading.getReadingId())) {
+					return;
+				}
+			}
 			Reading reading = new Reading(readingId, type, value, date, clinic);
 			readings.add(reading);
 		}
