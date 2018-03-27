@@ -28,7 +28,6 @@ public class ComboBoxPatientsListener implements ActionListener {
 			view.setActive(active);
 			view.setPatientInfo(text);
 		} else {
-			  JOptionPane.showMessageDialog(null, "Please select a valid patient");
 		}
 		view.getFrame().pack();
 	}
