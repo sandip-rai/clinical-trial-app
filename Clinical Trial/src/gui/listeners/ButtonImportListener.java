@@ -19,7 +19,7 @@ public class ButtonImportListener implements ActionListener{
 		 if (guiController.getFileAdapter().readFile(guiController.getClinicalTrial())) { 
 			 // If file is read, prompt the user and display the patient list\
              JOptionPane.showMessageDialog(null, "File uploaded successfully.");
-			 guiController.getSystemSettingView().getFrame().dispose();
+             guiController.disposeAllViews();
 			 guiController.getDisplayPatientListView().setupFrame(guiController.getClinicalTrial());
 			 guiController.getDisplayPatientListView().setVisible(true);
          } else { // If no file read, prompt the user and show the manage
