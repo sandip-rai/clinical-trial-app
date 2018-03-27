@@ -32,12 +32,10 @@ public class MainMenuView implements View {
 
 	// Creates labels and user input textFeild
     private JLabel addReading = new JLabel("Add a new reading:");
-    private JLabel id = new JLabel("Reading ID: ");
     private JLabel date = new JLabel("Date: ");
     private JLabel type = new JLabel("Type: ");
     private JLabel value = new JLabel("Value: ");
     private JTextField valueInput = new JTextField(16);
-	private JTextField idInput = new JTextField(16);
 	private JTextField dateInput = new JTextField(16);
 	private JTextField pastReadingDisplay = new JTextField(16);
 
@@ -119,11 +117,6 @@ public void setupFrame(ClinicalTrial clinicalTrial){
     public JTextField getValueInput() {
   		return valueInput;
   	}
-
-    //getter for idInput
-    public JTextField getIdInput() {
-		return idInput;
-	}
     
     //getter for comboBoxReadingType
     public JComboBox<String> getComboBoxReadingType() {
