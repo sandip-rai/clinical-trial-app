@@ -87,12 +87,21 @@ public class Handler {
 		}
 	}
 
+	/**
+	 * Adds the clinic to trial if enabled in system settings.
+	 *
+	 * @param readings the readings
+	 */
 	public void addClinicToTrial(ArrayList<FileReading> readings) {
+		//check system settings
 		if (clinicalTrial.getSettings().addUnknownClinics()) {
 			for (FileReading reading : readings) {
+				//get clinic info
 				String clinicName = reading.clinic_name;
 				String clinicId = reading.clinic_id;
+				//search clinicalTrial for the clinic
 				Clinic clinic = clinicalTrial.findClinic(clinicId);
+				//if clinic is not already in the trial add it
 				if (clinic == null) {
 					clinic = clinicalTrial.addClinic(clinicName, clinicId);
 				}
@@ -170,9 +179,11 @@ public class Handler {
 		String clinicId = reading.clinic_id;
 		Clinic clinic = clinicalTrial.findClinic(clinicId);
 		boolean addClinic = clinicalTrial.getSettings().addUnknownClinics();
+		//if required fields are present return true
 		if (type != null && value != null && patientId != null && (clinic != null || addClinic)) {
 			return true;
 		} else {
+			//if required fields are not present return false
 			return false;
 		}
 	}

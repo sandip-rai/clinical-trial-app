@@ -48,8 +48,11 @@ public class FileAdapter {
 	 * @return true, if successful
 	 */
 	public boolean writeFile(ClinicalTrial clinicalTrial) {
+		//get the path to write the file and set save to true
 		String path = getPath(true);
+		//instantiate a new JsonHandler
 		JsonHandler json = new JsonHandler(clinicalTrial);
+		//if a path was returned write the file with the JSonHandler
 		if (path != null) {
 			return json.WritePatientReadings(path);
 		} else {
@@ -64,8 +67,10 @@ public class FileAdapter {
 	 * @return true, if successful
 	 */
 	public boolean readFile(ClinicalTrial clinicalTrial) {
+		//get the path from the file reader and set save to false
 		String path = getPath(false);
 		String fileType;
+		//find the file extension
 		try {
 			int i = path.lastIndexOf('.');
 			fileType = path.substring(i);
@@ -73,29 +78,29 @@ public class FileAdapter {
 			// if no file was chosen return false
 			return false;
 		}
-
 		if (fileType.equals(".json")) {
-			Boolean addUnkownPatients = clinicalTrial.getSettings().jsonAddUnknownPatients();
-			Boolean addUnknownReadings = clinicalTrial.getSettings().jsonAddUnknownReadings();
+			//if the file was JSON use the JsonHandler
 			JsonHandler json = new JsonHandler(clinicalTrial);
-			return json.readFile(path, addUnkownPatients, addUnknownReadings);
+			return json.readFile(path);
 		} else if (fileType.equals(".xml")) {
-			Boolean addUnkownPatients = clinicalTrial.getSettings().xmlAddUnknownPatients();
-			Boolean addUnknownReadings = clinicalTrial.getSettings().xmlAddUnknownPatients();
+			//if the file was XML use the XmlHandler
 			XmlHandler xml = new XmlHandler(clinicalTrial);
-			return xml.readXMLFile(path, addUnkownPatients, addUnknownReadings);
+			return xml.readXMLFile(path);
 		} else
+			//if the file type was not recognized return false
 			return false;
 	}
 
 	/**
-	 * Save state.
+	 * Saves the current system state.
 	 *
 	 * @param clinicalTrial the clinical trial
 	 * @return true, if successful
 	 */
 	public boolean saveState(ClinicalTrial clinicalTrial) {
+		//Instantiate new JsonHandler
 		JsonHandler json = new JsonHandler(clinicalTrial);
+		//Save the current state 
 		if (json.saveState()) {
 			return true;
 		}
@@ -103,12 +108,14 @@ public class FileAdapter {
 	}
 
 	/**
-	 * c
+	 * Loads a SaveState.json file.
 	 *
 	 * @return the clinical trial
 	 */
 	public ClinicalTrial loadState() {
+		//Instantiate new JsonHandler
 		JsonHandler json = new JsonHandler(null);
+		//Load the save file
 		return json.loadState();
 	}
 

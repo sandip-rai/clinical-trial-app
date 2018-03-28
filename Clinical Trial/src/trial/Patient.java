@@ -55,7 +55,7 @@ public class Patient {
 	}
 
 	/**
-	 * Adds the new readings to the Patient object readings arraylist if the patient
+	 * Adds the new readings to the Patient object readings ArrayList if the patient
 	 * is active i.e on trial
 	 * 
 	 * @param readingId

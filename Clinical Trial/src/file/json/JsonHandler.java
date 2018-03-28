@@ -1,56 +1,62 @@
 package file.json;
-/**
- * FileHandler class handles the json file reading and writing the output to a new json file.
- */
-
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.util.*;
 import com.google.gson.*;
-
 import file.Handler;
-import trial.ClinicalTrial;
-import trial.Patient;
-import trial.Reading;
+import trial.*;
 
-public class JsonHandler extends Handler {
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JsonHandler.
+ */
+public class JsonHandler extends Handler {	
+	/** The save state path. */
 	private final String SAVE_STATE_PATH = "SaveState.json";
 
+	/**
+	 * Instantiates a new json handler.
+	 *
+	 * @param clinicalTrial the clinical trial
+	 */
 	public JsonHandler(ClinicalTrial clinicalTrial) {
 		this.clinicalTrial = clinicalTrial;
 	}
 
 	/**
-	 * readJsonFile initializes the FileReader, creates a Gson object, and creates
-	 * PatientReadingsJson object. It gets called from uploadFile method of GUI
-	 * class and then it passes PatientReadingsJson object patient readings to
-	 * AddReadingToPatient method.
-	 * 
-	 * @return true if file is successfully read and contents are added
-	 *         appropriately
+	 * Read file.
+	 *
+	 * @param path the path
+	 * @return true, if successful
 	 */
-
-	public boolean readFile(String path, boolean addUnkownPatients, boolean addUnknownReadings) {
+	public boolean readFile(String path) {
+		boolean addPatients = clinicalTrial.getSettings().jsonAddUnknownPatients();
+		boolean addReadings = clinicalTrial.getSettings().jsonAddUnknownReadings();
 		Gson gson = new GsonBuilder().serializeNulls().create();
 		try (Reader fileReader = new FileReader(path)) {
 			// Create PatientReadingsJson object which creates an AarrayList
 			FileReadings readingList = gson.fromJson(fileReader, FileReadings.class);
 			addClinicToTrial(readingList.patient_readings);
-			if (addUnkownPatients) {
-				addPatientsToTrial(readingList.patient_readings, addUnknownReadings);
+			if (addPatients) {
+				addPatientsToTrial(readingList.patient_readings, addReadings);
 			}
 			// Add readings from input file to Patient's readings ArrayList
 			AddReadingToPatient(readingList.patient_readings);
-			return true; // If file has been read and contents added
-		} catch (IOException e) { // Catch if fileLocation doesn't exist
+			// If file has been read and contents added
+			return true; 
+		} catch (IOException e) { 
+			// Catch if fileLocation doesn't exist
 			e.printStackTrace();
 		}
 		return false;
 	}
 
+	/**
+	 * Write patient readings.
+	 *
+	 * @param fileName the file name
+	 * @return true, if successful
+	 */
 	public boolean WritePatientReadings(String fileName) {
 		try {
 			Writer writer = new FileWriter(fileName);
@@ -65,6 +71,11 @@ public class JsonHandler extends Handler {
 		}
 	}
 
+	/**
+	 * Gets the json readings.
+	 *
+	 * @return the json readings
+	 */
 	private ArrayList<FileReading> getJsonReadings() {
 		ArrayList<Patient> allPatients = clinicalTrial.getAllPatients();
 		ArrayList<FileReading> allReadings = new ArrayList<FileReading>();
@@ -89,6 +100,11 @@ public class JsonHandler extends Handler {
 		return allReadings;
 	}
 
+	/**
+	 * Save state.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean saveState() {
 		try {
 			Writer writer = new FileWriter(SAVE_STATE_PATH);
@@ -102,6 +118,11 @@ public class JsonHandler extends Handler {
 		}
 	}
 
+	/**
+	 * Load state.
+	 *
+	 * @return the clinical trial
+	 */
 	public ClinicalTrial loadState() {
 		Gson gson = new GsonBuilder().serializeNulls().create();
 		try (Reader fileReader = new FileReader(SAVE_STATE_PATH)) {

@@ -1,8 +1,6 @@
 package file.xml;
-
 import java.io.File;
 import java.util.ArrayList;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -19,7 +17,10 @@ public class XmlHandler extends Handler {
 	 * 
 	 * Read the xml file, and please note that this also adds a clinic id.
 	 */
-	public boolean readXMLFile(String file, boolean addUnkownPatients, boolean addUnknownReadings) {
+	public boolean readXMLFile(String file) {
+		boolean addPatients = clinicalTrial.getSettings().xmlAddUnknownPatients();
+		boolean addReadings = clinicalTrial.getSettings().xmlAddUnknownReadings();
+		
 		JAXBContext jaxbContext;
 		try {
 			jaxbContext = JAXBContext.newInstance(ReadingSet.class);
@@ -27,8 +28,8 @@ public class XmlHandler extends Handler {
 			ReadingSet readingSet = (ReadingSet) jaxbUnmarshaller.unmarshal(new File(file));
 			ArrayList<FileReading> fileReadings = getFileReading(readingSet);
 			addClinicToTrial(fileReadings);
-			if (addUnkownPatients) {
-				addPatientsToTrial(fileReadings, addUnknownReadings);
+			if (addPatients) {
+				addPatientsToTrial(fileReadings, addReadings);
 			}
 			AddReadingToPatient(fileReadings);
 			return true;
