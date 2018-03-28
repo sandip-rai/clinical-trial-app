@@ -134,7 +134,7 @@ public class ClinicalTrial {
 	}
 	
 	private String getValidString(String string) {
-		boolean valid = !(string.equals("") || string == null || string.toLowerCase().equals("unknown"));
+		boolean valid = !(string == null || string.equals("") || string.toLowerCase().equals("unknown"));
 		if (valid) {
 			return string;
 		}

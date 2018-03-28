@@ -2,30 +2,40 @@ package file;
 
 import java.util.ArrayList;
 import java.util.Date;
+import trial.*;
 
-import trial.Clinic;
-import trial.ClinicalTrial;
-import trial.Patient;
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class FileHandler.
+ * The Class Handler.
  */
 public class Handler {
+
+	/** The clinical trial. */
 	protected ClinicalTrial clinicalTrial;
 
 	/**
-	 * ReadingJson class handles the objects with the specified parameters that are
-	 * present in the input Json File.
-	 *
+	 * Used by child classes to temporarily store Clinic and Reading data.
 	 */
 	public class FileReading {
+
+		/** The patient id. */
 		private String patient_id;
+
+		/** The reading type. */
 		private String reading_type;
+
+		/** The reading id. */
 		private String reading_id;
+
+		/** The reading value. */
 		private String reading_value;
+
+		/** The reading date. */
 		private String reading_date;
+
+		/** The clinic id. */
 		private String clinic_id;
+
+		/** The clinic name. */
 		private String clinic_name;
 
 		/**
@@ -41,6 +51,10 @@ public class Handler {
 		 *            the reading value
 		 * @param reading_date
 		 *            the reading date
+		 * @param clinic_id
+		 *            the clinic id
+		 * @param clinic_name
+		 *            the clinic name
 		 */
 		public FileReading(String patient_id, String reading_type, String reading_id, String reading_value,
 				String reading_date, String clinic_id, String clinic_name) {
@@ -55,12 +69,11 @@ public class Handler {
 	}
 
 	/**
-	 * PatientReadingsJson stores the ReadingJson class objects into an ArrayList.
+	 * Used by child classes to temporarily store Clinic and Reading data.
 	 */
 	public class FileReadings {
 
 		/** The patient readings. */
-		// Arraylist to hold ReadingJson class objects
 		public ArrayList<FileReading> patient_readings;
 
 		/**
@@ -74,8 +87,23 @@ public class Handler {
 		}
 	}
 
+	public void addClinicToTrial(ArrayList<FileReading> readings) {
+		if (clinicalTrial.getSettings().addUnknownClinics()) {
+			for (FileReading reading : readings) {
+				String clinicName = reading.clinic_name;
+				String clinicId = reading.clinic_id;
+				Clinic clinic = clinicalTrial.findClinic(clinicId);
+				if (clinic == null) {
+					clinic = clinicalTrial.addClinic(clinicName, clinicId);
+				}
+			}
+		}
+	}
+
 	/**
-	 * Adds the patients to trial.
+	 * Takes in an ArrayList of patient readings. Readings are validated and added
+	 * to the trial. All readings are set to active or inactive based on the
+	 * parameter
 	 *
 	 * @param readings
 	 *            the readings
@@ -83,8 +111,11 @@ public class Handler {
 	 *            the active
 	 */
 	public void addPatientsToTrial(ArrayList<FileReading> readings, boolean active) {
+		// Loop threw all readings in the readings array
 		for (FileReading reading : readings) {
+			// Validate the reading and ensure that the patient is not already in the trial
 			if (validReading(reading) && clinicalTrial.findPatient(reading.patient_id) == null) {
+				// Add the patient to the trial
 				Patient patient = new Patient(reading.patient_id);
 				patient.setActive(active);
 				clinicalTrial.getAllPatients().add(patient);
@@ -93,26 +124,29 @@ public class Handler {
 	}
 
 	/**
-	 * AddReadingToPatient adds the readings from the input file to the Patient's
-	 * reading ArrayList.
+	 * Adds a reading to a patient if they are in the trial.
 	 *
 	 * @param readings
-	 *            the readings of the input file in an ArrayList
+	 *            the readings
 	 */
 	public void AddReadingToPatient(ArrayList<FileReading> readings) {
+		// Loop threw all readings in the readings array
 		for (FileReading reading : readings) {
+			// ensure that reading is valid
 			if (validReading(reading)) {
 				// set reading variables
 				String readingId = reading.reading_id;
 				String type = reading.reading_type;
 				Date date = null;
+				// ensure that a date is present and turn it into a Date object
 				if (reading.reading_date != null) {
 					date = new Date(Long.parseLong(reading.reading_date));
 				}
 				String clinicId = reading.clinic_id;
-				Patient patient = clinicalTrial.findPatient(reading.patient_id); // Get a patient from the arrayList
 				Clinic clinic = clinicalTrial.findClinic(clinicId);
 				String value = reading.reading_value;
+				// ensure patient is in the trial
+				Patient patient = clinicalTrial.findPatient(reading.patient_id); // Get a patient from the arrayList
 				if (patient != null) {
 					patient.addReading(readingId, type, value, date, clinic);
 				}
@@ -121,24 +155,22 @@ public class Handler {
 	}
 
 	/**
-	 * Validate reading.
+	 * Validates readings. A reading is valid if and only if it has a type, value,
+	 * patient, and clinic ID. Clinic id is only an exception if the
 	 *
 	 * @param reading
-	 *            from a file
-	 * @return true, if reading is valid
+	 *            the reading
+	 * @return true, if successful
 	 */
 	private boolean validReading(FileReading reading) {
+		// get required fields
 		String type = reading.reading_type;
 		String value = reading.reading_value;
-		Patient patient = clinicalTrial.findPatient(reading.patient_id);
+		String patientId = reading.patient_id;
 		String clinicId = reading.clinic_id;
-		String clinicName = reading.clinic_name;
 		Clinic clinic = clinicalTrial.findClinic(clinicId);
 		boolean addClinic = clinicalTrial.getSettings().addUnknownClinics();
-		if (clinic == null && addClinic) {
-			clinic = clinicalTrial.addClinic(clinicName, clinicId);
-		}
-		if (type != null || value != null || patient != null || clinic != null) {
+		if (type != null && value != null && patientId != null && (clinic != null || addClinic)) {
 			return true;
 		} else {
 			return false;

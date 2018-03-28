@@ -26,6 +26,7 @@ public class XmlHandler extends Handler {
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			ReadingSet readingSet = (ReadingSet) jaxbUnmarshaller.unmarshal(new File(file));
 			ArrayList<FileReading> fileReadings = getFileReading(readingSet);
+			addClinicToTrial(fileReadings);
 			if (addUnkownPatients) {
 				addPatientsToTrial(fileReadings, addUnknownReadings);
 			}

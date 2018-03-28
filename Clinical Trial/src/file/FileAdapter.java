@@ -8,8 +8,17 @@ import file.json.JsonHandler;
 import file.xml.XmlHandler;
 import trial.ClinicalTrial;
 
+/**
+ * The Class FileAdapter.
+ */
 public class FileAdapter {
 
+	/**
+	 * Gets the path from the user for file importing and exporting.
+	 *
+	 * @param showSave the show save
+	 * @return the path
+	 */
 	private String getPath(boolean showSave) {
 		JFileChooser fileChooser = new JFileChooser();
 		// Open the file selection dialog at the current project directory
@@ -32,6 +41,12 @@ public class FileAdapter {
 		return null;
 	}
 
+	/**
+	 * Write file.
+	 *
+	 * @param clinicalTrial the clinical trial
+	 * @return true, if successful
+	 */
 	public boolean writeFile(ClinicalTrial clinicalTrial) {
 		String path = getPath(true);
 		JsonHandler json = new JsonHandler(clinicalTrial);
@@ -42,7 +57,12 @@ public class FileAdapter {
 		}
 	}
 
-	// Parses file extension, calls json or xml reading method accordingly
+	/**
+	 *  Parses file extension, calls json or xml reading method accordingly
+	 *
+	 * @param clinicalTrial the clinical trial
+	 * @return true, if successful
+	 */
 	public boolean readFile(ClinicalTrial clinicalTrial) {
 		String path = getPath(false);
 		String fileType;
@@ -68,6 +88,12 @@ public class FileAdapter {
 			return false;
 	}
 
+	/**
+	 * Save state.
+	 *
+	 * @param clinicalTrial the clinical trial
+	 * @return true, if successful
+	 */
 	public boolean saveState(ClinicalTrial clinicalTrial) {
 		JsonHandler json = new JsonHandler(clinicalTrial);
 		if (json.saveState()) {
@@ -76,6 +102,11 @@ public class FileAdapter {
 		return false;
 	}
 
+	/**
+	 * c
+	 *
+	 * @return the clinical trial
+	 */
 	public ClinicalTrial loadState() {
 		JsonHandler json = new JsonHandler(null);
 		return json.loadState();

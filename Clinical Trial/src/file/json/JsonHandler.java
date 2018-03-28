@@ -38,6 +38,7 @@ public class JsonHandler extends Handler {
 		try (Reader fileReader = new FileReader(path)) {
 			// Create PatientReadingsJson object which creates an AarrayList
 			FileReadings readingList = gson.fromJson(fileReader, FileReadings.class);
+			addClinicToTrial(readingList.patient_readings);
 			if (addUnkownPatients) {
 				addPatientsToTrial(readingList.patient_readings, addUnknownReadings);
 			}
