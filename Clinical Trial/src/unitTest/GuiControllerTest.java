@@ -10,6 +10,7 @@ import trial.ClinicalTrial;
 import file.FileAdapter;
 
 import org.junit.Assert;
+import org.junit.Test;
 
 public class GuiControllerTest {
 	private MainMenuView mainMenuView;
@@ -20,6 +21,7 @@ public class GuiControllerTest {
 	private DisplayPatientListView displayPatientListView;
 	private ClinicView clinicView;
 	
+	 @Test
 	public void testAll() {
 		mainMenuView = new MainMenuView();
 		addPatientView = new AddPatientView();

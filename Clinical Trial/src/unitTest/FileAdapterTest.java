@@ -11,6 +11,7 @@ public class FileAdapterTest {
 		//because of the way the methods were written, will need to run this test twice and select different files with the filechooser
 		ClinicalTrial trial = new ClinicalTrial();
 		FileAdapter fa = new FileAdapter();
+		System.out.println("Please select a valid .json or .xml file to import.");
 		Assert.assertTrue(fa.readFile(trial));
 	}
 }
