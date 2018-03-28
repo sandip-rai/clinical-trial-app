@@ -3,9 +3,26 @@ import org.junit.Test;
 import org.junit.Assert;
 import trial.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClincalTrailUnitTest.
+ */
 public class ClincalTrailUnitTest {
+	
+	/**
+	 * Test all.
+	 */
+	public void testAll() {		
+		uTestForAddPatient();
+		uTestForFindPatient();
+		uTestForAddClinic();
+		uTestForFindClinic();
+	}
 
 	
+	/**
+	 * U test for add patient.
+	 */
 	@Test
 	// unit test method to test the addPatient method 
 	public void uTestForAddPatient(){
@@ -22,6 +39,9 @@ public class ClincalTrailUnitTest {
 	}
 	
 	
+	/**
+	 * U test for find patient.
+	 */
 	@Test
 	// unit test method to test the findPatient method 
 	public void uTestForFindPatient(){
@@ -46,6 +66,9 @@ public class ClincalTrailUnitTest {
 	
 	}
 	
+	/**
+	 * U test for add clinic.
+	 */
 	@Test
 	// unit test method to test the addClinic method 
 	public void uTestForAddClinic(){
@@ -69,6 +92,9 @@ public class ClincalTrailUnitTest {
 	}
 	
 	
+	/**
+	 * U test for find clinic.
+	 */
 	@Test
 	// unit test method to test the findClinic method 
 	public void uTestForFindClinic(){

@@ -7,9 +7,6 @@ import gui.views.DisplayPatientListView;
 import gui.views.MainMenuView;
 import gui.views.SystemSettingsView;
 import trial.ClinicalTrial;
-
-import org.junit.Test;
-
 import file.FileAdapter;
 
 import org.junit.Assert;
