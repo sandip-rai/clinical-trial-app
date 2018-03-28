@@ -10,15 +10,36 @@ import gui.GuiController;
 import trial.Clinic;
 import trial.Patient;
 
+/**
+ * The listener interface for receiving buttonAddReading events.
+ * The class that is interested in processing a buttonAddReading
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addButtonAddReadingListener<code> method. When
+ * the buttonAddReading event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see ButtonAddReadingEvent
+ */
 //inner class for buttonAddReading to perform actionPerformed(ActionEvent e)
 public class ButtonAddReadingListener implements ActionListener {
+	
+	/** The gui controller. */
 	GuiController guiController;
 
+	/**
+	 * Instantiates a new button add reading listener.
+	 *
+	 * @param guiController the gui controller
+	 */
 	// constructor
 	public ButtonAddReadingListener(GuiController guiController) {
 		this.guiController = guiController;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Get the new entered values

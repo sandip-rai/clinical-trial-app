@@ -13,11 +13,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+/**
+ * The Class PanelAndFrame.
+ */
 public class PanelAndFrame {
 
+	/** The Constant FRAME_ROWS. */
 	static final int FRAME_ROWS = 0;
+	
+	/** The Constant FRAME_COLS. */
 	static final int FRAME_COLS = 1;
 
+    /**
+     * Setup panels.
+     *
+     * @param size the size
+     * @return the array list
+     */
     public static ArrayList<JPanel> setupPanels(int size) {
     	ArrayList<JPanel> tempPanels = new ArrayList<JPanel>();
 		for (int i = 0; i <size; i++) {
@@ -29,7 +41,11 @@ public class PanelAndFrame {
 	}
 
 	/**
-	 * use it to setup frame
+	 * use it to setup frame.
+	 *
+	 * @param frame the frame
+	 * @param panels the panels
+	 * @param menuBar the menu bar
 	 */
 	public static void setupFrame(JFrame frame, ArrayList<JPanel> panels, MenuBar menuBar) {
 		frame.setLayout(new GridLayout(FRAME_ROWS, FRAME_COLS));
@@ -43,20 +59,42 @@ public class PanelAndFrame {
 		frame.setVisible(false);
 	}
 
+   /**
+    * Hide frame.
+    *
+    * @param e the e
+    */
    public static void hideFrame(ActionEvent e) {
 	   JFrame frame = (JFrame) SwingUtilities.getRoot((Component) e.getSource());
 	   frame.setVisible(false);
     }
    
+   /**
+    * Hide current frame and go to next frame.
+    *
+    * @param frame the frame
+    * @param view the view
+    */
    public static void hideCurrentFrameAndGoToNextFrame(JFrame frame, View view) {
 	   frame.setVisible(false);
 	   view.setVisible(true);
     }
    
-   public static void diposeFrame(JFrame frame){
+   /**
+    * Dispose frame.
+    *
+    * @param frame the frame
+    */
+   public static void disposeFrame(JFrame frame){
 	   frame.dispose();
    }
    
+   /**
+    * Supply menu bar.
+    *
+    * @param guiController the gui controller
+    * @return the menu bar
+    */
    public static MenuBar supplyMenuBar(GuiController guiController){
 	   MenuBar menuBar = new MenuBar();
 	   menuBar.addButtonMainMenuListener(new ButtonMainMenuListener(guiController));
