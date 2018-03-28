@@ -59,7 +59,7 @@ public class Patient {
 	 * @return the reading uid
 	 */
 	private String getReadingUid() {
-		String Uid = "Reading" + readingCount++;
+		String Uid = patientId + readingCount++;
 		for (Reading reading : readings) {
 			if (Uid.equals(reading.getReadingId())) {
 				return getReadingUid();
