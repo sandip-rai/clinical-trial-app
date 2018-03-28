@@ -8,6 +8,7 @@ public class ClinicUnitTest {
 	Clinic c;
 	String nm, i;
 	
+	@Test
 	public void testAll() {
 		nm = "Clinic 1";
 		i = "001";
@@ -24,7 +25,6 @@ public class ClinicUnitTest {
 		
 		Assert.assertEquals("002", c.getId());
 		Assert.assertEquals("Clinic 2", c.getName());
-		
 	}
 
 }
