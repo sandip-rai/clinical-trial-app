@@ -18,7 +18,9 @@ public class ReadingUnitTest {
 	Clinic c;
 	Reading r, r1;
 	
+	@Test
 	public void testAll() {
+		
 		rid = "001";
 		t = "Weight";
 		v = "180.1";
@@ -41,10 +43,11 @@ public class ReadingUnitTest {
 		
 		
 		bpv = "135/85";
-		t= "BP";
+		t= "Blood Pressure";
 		rid="002";
 		Date dd = new Date();
-		c = new Clinic("Clinic 1", cid);
+		cid = "002";
+		c = new Clinic("Clinic 2", cid);
 		
 		r1 = new Reading(rid, t, bpv, dd, c);
 		
@@ -52,7 +55,7 @@ public class ReadingUnitTest {
 		Assert.assertNotNull(r1);
 		
 		Assert.assertEquals("002", r1.getReadingId());
-		Assert.assertEquals("BP", r1.getType());
+		Assert.assertEquals("Blood Pressure", r1.getType());
 		Assert.assertEquals("135/85", r1.getValue());
 		Assert.assertEquals(dd, r1.getDate());
 		Assert.assertEquals(c, r1.getClinic());
