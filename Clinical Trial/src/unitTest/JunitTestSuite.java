@@ -2,6 +2,9 @@ package unitTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+/**
+ * The Class JunitTestSuite.
+ */
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({

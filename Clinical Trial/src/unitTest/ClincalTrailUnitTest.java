@@ -3,7 +3,6 @@ import org.junit.Test;
 import org.junit.Assert;
 import trial.*;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClincalTrailUnitTest.
  */

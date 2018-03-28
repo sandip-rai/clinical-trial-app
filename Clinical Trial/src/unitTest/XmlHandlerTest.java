@@ -4,7 +4,14 @@ import org.junit.Assert;
 import trial.*;
 import file.xml.*;
 
+/**
+ * The Class XmlHandlerTest.
+ */
 public class XmlHandlerTest {
+	
+	/**
+	 * Xml handler unit test.
+	 */
 	@Test
 	public void XmlHandlerUnitTest(){
 		//reading test

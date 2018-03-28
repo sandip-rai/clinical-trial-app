@@ -12,16 +12,36 @@ import file.FileAdapter;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * The Class GuiControllerTest.
+ */
 public class GuiControllerTest {
+	
+	/** The main menu view. */
 	private MainMenuView mainMenuView;
+	
+	/** The add patient view. */
 	private AddPatientView addPatientView;
+	
+	/** The system settings view. */
 	private SystemSettingsView systemSettingsView;
+	
+	/** The file adapter. */
 	private FileAdapter fileAdapter;
+	
+	/** The clinical trial. */
 	private ClinicalTrial clinicalTrial;
+	
+	/** The display patient list view. */
 	private DisplayPatientListView displayPatientListView;
+	
+	/** The clinic view. */
 	private ClinicView clinicView;
 	
-	 @Test
+	 /**
+ 	 * Test all.
+ 	 */
+ 	@Test
 	public void testAll() {
 		mainMenuView = new MainMenuView();
 		addPatientView = new AddPatientView();

@@ -4,10 +4,20 @@ import trial.Clinic;
 import org.junit.Test;
 import org.junit.Assert;
 
+/**
+ * The Class ClinicUnitTest.
+ */
 public class ClinicUnitTest {
+	
+	/** The c. */
 	Clinic c;
+	
+	/** The i. */
 	String nm, i;
 	
+	/**
+	 * Test all.
+	 */
 	@Test
 	public void testAll() {
 		nm = "Clinic 1";

@@ -8,16 +8,38 @@ import trial.Reading;
 import org.junit.Test;
 import org.junit.Assert;
 
+/**
+ * The Class ReadingUnitTest.
+ */
 public class ReadingUnitTest {
+	
+	/** The rid. */
 	String rid;
+	
+	/** The t. */
 	String t;
+	
+	/** The v. */
 	String v;
+	
+	/** The bpv. */
 	String bpv;
+	
+	/** The d. */
 	Date d;
+	
+	/** The cid. */
 	String cid;
+	
+	/** The c. */
 	Clinic c;
+	
+	/** The r 1. */
 	Reading r, r1;
 	
+	/**
+	 * Test all.
+	 */
 	@Test
 	public void testAll() {
 		

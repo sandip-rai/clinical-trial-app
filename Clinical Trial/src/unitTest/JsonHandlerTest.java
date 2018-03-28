@@ -4,7 +4,14 @@ import org.junit.Assert;
 import trial.*;
 import file.json.*;
 
+/**
+ * The Class JsonHandlerTest.
+ */
 public class JsonHandlerTest {
+	
+	/**
+	 * Json handler unit test.
+	 */
 	@Test
 	public void JsonHandlerUnitTest(){
 		//reading test

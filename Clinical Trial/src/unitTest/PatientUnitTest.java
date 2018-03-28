@@ -9,12 +9,23 @@ import java.util.Date;
 
 import org.junit.Assert;
 
+/**
+ * The Class PatientUnitTest.
+ */
 public class PatientUnitTest {
 
+	/** The patient id. */
 	String patientId = "1";
+	
+	/** The p. */
 	Patient p;
+	
+	/** The c. */
 	Clinic c = new Clinic("Clinic 1", "99");
 	
+	/**
+	 * Patient test.
+	 */
 	@Test
 	public void PatientTest() {
 		//test constructor, isActive, getPatientId, get Readings
