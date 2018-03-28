@@ -15,7 +15,7 @@ public class GuiController {
 	private ClinicView clinicView;
 
 	// Constructor
-	GuiController(MainMenuView mainMenuView, AddPatientView addPatientView, SystemSettingsView systemSettingsView,
+	public GuiController(MainMenuView mainMenuView, AddPatientView addPatientView, SystemSettingsView systemSettingsView,
 			FileAdapter fileAdapter, ClinicalTrial clinicalTrial, DisplayPatientListView displayPatientListView,
 			ClinicView clinicView) {
 		this.mainMenuView = mainMenuView;
