@@ -6,18 +6,28 @@ package trial;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * The Class Patient.
+ */
 public class Patient {
+	
+	/** The patient id. */
 	// Initialization
 	private String patientId;
+	
+	/** The active. */
 	private boolean active;
+	
+	/** The readings. */
 	private ArrayList<Reading> readings;
+	
+	/** The reading count. */
 	private int readingCount = 1;
 
 	/**
-	 * Class Constructor specifying the patient Id
-	 * 
-	 * @param patientId
-	 *            the id of the patient
+	 * Class Constructor specifying the patient Id.
+	 *
+	 * @param patientId            the id of the patient
 	 */
 	public Patient(String patientId) {
 		this.patientId = patientId;
@@ -26,8 +36,8 @@ public class Patient {
 	}
 
 	/**
-	 * Getter for patient Id
-	 * 
+	 * Getter for patient Id.
+	 *
 	 * @return patientId
 	 */
 	public String getPatientId() {
@@ -35,14 +45,19 @@ public class Patient {
 	}
 
 	/**
-	 * Getter for patient's readings
-	 * 
+	 * Getter for patient's readings.
+	 *
 	 * @return an arrayList of readings
 	 */
 	public ArrayList<Reading> getReadings() {
 		return readings;
 	}
 	
+	/**
+	 * Gets the reading uid.
+	 *
+	 * @return the reading uid
+	 */
 	private String getReadingUid() {
 		String Uid = "Reading" + readingCount++;
 		for (Reading reading : readings) {
@@ -57,15 +72,13 @@ public class Patient {
 	/**
 	 * Adds the new readings to the Patient object readings ArrayList if the patient
 	 * is active i.e on trial
-	 * 
-	 * @param readingId
-	 *            the reading Id number
-	 * @param type
-	 *            the reading type
-	 * @param value
-	 *            the reading value
-	 * @param date
-	 *            the date of reading
+	 *
+	 * @param readingId            the reading Id number
+	 * @param type            the reading type
+	 * @param value            the reading value
+	 * @param date            the date of reading
+	 * @param clinic the clinic
+	 * @return the boolean
 	 */
 	public Boolean addReading(String readingId, String type, String value, Date date, Clinic clinic) {
 		if (active) { // Only add if the patient is active i.e in clinical trial
@@ -91,8 +104,8 @@ public class Patient {
 	}
 
 	/**
-	 * Returns patient's active boolean value
-	 * 
+	 * Returns patient's active boolean value.
+	 *
 	 * @return active the boolean to show if patient is in trial
 	 */
 	public boolean isActive() {
@@ -100,17 +113,19 @@ public class Patient {
 	}
 
 	/**
-	 * Sets true if patient is in trial
-	 * 
-	 * @param active
-	 *            the boolean to show if patient is in trial
+	 * Sets true if patient is in trial.
+	 *
+	 * @param active            the boolean to show if patient is in trial
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 
 	/**
-	 * toString method to print the parameters of the Patient class in string form
+	 * toString method to print the parameters of the Patient class in string form.
+	 *
+	 * @param dateFormat the date format
+	 * @return the string
 	 */
 	public String toString(String dateFormat) {
 		String string = new String();

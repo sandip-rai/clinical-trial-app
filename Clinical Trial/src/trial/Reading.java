@@ -3,6 +3,7 @@ package trial;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
 /**
  * Reading class creates objects of readings for the Patient objects. Need to
  * add the clinic section
@@ -10,13 +11,31 @@ import java.util.Date;
 
 public class Reading {
 
+	/** The reading id. */
 	// Initializing parameters
 	private String readingId;
+	
+	/** The type. */
 	private String type;
+	
+	/** The value. */
 	private String value;
+	
+	/** The date. */
 	private Date date;
+	
+	/** The clinic. */
 	private Clinic clinic;
 
+	/**
+	 * Instantiates a new reading.
+	 *
+	 * @param readingId the reading id
+	 * @param type the type
+	 * @param value the value
+	 * @param date the date
+	 * @param clinic the clinic
+	 */
 	// Constructor for every reading value except of blood_pressure type
 	public Reading(String readingId, String type, String value, Date date, Clinic clinic) {
 		type = validType(type);
@@ -30,7 +49,14 @@ public class Reading {
 		this.clinic = clinic;
 	}
 
+	/**
+	 * Verify a valid type was input and sets it to a standard value.
+	 *
+	 * @param type the type
+	 * @return the string
+	 */
 	private String validType(String type) {
+		//Set type to all lower case
 		type = type.toLowerCase();
 		if (type.equals("weight")) {
 			type = "Weight";
@@ -41,15 +67,20 @@ public class Reading {
 		} else if (type.equals("blood_press") || type.equals("blood pressure") || type.equals("bloodpressure")) {
 			type = "Blood Pressure";
 		}
+		//If type was recognized return the type
 		if (type.equals("Weight") || type.equals("Steps") || type.equals("Temperature")
 				|| type.equalsIgnoreCase("Blood Pressure")) {
 			return type;
 		}
+		//If type was not recognized return null
 		return null;
 	}
 
 	/**
-	 * toString method to print the String representation of the Reading object
+	 * toString method to print the String representation of the Reading object.
+	 *
+	 * @param dateFormat the date format
+	 * @return the string
 	 */
 	public String toString(String dateFormat) {
 		String date;
@@ -70,8 +101,8 @@ public class Reading {
 	}
 
 	/**
-	 * Getter for readingId
-	 * 
+	 * Getter for readingId.
+	 *
 	 * @return readingId of the patient
 	 */
 	public String getReadingId() {
@@ -79,8 +110,8 @@ public class Reading {
 	}
 
 	/**
-	 * Getter for type
-	 * 
+	 * Getter for type.
+	 *
 	 * @return type of reading of the patient
 	 */
 	public String getType() {
@@ -88,8 +119,8 @@ public class Reading {
 	}
 
 	/**
-	 * Getter for value of every type
-	 * 
+	 * Getter for value of every type.
+	 *
 	 * @return value of the reading of the patient
 	 */
 	public String getValue() {
@@ -97,14 +128,19 @@ public class Reading {
 	}
 
 	/**
-	 * Getter for date
-	 * 
+	 * Getter for date.
+	 *
 	 * @return date of the reading of the patient
 	 */
 	public Date getDate() {
 		return date;
 	}
 
+	/**
+	 * Gets the clinic.
+	 *
+	 * @return the clinic
+	 */
 	public Clinic getClinic() {
 		if (clinic == null) {
 			return new Clinic("Unknown", "Unkown");

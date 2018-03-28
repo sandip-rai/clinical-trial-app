@@ -1,10 +1,8 @@
 package gui.views;
 
 import trial.Clinic;
-import trial.ClinicRenderer;
 import trial.ClinicalTrial;
 import trial.Patient;
-import trial.PatientRenderer;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;

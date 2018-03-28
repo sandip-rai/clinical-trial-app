@@ -5,17 +5,27 @@ package trial;
  */
 import java.util.ArrayList;
 
+/**
+ * The Class ClinicalTrial.
+ */
 public class ClinicalTrial {
 
+	/** The all patients. */
 	// Creating an arrayList to hold the Patients in the trial
 	private ArrayList<Patient> allPatients = new ArrayList<Patient>();
+	
+	/** The all clinics. */
 	private ArrayList<Clinic> allClinics = new ArrayList<Clinic>();// array to hold every created clinic object
+	
+	/** The settings. */
 	private SystemSettings settings = new SystemSettings();
+	
+	/** The clinic count. */
 	private int clinicCount = 1;
 
 	/**
-	 * ClinicalTrial Getter for the allPatients arrayList
-	 * 
+	 * ClinicalTrial Getter for the allPatients arrayList.
+	 *
 	 * @return allPatients the arrayList holding the Patients in the trial
 	 */
 
@@ -24,10 +34,9 @@ public class ClinicalTrial {
 	}
 
 	/**
-	 * findPatient finds if a patient is currently in a trial or not
-	 * 
-	 * @param patientId
-	 *            the Id of the patient
+	 * findPatient finds if a patient is currently in a trial or not.
+	 *
+	 * @param patientId            the Id of the patient
 	 * @return patient the patient if it exists in the allPatients arrayList
 	 */
 	public Patient findPatient(String patientId) {
@@ -59,10 +68,9 @@ public class ClinicalTrial {
 	}
 
 	/**
-	 * finds if a clinic exists in the array list of clinics
-	 * 
-	 * @param Clinicid
-	 *            the id number for the clinic
+	 * finds if a clinic exists in the array list of clinics.
+	 *
+	 * @param id the id
 	 * @return clinic object if it exists in the allPatients arrayList else null is
 	 *         returned
 	 */
@@ -80,6 +88,11 @@ public class ClinicalTrial {
 		return null;
 	}
 
+	/**
+	 * Generate unique id.
+	 *
+	 * @return the string
+	 */
 	public String generateUniqueId() {
 		String id = "Clinic" + clinicCount++;
 		if (idIsUnique(id)) {
@@ -88,6 +101,12 @@ public class ClinicalTrial {
 			return generateUniqueId();
 	}
 
+	/**
+	 * Id is unique.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 */
 	public boolean idIsUnique(String id) {
 		if (id == null) {
 			return false;
@@ -102,28 +121,32 @@ public class ClinicalTrial {
 	}
 
 	/**
-	 * method that adds a new clinic to the list of clinics
-	 * 
-	 * @param clinicName
-	 * @param clinicid
+	 * method that adds a new clinic to the list of clinics.
+	 *
+	 * @param name the name
+	 * @param id the id
 	 * @return true if the clinic is added or return false if the clinic already
 	 *         exists in the list
 	 */
 	public Clinic addClinic(String name, String id) {	
 		Clinic clinic;
+		//Check name and id for null, an empty string or unknown
 		name = getValidString(name);
 		id = getValidString(id);
 		boolean hasName = !(name == null);
 		boolean hasId = !(name == null);
 		boolean InTrial = !(findClinic(id) == null);
+		//If there is no name and no ID add a empty clinic but do not add it to the trial
 		if (!hasName && !hasId){
 			return clinic = new Clinic(null, null);
 		} else if (hasName && !hasId) {
+			//If there is a name but no id generate a unique ID
 			id = generateUniqueId();
 			clinic = new Clinic(name, id);
 			allClinics.add(clinic);
 			return clinic;
 		}	else if (!InTrial) {
+			//If the clinic is not already in the trial add it to the trial 
 			clinic = new Clinic(name, id);
 			allClinics.add(clinic);
 			return clinic;
@@ -133,7 +156,14 @@ public class ClinicalTrial {
 		}
 	}
 	
+	/**
+	 * Gets the valid string.
+	 *
+	 * @param string the string
+	 * @return the valid string
+	 */
 	private String getValidString(String string) {
+		//Check string for null, an empty string or unknown
 		boolean valid = !(string == null || string.equals("") || string.toLowerCase().equals("unknown"));
 		if (valid) {
 			return string;
@@ -141,10 +171,20 @@ public class ClinicalTrial {
 		return null;
 	}
 
+	/**
+	 * Gets the settings.
+	 *
+	 * @return the settings
+	 */
 	public SystemSettings getSettings() {
 		return settings;
 	}
 	
+	/**
+	 * Gets the all clinics.
+	 *
+	 * @return the all clinics
+	 */
 	public ArrayList<Clinic> getAllClinics(){
 		return allClinics;
 	}
