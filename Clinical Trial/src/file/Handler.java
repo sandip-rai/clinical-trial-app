@@ -67,6 +67,13 @@ public class Handler {
 			this.clinic_name = clinic_name;
 		}
 	}
+	
+	/*
+	 * Getter for clinical trial, for testing
+	 */
+	public ClinicalTrial getClinicalTrial() {
+		return clinicalTrial;
+	}
 
 	/**
 	 * Used by child classes to temporarily store Clinic and Reading data.
