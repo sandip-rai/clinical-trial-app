@@ -1,0 +1,40 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.administrator.clinicaltrial.MainActivity">
+    <item
+        android:id="@+id/action_patientInfo"
+        android:orderInCategory="100"
+        android:title="Patient Information"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_importReadings"
+        android:orderInCategory="100"
+        android:title="Import Readings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_exportReadings"
+        android:orderInCategory="100"
+        android:title="Export Readings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_systemSettings"
+        android:orderInCategory="100"
+        android:title="System Settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_save"
+        android:orderInCategory="100"
+        android:title="Save"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="100"
+        android:title="Exit"
+        app:showAsAction="never" />
+</menu>
