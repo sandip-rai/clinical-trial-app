@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Clinical Trial</string>
+
+    <string-array name="reading_type_array">
+        <item> Weight</item>
+        <item>Steps</item>
+        <item>Temperature</item>
+        <item>Blood Pressure</item>
+    </string-array>
+
+    <string-array name="dummy_patientId_array">
+        <item>1a</item>
+        <item>2b</item>
+        <item>3c</item>
+        <item>4b</item>
+    </string-array>
+</resources>
