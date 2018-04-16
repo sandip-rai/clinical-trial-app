@@ -14,4 +14,5 @@
         <item>3c</item>
         <item>4b</item>
     </string-array>
+    <string name="title_activity_system_settings">SystemSettingsActivity</string>
 </resources>

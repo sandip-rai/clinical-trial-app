@@ -39,7 +39,12 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent); //Start the intent
     }
 
-
+    public void onClickSystemSettings(View view){
+        //Create the intent
+        Intent intent = new Intent(MainMenuActivity.this,
+                SystemSettingsActivity.class);
+        startActivity(intent); //Start the intent
+    }
 
 
 
