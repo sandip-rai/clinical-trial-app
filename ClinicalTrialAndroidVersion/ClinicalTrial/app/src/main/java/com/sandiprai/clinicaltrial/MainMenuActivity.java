@@ -39,6 +39,18 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent); //Start the intent
     }
 
+    /**
+     * Method to run when buttonPatientList is clicked
+     * Creates and starts an intent to move from MainMenuActivity to PatientListActivity
+     * @param view
+     */
+    public void onClickPatientList(View view){
+        //Create the intent
+        Intent intent = new Intent(MainMenuActivity.this,
+                PatientListActivity.class);
+        startActivity(intent); //Start teh intent
+    }
+
     public void onClickSystemSettings(View view){
         //Create the intent
         Intent intent = new Intent(MainMenuActivity.this,

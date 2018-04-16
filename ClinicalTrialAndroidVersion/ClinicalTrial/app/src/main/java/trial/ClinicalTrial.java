@@ -188,4 +188,5 @@ public class ClinicalTrial {
 	public ArrayList<Clinic> getAllClinics(){
 		return allClinics;
 	}
+
 }

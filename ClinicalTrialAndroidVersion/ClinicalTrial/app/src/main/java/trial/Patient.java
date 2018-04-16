@@ -135,4 +135,11 @@ public class Patient {
 		return string;
 	}
 
+	/**
+	 * Shows just the patientId; used for ArrayAdapter to show patientId in Spinner
+	 * @return the patientId of the Patient object
+	 */
+	public String toString(){
+		return patientId;
+	}
 }

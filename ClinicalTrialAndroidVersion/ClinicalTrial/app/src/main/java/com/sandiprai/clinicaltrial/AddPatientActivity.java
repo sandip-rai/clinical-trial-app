@@ -1,6 +1,7 @@
 package com.sandiprai.clinicaltrial;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.Toast;
 import trial.ClinicalTrial;
 
 public class AddPatientActivity extends AppCompatActivity {
-    trial.ClinicalTrial clinicalTrial = new ClinicalTrial();
+    public static trial.ClinicalTrial clinicalTrial = new ClinicalTrial();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,19 @@ public class AddPatientActivity extends AppCompatActivity {
 
     }
 
+    public void onClickAddReadingsinAddPatient(View view){
+        Intent intent = new Intent(AddPatientActivity.this, AddPatientInfoActivity.class);
+        startActivity(intent);
+    }
+
+    /**Dummy method TO-DELETE
+     *
+     * @param view
+     */
+    public void onClickShowPatientList(View view){
+        Intent intent = new Intent(AddPatientActivity.this, AddPatientInfoActivity.class);
+
+    }
     /**
      * Creates toast messages
      * @param message the message in CharSequence to be displayed
@@ -53,5 +67,9 @@ public class AddPatientActivity extends AppCompatActivity {
         //Create the toast and show it
         Toast toast = Toast.makeText(context,text,duration);
         toast.show();
+    }
+
+    public ClinicalTrial getClinicalTrial() {
+        return clinicalTrial;
     }
 }
