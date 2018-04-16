@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddPatientInfoActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="30dp"
+        android:text="Add a new reading:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <GridLayout
+        android:id="@+id/gridLayoutReadings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:paddingLeft="20dp"
+            android:text="Patient Id"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <Spinner
+            android:id="@+id/spinnerReadingPatientId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_weight="1"
+            android:dropDownWidth="match_parent"
+            android:textAlignment="center" />
+
+
+
+        <TextView
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Reading ID"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <EditText
+            android:layout_row="1"
+            android:layout_column="1"
+            android:id="@+id/editTextReadingId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Enter in number format" />
+
+
+
+        <TextView
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <EditText
+            android:layout_row="2"
+            android:layout_column="1"
+            android:id="@+id/editTextDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:hint="Enter in date format"/>
+
+
+
+        <TextView
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="20dp"
+            android:text="Type"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <Spinner
+            android:layout_row="3"
+            android:layout_column="1"
+            android:id="@+id/spinnerReadingType"
+            android:layout_width="233dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:dropDownWidth="match_parent"
+            android:entries="@array/reading_type_array"
+            android:textAlignment="center" />
+
+
+        <TextView
+            android:layout_row="4"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Value"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <EditText
+            android:layout_row="4"
+            android:layout_column="1"
+            android:id="@+id/editTextValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="Enter in number format"/>
+
+
+        <TextView
+            android:layout_row="5"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Clinic"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <EditText
+            android:layout_row="5"
+            android:layout_column="1"
+            android:id="@+id/editTextClinic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Enter in string format"/>
+
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/buttonAddReadings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif"
+        android:text="Add Readings"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textSize="18sp" />
+
+
+</LinearLayout>
