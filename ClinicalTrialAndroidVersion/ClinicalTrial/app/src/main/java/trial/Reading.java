@@ -147,4 +147,18 @@ public class Reading {
 		}
 		return clinic;
 	}
+
+	/**
+	 * toString method to print the String representation of the Reading object.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		return	"readingId='" + readingId + '\'' +
+				", type='" + type + '\'' +
+				", value='" + value + '\'' +
+				", date=" + date +
+				", clinic=" + clinic;
+	}
 }

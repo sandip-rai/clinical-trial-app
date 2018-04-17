@@ -46,12 +46,13 @@ public class AddPatientActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**Dummy method TO-DELETE
+    /**
      *
      * @param view
      */
     public void onClickShowPatientList(View view){
-        Intent intent = new Intent(AddPatientActivity.this, AddPatientInfoActivity.class);
+        Intent intent = new Intent(AddPatientActivity.this, PatientListActivity.class);
+        startActivity(intent);
 
     }
     /**
