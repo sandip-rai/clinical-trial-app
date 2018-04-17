@@ -76,14 +76,15 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <EditText
-            android:layout_row="2"
-            android:layout_column="1"
             android:id="@+id/editTextDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="2"
             android:ems="10"
+            android:hint="Enter in date format"
             android:inputType="date"
-            android:hint="Enter in date format"/>
+            android:text="ddMMMyyyy HH:mm" />
 
 
 
@@ -159,6 +160,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:fontFamily="sans-serif"
+        android:onClick="onClickAddReadingsToSelectedPatient"
         android:text="Add Readings"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textSize="18sp" />
