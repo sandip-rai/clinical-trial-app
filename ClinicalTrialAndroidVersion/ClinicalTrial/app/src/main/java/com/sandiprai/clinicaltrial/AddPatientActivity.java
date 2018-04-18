@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import trial.ClinicalTrial;
+import trial.Patient;
+import trial.PatientState;
+import trial.PatientStateActive;
 
 public class AddPatientActivity extends AppCompatActivity {
     public static trial.ClinicalTrial clinicalTrial = new ClinicalTrial();
@@ -32,7 +35,8 @@ public class AddPatientActivity extends AppCompatActivity {
         if (patientId == null || patientId.equals("")) {// make sure the user has entered a  patient ID
             makeToast("Please enter a patient ID");
         } else if (clinicalTrial.addPatient(patientId)) {
-            clinicalTrial.findPatient(patientId).setActive(true);
+            Patient p = clinicalTrial.findPatient(patientId);
+            p.setState(new PatientStateActive(p));
             makeToast("Added! Ready for next patient!");
             editTextPatientId.setText("");
         } else {
@@ -46,13 +50,12 @@ public class AddPatientActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**
+    /**Dummy method TO-DELETE
      *
      * @param view
      */
     public void onClickShowPatientList(View view){
-        Intent intent = new Intent(AddPatientActivity.this, PatientListActivity.class);
-        startActivity(intent);
+        Intent intent = new Intent(AddPatientActivity.this, AddPatientInfoActivity.class);
 
     }
     /**
