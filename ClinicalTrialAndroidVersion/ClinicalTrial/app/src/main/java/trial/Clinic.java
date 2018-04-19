@@ -75,7 +75,7 @@ public class Clinic {
 	 */
 	@Override
 	public String toString() {
-		return "Clinic Name: " + getName() + "\nClinic ID: " + getId();
+		return getName() + ", " + getId();
 	}
 	
 	

@@ -20,7 +20,8 @@
         <activity android:name=".AddPatientInfoActivity" />
         <activity android:name=".SystemSettingsActivity" />
         <activity android:name=".PatientListActivity" />
-        <activity android:name=".PatientReadingsActivity"></activity>
+        <activity android:name=".PatientReadingsActivity" />
+        <activity android:name=".AddClinicActivity"></activity>
     </application>
 
 </manifest>

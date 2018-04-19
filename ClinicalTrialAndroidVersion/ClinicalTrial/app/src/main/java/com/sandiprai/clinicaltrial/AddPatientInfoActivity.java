@@ -1,6 +1,7 @@
 package com.sandiprai.clinicaltrial;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,13 +24,23 @@ public class AddPatientInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_patient_info);
 
-        //Grab the spinner
+        //Grab the spinner for PatientList
         Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerReadingPatientId);
         ArrayAdapter<Patient> adapter= new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,
                 AddPatientActivity.clinicalTrial.getAllPatients());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         patientListSpinner.setAdapter(adapter);
+
+
+        //Grab the spinner for ClinicList
+        Spinner clinicListSpinner = (Spinner) findViewById(R.id.spinnerClinicId);
+        ArrayAdapter<Clinic> clinicListAdapter= new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item,
+                AddPatientActivity.clinicalTrial.getAllClinics());
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        clinicListSpinner.setAdapter(clinicListAdapter);
+
     }
 
     public void onClickAddReadingsToSelectedPatient(View view){
@@ -51,8 +62,8 @@ public class AddPatientInfoActivity extends AppCompatActivity {
         EditText editTextValue = (EditText) findViewById(R.id.editTextValue);
         String value = editTextValue.getText().toString();
 
-        EditText editTextClinic = (EditText) findViewById(R.id.editTextClinic);
-        String clinicId = editTextClinic.getText().toString();
+        Spinner spinnerClinicId = (Spinner) findViewById(R.id.spinnerClinicId);
+        String clinicId = spinnerClinicId.getSelectedItem().toString();
         Clinic clinic = AddPatientActivity.clinicalTrial.findClinic(clinicId);
 
         String dateFormat =  AddPatientActivity.clinicalTrial.getSettings().getDateFormat();
@@ -72,12 +83,16 @@ public class AddPatientInfoActivity extends AppCompatActivity {
                 editTextReadingId.setText("");
                 editTextDate.setText("");
                 editTextValue.setText("");
-                editTextClinic.setText("");
             } else {
                 makeToast(  "Invalid reading."); //Prompt if patient is not active in trial
             }
         }
 
+    }
+
+    public void onClickAddClinicinAddPatientInfo(View view){
+        Intent intent = new Intent(AddPatientInfoActivity.this,AddClinicActivity.class);
+        startActivity(intent);
     }
 
     public void makeToast(CharSequence message){
