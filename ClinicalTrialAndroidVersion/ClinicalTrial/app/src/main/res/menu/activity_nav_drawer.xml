@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Add">
+        <menu>
+            <item
+                android:id="@+id/new_patient"
+                android:title="New Patient" />
+
+            <item
+                android:id="@+id/new_reading"
+                android:title="New Reading" />
+
+            <item
+                android:id="@+id/new_clinic"
+                android:title="New Clinic" />
+        </menu>
+    </item>
+
+    <item android:title="Display">
+        <menu>
+            <item
+                android:id="@+id/patient_list"
+                android:title="Patient List" />
+            <item
+                android:id="@+id/patient_readings"
+                android:title="Patient Readings" />
+            <item
+                android:id="@+id/clinic_list"
+                android:title="Clinic List" />
+        </menu>
+    </item>
+    <item android:title="File">
+        <menu>
+            <item
+                android:id="@+id/import_data"
+
+                android:title="Import Data" />
+            <item
+                android:id="@+id/export_data"
+
+                android:title="Export Data" />
+
+        </menu>
+    </item>
+
+</menu>

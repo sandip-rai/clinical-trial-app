@@ -2,8 +2,6 @@
 
 # program info
 
-IDE used: Eclipse
-
 Design and build a program for a hospital conducting a clinical trial at a number of remote sites.
 
 Nurses will use the software to record data that patients have entered into their journals.  It
