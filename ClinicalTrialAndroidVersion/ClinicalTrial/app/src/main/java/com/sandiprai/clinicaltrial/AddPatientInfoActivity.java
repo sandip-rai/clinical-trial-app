@@ -83,7 +83,11 @@ public class AddPatientInfoActivity extends AppCompatActivity {
                 editTextReadingId.setText("");
                 editTextDate.setText("");
                 editTextValue.setText("");
-            } else {
+            }
+            else if (!patient.getState().toString().equals("Active")){
+                makeToast("Patient is not currently active.");
+            }
+            else {
                 makeToast(  "Invalid reading."); //Prompt if patient is not active in trial
             }
         }

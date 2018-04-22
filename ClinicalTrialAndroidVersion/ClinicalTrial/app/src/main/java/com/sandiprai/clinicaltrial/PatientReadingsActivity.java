@@ -26,11 +26,13 @@ public class PatientReadingsActivity extends AppCompatActivity {
         TextView textViewPatientId = (TextView) findViewById(R.id.textViewPatientIdinPatientReadings);
         textViewPatientId.setText(selectedPatientId);
 
-        //Create an AdapterArray to hold the Readings ArrayList of the Patient
-        ArrayAdapter<Reading> listAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,patient.getReadings());
-        //Get the listView and set the adapter
-        ListView listReadings = (ListView) findViewById(R.id.list_patient_readings);
-        listReadings.setAdapter(listAdapter);
+        if (patient.getState().getReadings()!= null) {
+            //Create an AdapterArray to hold the Readings ArrayList of the Patient
+            ArrayAdapter<Reading> listAdapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_1, patient.getState().getReadings());
+            //Get the listView and set the adapter
+            ListView listReadings = (ListView) findViewById(R.id.list_patient_readings);
+            listReadings.setAdapter(listAdapter);
+        }
     }
 }
