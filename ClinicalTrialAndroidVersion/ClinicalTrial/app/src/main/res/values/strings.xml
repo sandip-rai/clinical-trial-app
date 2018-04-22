@@ -16,6 +16,13 @@
     </string-array>
     <string name="title_activity_system_settings">SystemSettingsActivity</string>
 
+    <string-array name = "statusList">
+        <item>Active</item>
+        <item>Withdrawn</item>
+        <item>Failed</item>
+        <item>Completed</item>
+    </string-array>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Clinical Trial</string>
