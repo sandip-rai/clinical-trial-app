@@ -23,12 +23,15 @@ public class AddClinicActivity extends AppCompatActivity {
     public void onClickAddToClinicList(View view){
         //Grab the editText field where the user enters the patientId
         EditText editTextClinicId = (EditText) findViewById(R.id.editTextClinicIdinAddClinic);
-        String clinicId = editTextClinicId.getText().toString(); //Get the patientId
+        EditText editTextClinicName = (EditText) findViewById(R.id.editTextClinicNameinAddClinic);
+        String clinicId = editTextClinicId.getText().toString(); //Get the clinicId
+        String clinicName = editTextClinicName.getText().toString(); //Get the clinicName
         //Try to add the clinic, if added returns the clinic,else returns null
-        Clinic tempClinic = clinicalTrial.addClinic(clinicId,null);
+        Clinic tempClinic = clinicalTrial.addClinic(clinicName,clinicId);
 
-        if (clinicId == null || clinicId.equals("")) {// make sure the user has entered a  patient ID
-            makeToast("Please enter a clinic ID");
+        // make sure the user has entered in the fields
+        if ((clinicName == null || clinicName.equals(""))) {
+            makeToast("Please fill the Clinic Name");
         } else if ( tempClinic != null) {
             //clinicalTrial.findPatient(patientId).setActive(true);
             makeToast("Successfully Added!");
