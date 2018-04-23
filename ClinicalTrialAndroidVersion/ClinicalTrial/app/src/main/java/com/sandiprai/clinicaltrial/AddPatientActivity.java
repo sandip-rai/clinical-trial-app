@@ -44,10 +44,12 @@ public class AddPatientActivity extends AppCompatActivity {
 
     }
 
+    /**
     public void onClickAddReadingsinAddPatient(View view){
         Intent intent = new Intent(AddPatientActivity.this, AddPatientInfoActivity.class);
         startActivity(intent);
     }
+    **/
 
     /**
      *

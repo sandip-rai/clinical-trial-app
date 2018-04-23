@@ -42,10 +42,10 @@ public class AddClinicActivity extends AppCompatActivity {
 
     }
 
-    public void onClickBackinAddClinic(View view){
-        Intent intent = new Intent(AddClinicActivity.this, AddPatientInfoActivity.class);
+   public void onClickPatientListinAddClinic(View view){
+        Intent intent = new Intent(AddClinicActivity.this, PatientListActivity.class);
         startActivity(intent);
-    }
+   }
 
     /**
      * Creates toast messages
