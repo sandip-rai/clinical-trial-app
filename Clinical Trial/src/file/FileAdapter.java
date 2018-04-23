@@ -85,10 +85,15 @@ public class FileAdapter {
 		} else if (fileType.equals(".xml")) {
 			//if the file was XML use the XmlHandler
 			XmlHandler xml = new XmlHandler(clinicalTrial);
-			return xml.readXMLFile(path);
+			try {
+				return xml.readXMLFile(path);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else
 			//if the file type was not recognized return false
 			return false;
+		return false;
 	}
 
 	/**

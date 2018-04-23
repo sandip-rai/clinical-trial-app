@@ -1,10 +1,9 @@
-package file.json;
+package com.file.json;
 import java.io.*;
 import java.util.*;
-import com.google.gson.*;
-import file.Handler;
+import com.file.Handler;
 import trial.*;
-
+import com.google.gson.*;
 
 // TODO: Auto-generated Javadoc
 /**

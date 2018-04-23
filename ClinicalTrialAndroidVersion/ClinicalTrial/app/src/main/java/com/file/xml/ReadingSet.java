@@ -1,20 +1,23 @@
-package file.xml;
+package com.file.xml;
 import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.simpleframework.xml.Root;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 
 
 /**
  * The Class ReadingSet.
  * Helper class to read XML files
  */
-@XmlRootElement(name="ReadingSet")
+@Root
 class ReadingSet {
 		
 		/** The readings. */
+		@ElementList(name="Reading", inline=true)
 		private ArrayList<Reading> readings;
 		
 		/** The clinic. */
+		@Element(required=false, name = "Clinic")
 		private Clinic clinic;
 		
 		/**
@@ -22,7 +25,6 @@ class ReadingSet {
 		 *
 		 * @return the clinic
 		 */
-		@XmlElement( name = "Clinic" )
 		protected Clinic getClinic() { 
 		    return clinic;  
 		}  
@@ -42,7 +44,6 @@ class ReadingSet {
 		 *
 		 * @return the readings
 		 */
-		@XmlElement(name = "Reading")
 		protected ArrayList<Reading> getReadings(){
 			return readings;
 		}

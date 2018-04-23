@@ -1,19 +1,19 @@
 package file.xml;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
-
+import org.simpleframework.xml.Text;
+import org.simpleframework.xml.Attribute;
 
 /**
  * The Class Clinic.
  * Helper class to read XML files
  */
 class Clinic {
-	
 	/** The name. */
+	@Text
 	private String name;
 	
 	/** The id. */
+	@Attribute(required=false)
 	private String id;
 	
 	/**
@@ -21,7 +21,6 @@ class Clinic {
 	 *
 	 * @return the name
 	 */
-	@XmlValue
 	public String getName() {
 		return name;
 	}
@@ -40,7 +39,6 @@ class Clinic {
 	 *
 	 * @return the id
 	 */
-	@XmlAttribute(name = "id")
 	public String getId() {
 		return id;
 	}
