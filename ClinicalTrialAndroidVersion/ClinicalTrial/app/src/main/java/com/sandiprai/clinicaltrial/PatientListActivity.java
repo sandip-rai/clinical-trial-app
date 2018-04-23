@@ -16,6 +16,8 @@ import trial.PatientStateCompleted;
 import trial.PatientStateFailed;
 import trial.PatientStateWithdrawn;
 
+import static com.sandiprai.clinicaltrial.AddPatientActivity.clinicalTrial;
+
 public class PatientListActivity extends AppCompatActivity {
 
     @Override
@@ -27,7 +29,7 @@ public class PatientListActivity extends AppCompatActivity {
         final Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerPatientIdinPatientList);
         ArrayAdapter<Patient> adapter= new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,
-                AddPatientActivity.clinicalTrial.getAllPatients());
+                clinicalTrial.getAllPatients());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         patientListSpinner.setAdapter(adapter);
 
@@ -42,12 +44,13 @@ public class PatientListActivity extends AppCompatActivity {
         patientListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Patient p = (Patient) patientListSpinner.getSelectedItem();
-                String state = p.getState().toString();
-                Log.i("DEBUGGING",state);
-                if(state != null){
-                    int spinnerPosition = adapterStatus.getPosition(state);
-                    patientStatusSpinner.setSelection(spinnerPosition);
+                if (clinicalTrial.getAllPatients().size()>0) {
+                    Patient p = (Patient) patientListSpinner.getSelectedItem();
+                    String state = p.getState().toString();
+                    if (state != null) {
+                        int spinnerPosition = adapterStatus.getPosition(state);
+                        patientStatusSpinner.setSelection(spinnerPosition);
+                    }
                 }
             }
             @Override
@@ -56,35 +59,28 @@ public class PatientListActivity extends AppCompatActivity {
         })
         ;
 
-
         //Update patient state on status spinner selection
         patientStatusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Patient p = (Patient) patientListSpinner.getSelectedItem();
+                if (clinicalTrial.getAllPatients().size()>0) {
+                    Patient p = (Patient) patientListSpinner.getSelectedItem();
 
-                switch ((String)patientStatusSpinner.getSelectedItem()){
-                    case "Active":
-                        p.setState(new PatientStateActive(p));
-                        break;
-                    case "Withdrawn":
-                        p.setState(new PatientStateWithdrawn(p));
-                        break;
-                    case "Failed":
-                        p.setState(new PatientStateFailed(p));
-                        break;
-                    case "Completed":
-                        p.setState(new PatientStateCompleted(p));
-                        break;
+                    switch ((String) patientStatusSpinner.getSelectedItem()) {
+                        case "Active":
+                            p.setState(new PatientStateActive(p));
+                            break;
+                        case "Withdrawn":
+                            p.setState(new PatientStateWithdrawn(p));
+                            break;
+                        case "Failed":
+                            p.setState(new PatientStateFailed(p));
+                            break;
+                        case "Completed":
+                            p.setState(new PatientStateCompleted(p));
+                            break;
+                    }
                 }
-
-                /*
-                Log.i("DEBUGGING", p.getState().toString() + "-"+patientStatusSpinner.getSelectedItem());
-                if(patientStatusSpinner.getSelectedItem().equals("Withdrawn")) {
-                    p.setState(new PatientStateWithdrawn(p));
-                }
-                Log.i("DEBUGGING", p.getState().toString() + "-"+patientStatusSpinner.getSelectedItem());
-                */
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
