@@ -1,4 +1,4 @@
-package file.xml;
+package com.file.xml;
 import java.util.ArrayList;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Element;

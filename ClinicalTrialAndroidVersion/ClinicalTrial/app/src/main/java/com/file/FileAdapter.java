@@ -1,10 +1,7 @@
-package file;
+package com.file;
 
 import java.io.File;
-
-import javax.swing.JFileChooser;
-
-import file.json.JsonHandler;
+import com.file.json.JsonHandler;
 import file.xml.XmlHandler;
 import trial.ClinicalTrial;
 
@@ -20,25 +17,8 @@ public class FileAdapter {
 	 * @return the path
 	 */
 	private String getPath(boolean showSave) {
-		JFileChooser fileChooser = new JFileChooser();
-		// Open the file selection dialog at the current project directory
-		fileChooser.setCurrentDirectory(new File("."));
-		if (showSave) {
-			fileChooser.showSaveDialog(null);
-			File selectedFile = fileChooser.getSelectedFile(); // Get the file
-			if (selectedFile != null) {
-				String filePath = selectedFile.getAbsolutePath(); // Get the path
-				return filePath;
-			}
-		} else {
-			int result = fileChooser.showOpenDialog(null);
-			if (result == JFileChooser.APPROVE_OPTION) {
-				File selectedFile = fileChooser.getSelectedFile(); // Get the file
-				String filePath = selectedFile.getAbsolutePath(); // Get the path
-				return filePath;
-			}
-		}
-		return null;
+		String path = "./";
+		return path;
 	}
 
 	/**
@@ -85,15 +65,10 @@ public class FileAdapter {
 		} else if (fileType.equals(".xml")) {
 			//if the file was XML use the XmlHandler
 			XmlHandler xml = new XmlHandler(clinicalTrial);
-			try {
-				return xml.readXMLFile(path);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			return xml.readXMLFile(path);
 		} else
 			//if the file type was not recognized return false
 			return false;
-		return false;
 	}
 
 	/**

@@ -1,9 +1,8 @@
-package file.xml;
+package com.file.xml;
 
 import java.io.File;
 import java.util.ArrayList;
-import javax.xml.bind.*;
-import file.Handler;
+import com.file.Handler;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -28,7 +27,7 @@ public class XmlHandler extends Handler {
 	/**
 	 * Read XML file.
 	 *
-	 * @param file
+	 * @param path
 	 *            the file
 	 * @return true, if successful
 	 * @throws Exception 
@@ -37,10 +36,8 @@ public class XmlHandler extends Handler {
 		// Decide how to handle unknown patients and readings based on system settings
 		boolean addPatients = clinicalTrial.getSettings().xmlAddUnknownPatients();
 		boolean addReadings = clinicalTrial.getSettings().xmlAddUnknownReadings();
-		try {
 			File file = new File(path);
 			Serializer serializer = new Persister();
-
 			ReadingSet readingSet = serializer.read(ReadingSet.class, file);
 			// Convert from a reading set to an ArrayList of FileReadings so that the data
 			// can be processed
@@ -55,10 +52,7 @@ public class XmlHandler extends Handler {
 			// Add readings from input file to Patient's readings ArrayList
 			AddReadingToPatient(fileReadings);
 			return true;
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-		return false;
+
 	}
 
 	/**
