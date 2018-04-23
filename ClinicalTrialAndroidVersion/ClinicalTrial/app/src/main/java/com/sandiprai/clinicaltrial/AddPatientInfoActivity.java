@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -18,12 +19,20 @@ import trial.Clinic;
 import trial.Patient;
 
 public class AddPatientInfoActivity extends AppCompatActivity {
+    //Used for the intent putExtra()
+    public static final String PATIENTID = "patientId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_patient_info);
 
+        //Get the Patient object using the PATIENTID and fill it to patientIdTextView
+        String selectedPatientId = (String)getIntent().getExtras().get(PATIENTID);
+        TextView patientIdText = (TextView) findViewById(R.id.textViewPatientId);
+        patientIdText.setText(selectedPatientId);
+
+        /**
         //Grab the spinner for PatientList
         Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerReadingPatientId);
         ArrayAdapter<Patient> adapter= new ArrayAdapter<>(this,
@@ -31,7 +40,7 @@ public class AddPatientInfoActivity extends AppCompatActivity {
                 AddPatientActivity.clinicalTrial.getAllPatients());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         patientListSpinner.setAdapter(adapter);
-
+        **/
 
         //Grab the spinner for ClinicList
         Spinner clinicListSpinner = (Spinner) findViewById(R.id.spinnerClinicId);
@@ -45,8 +54,12 @@ public class AddPatientInfoActivity extends AppCompatActivity {
 
     public void onClickAddReadingsToSelectedPatient(View view){
         //get selected patients id from spinner and pass it to clinicalTrial to find that patient
-        Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerReadingPatientId);
-        String patientId = patientListSpinner.getSelectedItem().toString();
+        //Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerReadingPatientId);
+        //String patientId = patientListSpinner.getSelectedItem().toString();
+
+        //Get the patientId from the textView which is passed from PatientListActivity
+        TextView patientIdText = (TextView) findViewById(R.id.textViewPatientId);
+        String patientId = patientIdText.getText().toString();
         Patient patient = AddPatientActivity.clinicalTrial.findPatient(patientId);
 
         //get selected reading type from spinner
