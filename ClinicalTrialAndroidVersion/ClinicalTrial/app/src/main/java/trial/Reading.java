@@ -155,10 +155,13 @@ public class Reading {
 	 */
 	@Override
 	public String toString() {
-		return	"readingId='" + readingId + '\'' +
-				", type='" + type + '\'' +
-				", value='" + value + '\'' +
-				", date=" + date +
-				", clinic=" + clinic;
+		String clinicName = this.clinic.getName();
+		String clinicId = this.clinic.getId();
+		return	"ReadingId= '" + readingId + '\'' +
+				", Type= '" + type + '\'' +
+				", Value= '" + value + '\'' +
+				", Date= " + date +
+				", ClinicName= " + clinicName +
+				", ClinicId= " + clinicId;
 	}
 }

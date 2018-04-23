@@ -75,8 +75,9 @@ public class Clinic {
 	 */
 	@Override
 	public String toString() {
-		return getName() + ", " + getId();
+		return  getId() + ": " + getName();
 	}
+
 	
 	
 	
