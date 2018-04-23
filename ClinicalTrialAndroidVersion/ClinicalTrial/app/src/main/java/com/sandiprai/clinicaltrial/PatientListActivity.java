@@ -93,9 +93,31 @@ public class PatientListActivity extends AppCompatActivity {
      * @param view
      */
     public void onClickAddNewReadingsinPatientList(View view){
-        Intent intent = new Intent(PatientListActivity.this,
-                AddPatientInfoActivity.class);
-        startActivity(intent);
+        //Grab the spinner
+        Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerPatientIdinPatientList);
+        Spinner patientStatusSpinner = (Spinner) findViewById(R.id.spinnerStatusPatientList);
+
+        if(patientListSpinner.getSelectedItem() != null &&
+                patientStatusSpinner.getSelectedItem().equals("Active")){//Check if patient is selected or not
+            //Get the selected patientId
+            String patientId = patientListSpinner.getSelectedItem().toString();
+            //Create an intent
+            Intent intent = new Intent(PatientListActivity.this,
+                    AddPatientInfoActivity.class);
+            //Pass the patientId to the PatientReadingActivity
+            intent.putExtra(AddPatientInfoActivity.PATIENTID,patientId);
+            startActivity(intent); //Start the intent to move to the PatientReadingActivity
+        }else if (patientListSpinner.getSelectedItem() != null &&
+                !patientStatusSpinner.getSelectedItem().equals("Active")) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Add Readings only for Active Patients",Toast.LENGTH_SHORT);
+            toast.show();
+        }else{//Show the error message
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Please select a patient. Add if no patient.",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
 
     }
 
@@ -120,7 +142,13 @@ public class PatientListActivity extends AppCompatActivity {
             //Pass the patientId to the PatientReadingActivity
             intent.putExtra(PatientReadingsActivity.SELECTED_PATIENTID,patientId);
             startActivity(intent); //Start the intent to move to the PatientReadingActivity
-        } else{//Show the error message
+        }else if (patientListSpinner.getSelectedItem() != null &&
+                !patientStatusSpinner.getSelectedItem().equals("Active")) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Readings shown only for Active Patients",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else{//Show the error message
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Please select a patient. Add if no patient.",Toast.LENGTH_SHORT);
             toast.show();
