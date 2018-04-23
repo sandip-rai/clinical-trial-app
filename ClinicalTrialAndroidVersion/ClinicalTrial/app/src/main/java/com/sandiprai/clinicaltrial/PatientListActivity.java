@@ -107,13 +107,16 @@ public class PatientListActivity extends AppCompatActivity {
     public void onClickShowPatientReading(View view){
         //Grab the spinner
         Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerPatientIdinPatientList);
+        Spinner patientStatusSpinner = (Spinner) findViewById(R.id.spinnerStatusPatientList);
 
 
-        if(!patientListSpinner.getSelectedItem().equals(null)){//Check if patient is selected or not
+        if(patientListSpinner.getSelectedItem() != null &&
+                patientStatusSpinner.getSelectedItem().equals("Active")){//Check if patient is selected or not
             //Get the selected patientId
             String patientId = patientListSpinner.getSelectedItem().toString();
             //Create an intent
-            Intent intent = new Intent(PatientListActivity.this, PatientReadingsActivity.class);
+            Intent intent = new Intent(PatientListActivity.this,
+                    PatientReadingsActivity.class);
             //Pass the patientId to the PatientReadingActivity
             intent.putExtra(PatientReadingsActivity.SELECTED_PATIENTID,patientId);
             startActivity(intent); //Start the intent to move to the PatientReadingActivity
