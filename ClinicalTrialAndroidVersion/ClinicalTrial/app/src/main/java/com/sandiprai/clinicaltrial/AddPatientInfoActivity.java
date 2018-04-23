@@ -63,7 +63,12 @@ public class AddPatientInfoActivity extends AppCompatActivity {
         String value = editTextValue.getText().toString();
 
         Spinner spinnerClinicId = (Spinner) findViewById(R.id.spinnerClinicId);
-        String clinicId = spinnerClinicId.getSelectedItem().toString();
+        String clinicInSpinner = spinnerClinicId.getSelectedItem().toString();
+
+
+        String[] clinicArray = clinicInSpinner.split(":");
+        String clinicId = clinicArray[0];
+
         Clinic clinic = AddPatientActivity.clinicalTrial.findClinic(clinicId);
 
         String dateFormat =  AddPatientActivity.clinicalTrial.getSettings().getDateFormat();
