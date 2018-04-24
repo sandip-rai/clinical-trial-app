@@ -1,35 +1,28 @@
 package file.xml;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
-import org.simpleframework.xml.Attribute;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * The Class Reading.
  * Helper class to read XML files
  */
-@Root(name="Reading")
 class Reading {
 	
 	/** The id. */
-	@Attribute(required=false)
 	private String id;
 	
 	/** The type. */
-	@Attribute(required=false)
 	private String type;
 	
 	/** The value. */
-	@Element(name = "Value", required=false)
+	//private String Value;
 	private Value value;
 	
 	/** The Date. */
-	@Attribute(required=false)
 	private String Date;
 	
-	
 	/** The patient. */
-	@Element(name = "Patient")
 	private String patient;
 	
 	/**
@@ -37,6 +30,7 @@ class Reading {
 	 *
 	 * @return the id
 	 */
+	@XmlAttribute(name = "id")
 	public String getId() {
 		return id;
 	}
@@ -55,6 +49,7 @@ class Reading {
 	 *
 	 * @return the type
 	 */
+	@XmlAttribute(name = "type")
 	public String getType() {
 		return type;
 	}
@@ -73,6 +68,7 @@ class Reading {
 	 *
 	 * @return the date
 	 */
+	@XmlElement(name = "Date")
 	public String getDate() {
 		return Date;
 	}
@@ -91,6 +87,7 @@ class Reading {
 	 *
 	 * @return the patient
 	 */
+	@XmlElement(name = "Patient")
 	public String getPatient() {
 		return patient;
 	}
@@ -109,6 +106,7 @@ class Reading {
 	 *
 	 * @return the value
 	 */
+	@XmlElement( name = "Value" )
 	public Value getValue() {
 		return value;
 	}
@@ -120,6 +118,7 @@ class Reading {
 	 */
 	public void setValue(Value value) {
 		this.value = value;
-	}	
+	}
+	
 	
 }

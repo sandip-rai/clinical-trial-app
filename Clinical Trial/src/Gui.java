@@ -23,10 +23,10 @@ public class Gui extends JPanel implements ActionListener {
 		    File selectedFile = fileChooser.getSelectedFile();
 		    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 		    FileHandler fh = new FileHandler();
-//		    numberOfPatiens = fh.patients.size();
-//		    for (Patient patient: fh.patients) {
-//		    	patiensID.add(patient.getPatientId());
-//		    }
+		    numberOfPatiens = fh.patients.size();
+		    for (Patient patient: fh.patients) {
+		    	patiensID.add(patient.getPatientId());
+		    }
 		}
 	}
 	
