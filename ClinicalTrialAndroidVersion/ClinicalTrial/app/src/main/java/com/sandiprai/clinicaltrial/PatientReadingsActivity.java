@@ -34,76 +34,28 @@ public class PatientReadingsActivity extends AppCompatActivity {
         textViewPatientId.setText(selectedPatientId);
 
         if (patient.getState().getReadings()!= null) {
+            //Get the TableLayout
             TableLayout table = (TableLayout) findViewById(R.id.readingsTable);
-            int count = 0;
-            for(Reading reading: patient.getReadings()) {
-                //
-                // TableRow row = new TableRow(this);
-
+            int count = 0; //Counter to count number of rows and setting colors to even rows
+            for(Reading reading: patient.getReadings()) { //Get all the readings of the Patient
+                //Create a table row using the readings_row XML
                 TableRow row = (TableRow) LayoutInflater.from(PatientReadingsActivity.this)
                         .inflate(R.layout.readings_row, null);
-                if (count % 2 == 0) {
+                if (count % 2 == 0) { //set the color to even rows
                     row.setBackgroundColor(Color.GRAY);
                 }
+                //Fill the TextViews in the rows using the reading of the Patient Object
                 ((TextView) row.findViewById(R.id.readingIdColumn)).setText(reading.getReadingId());
                 ((TextView) row.findViewById(R.id.typeColumn)).setText(reading.getType());
                 ((TextView) row.findViewById(R.id.valueColumn)).setText(reading.getValue());
-                //((TextView)row.findViewById(R.id.dateColumn)).setText(reading.getReadingId());
-                ((TextView) row.findViewById(R.id.dateColumn)).setText("null");
+                ((TextView) row.findViewById(R.id.dateColumn)).setText(reading.getDate().toString());
                 ((TextView) row.findViewById(R.id.clinicIdColumn)).setText(reading.getClinic().getId());
                 ((TextView) row.findViewById(R.id.clinicNameColumn)).setText(reading.getClinic().getName());
 
-                table.addView(row);
-                count++;
-
+                table.addView(row); //Add the row to the TableLayout
+                count++; 
             }
             table.requestLayout();
-                /**
-                TextView readingIdTextView = new TextView(this);
-                readingIdTextView.setText(reading.getReadingId());
-                readingIdTextView.setWidth(50);
-                row.addView(readingIdTextView);
-
-                TextView typeTextView = new TextView(this);
-                readingIdTextView.setText(reading.getType());
-                readingIdTextView.setWidth(50);
-                row.addView(typeTextView);
-
-                TextView valueTextView = new TextView(this);
-                readingIdTextView.setText(reading.getValue());
-                readingIdTextView.setWidth(50);
-                row.addView(valueTextView);
-
-                /***TO-DOOOOOOOOO*
-                TextView dateTextView = new TextView(this);
-                //readingIdTextView.setText(reading.getDate());
-                readingIdTextView.setWidth(50);
-                row.addView(dateTextView);
-
-                TextView clinicIdTextView = new TextView(this);
-                readingIdTextView.setText(reading.getClinic().getId());
-                readingIdTextView.setWidth(50);
-                row.addView(clinicIdTextView);
-
-                TextView clinicNameTextView = new TextView(this);
-                readingIdTextView.setText(reading.getClinic().getName());
-                readingIdTextView.setWidth(50);
-                row.addView(clinicNameTextView);
-
-                table.addView(row);
-                count++;
-
-                **/
-            //}
-            /**
-            //Create an AdapterArray to hold the Readings ArrayList of the Patient
-            ArrayAdapter<Reading> listAdapter = new ArrayAdapter<>(this,
-                    android.R.layout.simple_list_item_1, patient.getState().getReadings());
-            //Get the listView and set the adapter
-            ListView listReadings = (ListView) findViewById(R.id.list_patient_readings);
-            listReadings.setAdapter(listAdapter);
-             **/
-
         }
     }
 }
