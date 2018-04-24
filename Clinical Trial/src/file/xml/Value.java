@@ -1,30 +1,26 @@
 package file.xml;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Root;
-import org.simpleframework.xml.Text;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlValue;
 
 /**
  * The Class Value.
  * Helper class to read XML files
  */
-@Root(name = "Value")
 class Value {
 	
 	/** The value. */
-	@Text
 	private String value;
 	
 	/** The unit. */
-	@Attribute(required=false)
 	private String unit;
-	
 	
 	/**
 	 * Gets the value.
 	 *
 	 * @return the value
 	 */
+	@XmlValue
 	public String getValue() {
 		return value;
 	}
@@ -43,6 +39,7 @@ class Value {
 	 *
 	 * @return the unit
 	 */
+	@XmlAttribute(name = "unit")
 	public String getUnit() {
 		return unit;
 	}
