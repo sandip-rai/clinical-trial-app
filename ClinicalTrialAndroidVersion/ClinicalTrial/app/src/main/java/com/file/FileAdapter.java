@@ -1,8 +1,7 @@
 package com.file;
 
-import java.io.File;
 import com.file.json.JsonHandler;
-import file.xml.XmlHandler;
+import com.file.xml.XmlHandler;
 import trial.ClinicalTrial;
 
 /**
@@ -65,10 +64,15 @@ public class FileAdapter {
 		} else if (fileType.equals(".xml")) {
 			//if the file was XML use the XmlHandler
 			XmlHandler xml = new XmlHandler(clinicalTrial);
-			return xml.readXMLFile(path);
+			try {
+				return xml.readXMLFile(path);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else
 			//if the file type was not recognized return false
 			return false;
+		return false;
 	}
 
 	/**

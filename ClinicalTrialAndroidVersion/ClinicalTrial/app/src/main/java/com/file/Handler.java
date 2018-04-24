@@ -133,7 +133,8 @@ public class Handler {
 			if (validReading(reading) && clinicalTrial.findPatient(reading.patient_id) == null) {
 				// Add the patient to the trial
 				Patient patient = new Patient(reading.patient_id);
-				patient.setActive(active);
+				//TODO: set patient state
+				//patient.setActive(active);
 				clinicalTrial.getAllPatients().add(patient);
 			}
 		}
