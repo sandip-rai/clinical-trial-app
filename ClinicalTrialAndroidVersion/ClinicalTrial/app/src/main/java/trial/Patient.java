@@ -42,7 +42,7 @@ public class Patient {
 	        return patientId;
         }
 
-        protected ArrayList<Reading> getReadings() {
+        public ArrayList<Reading> getReadings() {
             return readings;
         }
 
