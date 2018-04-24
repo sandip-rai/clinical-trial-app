@@ -94,7 +94,7 @@
             android:layout_row="2"
             android:ems="10"
             android:hint="ddMMMyyyy HH:mm"
-            android:inputType="text" />
+            android:inputType="date" />
 
 
 

@@ -76,37 +76,25 @@ public class AddPatientInfoActivity extends AppCompatActivity {
         String value = editTextValue.getText().toString();
 
         Spinner spinnerClinicId = (Spinner) findViewById(R.id.spinnerClinicId);
-        String clinicInSpinner = null;
-        String[] clinicArray;
-        String clinicId = null;
-        try {
-            clinicInSpinner = spinnerClinicId.getSelectedItem().toString();
-            clinicArray = clinicInSpinner.split(":");
-            clinicId = clinicArray[0];
-        } catch (NullPointerException e) {
-            makeToast("Patient is not currently active.");
-        }
+        String clinicInSpinner = spinnerClinicId.getSelectedItem().toString();
+
+
+        String[] clinicArray = clinicInSpinner.split(":");
+        String clinicId = clinicArray[0];
 
         Clinic clinic = AddPatientActivity.clinicalTrial.findClinic(clinicId);
 
         String dateFormat =  AddPatientActivity.clinicalTrial.getSettings().getDateFormat();
-        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
-        Date date = null; // Change date from String to Date
-        try {
-            date = formatter.parse(textDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         if (value.equals("") || textDate.equals("") || readingId.equals("") || clinicId.equals("")) {
             makeToast( "Please fill in the values for every field.");
-        } else if(clinicInSpinner ==  null){
-            makeToast( "Please select/add a clinic.");
-        } else if(date == null){
-            makeToast("Please enter date in a correct format");
-        } else if (!patient.getState().toString().equals("Active")){
-            makeToast("Patient is not currently active.");
-        } else {
+        } else { // If all values are filled, add them to to corresponding Patient
+            SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+            Date date = null; // Change date from String to Date
+            try {
+                date = formatter.parse(textDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             // add the new readings to that patient
             if (patient.addReading(readingId,readingType, value, date, clinic)) {
                 makeToast(  "New reading has been added."); //Prompt if the reading is added
@@ -114,7 +102,14 @@ public class AddPatientInfoActivity extends AppCompatActivity {
                 editTextDate.setText("");
                 editTextValue.setText("");
             }
+            else if (!patient.getState().toString().equals("Active")){
+                makeToast("Patient is not currently active.");
+            }
+            else {
+                makeToast(  "Invalid reading."); //Prompt if patient is not active in trial
+            }
         }
+
     }
 
     public void onClickAddClinicinAddPatientInfo(View view){

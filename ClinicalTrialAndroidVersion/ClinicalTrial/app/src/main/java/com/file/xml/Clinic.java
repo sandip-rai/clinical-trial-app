@@ -1,4 +1,4 @@
-package file.xml;
+package com.file.xml;
 
 import org.simpleframework.xml.Text;
 import org.simpleframework.xml.Attribute;
