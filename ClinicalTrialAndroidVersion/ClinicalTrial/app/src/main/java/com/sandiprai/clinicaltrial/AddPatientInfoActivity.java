@@ -102,8 +102,8 @@ public class AddPatientInfoActivity extends AppCompatActivity {
             makeToast( "Please fill in the values for every field.");
         } else if(clinicInSpinner ==  null){
             makeToast( "Please select/add a clinic.");
-        } else if(date == null){
-            makeToast("Please enter date in a correct format");
+       // }// else if(date == null){
+            //makeToast("Please enter date in a correct format");
         } else if (!patient.getState().toString().equals("Active")){
             makeToast("Patient is not currently active.");
         } else {
