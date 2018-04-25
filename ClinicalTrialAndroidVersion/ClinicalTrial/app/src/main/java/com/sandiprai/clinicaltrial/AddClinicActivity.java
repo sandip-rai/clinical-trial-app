@@ -36,6 +36,7 @@ public class AddClinicActivity extends AppCompatActivity {
             //clinicalTrial.findPatient(patientId).setActive(true);
             makeToast("Successfully Added!");
             editTextClinicId.setText("");
+            editTextClinicName.setText("");
         } else {
             makeToast("Clinic exists already.");
         }

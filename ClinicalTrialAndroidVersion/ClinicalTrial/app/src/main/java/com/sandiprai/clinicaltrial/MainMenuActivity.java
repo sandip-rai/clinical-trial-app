@@ -13,8 +13,6 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
     }
 
-
-
     /**
      * Method to run when buttonAddPatient is clicked
      * Creates and starts an intent to move from MainMenuActivity to AddPatientActivity
@@ -24,6 +22,18 @@ public class MainMenuActivity extends AppCompatActivity {
         //Create the intent
         Intent intent = new Intent(MainMenuActivity.this,
                 AddPatientActivity.class);
+        startActivity(intent); //Start the intent
+    }
+
+    /**
+     * Method to run when buttonAddClinic is clicked
+     * Creates and starts an intent to move from MainMenuActivity to AddClinicActivity
+     * @param view
+     */
+    public void onClickAddClinic(View view){
+        //Create the intent
+        Intent intent = new Intent(MainMenuActivity.this,
+                AddClinicActivity.class);
         startActivity(intent); //Start the intent
     }
 
