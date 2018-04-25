@@ -1,11 +1,11 @@
 package com.sandiprai.clinicaltrial;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +15,6 @@ import com.file.FileAdapter;
 import static com.sandiprai.clinicaltrial.AddPatientActivity.clinicalTrial;
 
 public class MainMenuActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         writeAllowed();
@@ -79,27 +78,29 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent); //Start the intent
     }
 
-    public void onClickImportData(View view){
-        FileAdapter fileAdapter = new FileAdapter();
-        fileAdapter.getFiles(clinicalTrial);
+    public void onClickImportData(View view) {
+        if (writeAllowed()) {
+            FileAdapter fileAdapter = new FileAdapter();
+            fileAdapter.getFiles(clinicalTrial, getApplicationContext());
+        }
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle state) {
+    protected void onStop() {
         if (writeAllowed()){
-//            super.onSaveInstanceState(state);
-//            FileAdapter fileAdapter = new FileAdapter();
-//            fileAdapter.saveState(clinicalTrial);
+            super.onStop();
+            FileAdapter fileAdapter = new FileAdapter();
+            fileAdapter.saveState(clinicalTrial, getApplicationContext());
         }
 
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState)   {
+    protected void onPause()   {
         if(readAllowed()){
-//            super.onRestoreInstanceState(savedInstanceState);
-//            FileAdapter fileAdapter = new FileAdapter();
-//            clinicalTrial = fileAdapter.loadState();
+            super.onPause();
+            FileAdapter fileAdapter = new FileAdapter();
+            clinicalTrial = fileAdapter.loadState(getApplicationContext());
         }
 
     }
