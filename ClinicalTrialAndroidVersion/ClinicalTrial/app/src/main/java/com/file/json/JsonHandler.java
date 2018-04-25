@@ -1,4 +1,6 @@
 package com.file.json;
+import android.content.Context;
+
 import java.io.*;
 import java.util.*;
 import com.file.Handler;
@@ -10,8 +12,7 @@ import com.google.gson.*;
  * The Class JsonHandler.
  */
 public class JsonHandler extends Handler {	
-	/** The save state path. */
-	private final String SAVE_STATE_PATH = "SaveState.json";
+
 
 	/**
 	 * Instantiates a new json handler.
@@ -120,10 +121,10 @@ public class JsonHandler extends Handler {
 	 *
 	 * @return true, if successful
 	 */
-	public boolean saveState() {
+	public boolean saveState(String path) {
 		try {
-			//write a save file to the SAVE_STATE_PATH
-			Writer writer = new FileWriter(SAVE_STATE_PATH);
+			//write a save file to the path
+			Writer writer = new FileWriter(path);
 			Gson gson = new GsonBuilder().create();
 			//write the current ClinicalTrial
 			gson.toJson(clinicalTrial, writer);
@@ -141,9 +142,9 @@ public class JsonHandler extends Handler {
 	 *
 	 * @return the clinical trial
 	 */
-	public ClinicalTrial loadState() {
+	public ClinicalTrial loadState(String path) {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		try (Reader fileReader = new FileReader(SAVE_STATE_PATH)) {
+		try (Reader fileReader = new FileReader(path)) {
 			// Create PatientReadingsJson object which creates an AarrayList
 			ClinicalTrial fileTrial = gson.fromJson(fileReader, ClinicalTrial.class);
 			// If file has been read return the ClinicalTrial
