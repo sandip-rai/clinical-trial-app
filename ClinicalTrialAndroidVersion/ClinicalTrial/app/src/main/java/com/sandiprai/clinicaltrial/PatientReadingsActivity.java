@@ -1,6 +1,8 @@
 package com.sandiprai.clinicaltrial;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,7 +44,7 @@ public class PatientReadingsActivity extends AppCompatActivity {
                 TableRow row = (TableRow) LayoutInflater.from(PatientReadingsActivity.this)
                         .inflate(R.layout.readings_row, null);
                 if (count % 2 == 0) { //set the color to even rows
-                    row.setBackgroundColor(Color.GRAY);
+                    row.setBackgroundColor(Color.LTGRAY);
                 }
                 //Fill the TextViews in the rows using the reading of the Patient Object
                 ((TextView) row.findViewById(R.id.readingIdColumn)).setText(reading.getReadingId());

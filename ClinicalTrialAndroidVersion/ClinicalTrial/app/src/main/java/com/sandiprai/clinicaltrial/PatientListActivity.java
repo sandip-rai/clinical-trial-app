@@ -97,7 +97,11 @@ public class PatientListActivity extends AppCompatActivity {
         Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerPatientIdinPatientList);
         Spinner patientStatusSpinner = (Spinner) findViewById(R.id.spinnerStatusPatientList);
 
-        if(patientListSpinner.getSelectedItem() != null &&
+        if (AddPatientActivity.clinicalTrial.getAllClinics().size() == 0){
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "No Clinic. Please add a new clinic.",Toast.LENGTH_SHORT);
+            toast.show();
+        }else if(patientListSpinner.getSelectedItem() != null &&
                 patientStatusSpinner.getSelectedItem().equals("Active")){//Check if patient is selected or not
             //Get the selected patientId
             String patientId = patientListSpinner.getSelectedItem().toString();
@@ -154,6 +158,11 @@ public class PatientListActivity extends AppCompatActivity {
             toast.show();
         }
 
+    }
+
+    public void onClickAddClinicinPatientList(View view){
+        Intent intent = new Intent(PatientListActivity.this,AddClinicActivity.class);
+        startActivity(intent);
     }
 
 }

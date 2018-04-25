@@ -117,10 +117,7 @@ public class AddPatientInfoActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickAddClinicinAddPatientInfo(View view){
-        Intent intent = new Intent(AddPatientInfoActivity.this,AddClinicActivity.class);
-        startActivity(intent);
-    }
+
 
     public void makeToast(CharSequence message){
         //Create the context

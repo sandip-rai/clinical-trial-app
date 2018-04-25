@@ -68,7 +68,7 @@
 
     <Button
         android:id="@+id/buttonShowPatientReading"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -81,7 +81,7 @@
 
     <Button
         android:id="@+id/buttonAddNewReadingsinPatientList"
-        android:layout_width="208dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -91,5 +91,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonShowPatientReading" />
+
+    <Button
+        android:id="@+id/buttonAddClinicinAddPatientInfo"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:onClick="onClickAddClinicinPatientList"
+        android:text="Add New Clinic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddNewReadingsinPatientList" />
 
 </android.support.constraint.ConstraintLayout>
