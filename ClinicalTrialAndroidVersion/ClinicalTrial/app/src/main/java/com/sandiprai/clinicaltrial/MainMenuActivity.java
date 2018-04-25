@@ -87,9 +87,9 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle state) {
         if (writeAllowed()){
-            super.onSaveInstanceState(state);
-            FileAdapter fileAdapter = new FileAdapter();
-            fileAdapter.saveState(clinicalTrial);
+//            super.onSaveInstanceState(state);
+//            FileAdapter fileAdapter = new FileAdapter();
+//            fileAdapter.saveState(clinicalTrial);
         }
 
     }
@@ -97,9 +97,9 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState)   {
         if(readAllowed()){
-            super.onRestoreInstanceState(savedInstanceState);
-            FileAdapter fileAdapter = new FileAdapter();
-            clinicalTrial = fileAdapter.loadState();
+//            super.onRestoreInstanceState(savedInstanceState);
+//            FileAdapter fileAdapter = new FileAdapter();
+//            clinicalTrial = fileAdapter.loadState();
         }
 
     }
