@@ -1,6 +1,11 @@
 package com.sandiprai.clinicaltrial;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +18,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        writeAllowed();
+        readAllowed();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
     }
@@ -79,15 +86,51 @@ public class MainMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle state) {
-        super.onSaveInstanceState(state);
-        FileAdapter fileAdapter = new FileAdapter();
-        fileAdapter.saveState(clinicalTrial);
+        if (writeAllowed()){
+            super.onSaveInstanceState(state);
+            FileAdapter fileAdapter = new FileAdapter();
+            fileAdapter.saveState(clinicalTrial);
+        }
+
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState)   {
-        super.onRestoreInstanceState(savedInstanceState);
-        FileAdapter fileAdapter = new FileAdapter();
-        clinicalTrial = fileAdapter.loadState();
+        if(readAllowed()){
+            super.onRestoreInstanceState(savedInstanceState);
+            FileAdapter fileAdapter = new FileAdapter();
+            clinicalTrial = fileAdapter.loadState();
+        }
+
+    }
+
+    private boolean writeAllowed(){
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
+    private boolean readAllowed(){
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
     }
 }
