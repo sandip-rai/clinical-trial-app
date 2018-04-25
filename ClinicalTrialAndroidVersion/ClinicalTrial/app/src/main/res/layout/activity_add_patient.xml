@@ -13,7 +13,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"
-        android:text="Add a New Patient: "
+        android:text="@string/add_new_patient"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:ems="10"
-        android:hint="Enter the Patient Id in string format"
+        android:hint="@string/add_new_patient_hint"
         android:inputType="text|textNoSuggestions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:onClick="onClickAddToPatientList"
-        android:text="Add to Patient List"
+        android:text="@string/add_to_patient_list_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextAddPatientId" />
@@ -56,25 +56,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="onClickShowPatientList"
-        android:text="Show Patient List"
+        android:text="@string/show_patient_list_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAddToPatientList" />
-
-    <!--
-    <Button
-        android:id="@+id/buttonAddReadingsinAddPatient"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="168dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Add Readings"
-        android:onClick="onClickAddReadingsinAddPatient"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddToPatientList" />
-    -->
 
 </android.support.constraint.ConstraintLayout>

@@ -19,7 +19,7 @@
         android:layout_row="0"
         android:drawableTop="@drawable/patient"
         android:onClick="onClickAddPatient"
-        android:text="Add Patient"
+        android:text="@string/add_patient_button"
         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
 
@@ -32,7 +32,7 @@
         android:layout_row="0"
         android:drawableTop="@drawable/clinic"
         android:onClick="onClickAddClinic"
-        android:text="Add Clinic"
+        android:text="@string/add_clinic_button"
         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
 
@@ -45,7 +45,7 @@
         android:layout_column="0"
         android:drawableTop="@drawable/list"
         android:onClick="onClickPatientList"
-        android:text="Patient's List"
+        android:text="@string/patient_list_button"
         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
     <Space
@@ -64,7 +64,7 @@
         android:layout_column="1"
         android:drawableTop="@drawable/importfile"
         android:gravity="center"
-        android:text="Import Data"
+        android:text="@string/import_data_button"
         android:onClick="onClickImportData"
         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
@@ -84,7 +84,7 @@
         android:layout_column="0"
         android:drawableTop="@drawable/systemsettings"
         android:onClick="onClickSystemSettings"
-        android:text="System Settings"
+        android:text="@string/system_settings_button"
         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
 
