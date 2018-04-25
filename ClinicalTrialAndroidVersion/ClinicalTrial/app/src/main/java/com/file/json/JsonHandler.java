@@ -7,7 +7,6 @@ import com.file.Handler;
 import trial.*;
 import com.google.gson.*;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class JsonHandler.
  */

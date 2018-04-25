@@ -64,8 +64,9 @@ public class FileAdapter extends AppCompatActivity {
 	 * @param clinicalTrial the clinical trial
 	 * @return true, if successful
 	 */
-	public boolean readFile(ClinicalTrial clinicalTrial) {
+	public boolean getFiles(ClinicalTrial clinicalTrial) {
 		ArrayList<String> filePaths = new ArrayList<>();
+		//get the path from the file reader and set save to false
 		//get the path from the file reader and set save to false
 		getAllFiles(context.getExternalFilesDir(null), filePaths);
 		for (String path : filePaths){

@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.file.FileAdapter;
+
+import static com.sandiprai.clinicaltrial.AddPatientActivity.clinicalTrial;
+
 public class MainMenuActivity extends AppCompatActivity {
 
     @Override
@@ -58,6 +62,22 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent); //Start the intent
     }
 
+    public void onClickImportData(View view){
+        FileAdapter fileAdapter = new FileAdapter();
+        fileAdapter.getFiles(clinicalTrial);
+    }
 
+    @Override
+    protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        FileAdapter fileAdapter = new FileAdapter();
+        fileAdapter.saveState(clinicalTrial);
+    }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)   {
+        super.onRestoreInstanceState(savedInstanceState);
+        FileAdapter fileAdapter = new FileAdapter();
+        clinicalTrial = fileAdapter.loadState();
+    }
 }

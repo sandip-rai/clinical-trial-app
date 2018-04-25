@@ -133,7 +133,7 @@ public class Handler {
 			if (validReading(reading) && clinicalTrial.findPatient(reading.patient_id) == null) {
 				// Add the patient to the trial
 				Patient patient = new Patient(reading.patient_id);
-				//TODO: set patient state
+				//TODO: set patient state? New Patient object seems to default to active?
 				//patient.setActive(active);
 				clinicalTrial.getAllPatients().add(patient);
 			}
