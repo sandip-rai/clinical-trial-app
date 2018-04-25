@@ -24,6 +24,39 @@
         <item>Failed</item>
         <item>Completed</item>
     </string-array>
+    <string name="status">Status</string>
+
+    <!--Strings used for buttons-->
+    <string name="add_patient_button">Add Patient</string>
+    <string name="add_clinic_button">Add Clinic</string>
+    <string name="patient_list_button">Patient List</string>
+    <string name="import_data_button">Import Data</string>
+    <string name="system_settings_button">System Settings</string>
+    <string name="add_to_patient_list_button">Add to Patient List</string>
+    <string name="show_patient_list_button">Show Patient List</string>
+    <string name="add_new_readings_button">Add New Readings</string>
+    <string name="show_patient_reading_button">Show Patient Readings</string>
+
+    <!--Strings used for AddPatientActivity-->
+    <string name="add_new_patient">Add a New Patient: </string>
+    <string name="add_new_patient_hint">Enter the Patient Id in string format</string>
+
+
+    <!--Strings used for AddPatientInfoActivity-->
+    <string name="patientId">Patient Id</string>
+    <string name="readingId">Reading Id</string>
+    <string name="date">Date</string>
+    <string name="type">Type</string>
+    <string name="value">Value</string>
+    <string name="clinic">Clinic</string>
+    <string name="clinicId">Clinic Id</string>
+    <string name="clinicName">Clinic Name</string>
+    <string name="add_readings">Add Readings</string>
+
+    <!--Hints-->
+    <string name="numberFormatHints">Enter in number format</string>
+    <string name="string_format_hint">Enter in string format</string>
+    <string name="dateFormatHints">Format= 20Apr2018 04:20</string>
 
     <string name="title_activity_system_settings">SystemSettingsActivity</string>
 
