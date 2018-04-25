@@ -34,7 +34,7 @@ public class ClinicalTrialActivity extends AppCompatActivity {
         if (writeAllowed()){
             super.onStop();
             if(readAllowed()) {
-                doInBackground(fileAdapter.saveState(clinicalTrial, getApplicationContext()));
+                fileAdapter.saveState(clinicalTrial, getApplicationContext());
             }
         }
 
