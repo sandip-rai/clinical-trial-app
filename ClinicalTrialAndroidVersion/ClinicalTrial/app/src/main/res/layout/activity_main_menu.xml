@@ -65,6 +65,7 @@
         android:drawableTop="@drawable/importfile"
         android:gravity="center"
         android:text="Import Data"
+        android:onClick="onClickImportData"
         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
 
