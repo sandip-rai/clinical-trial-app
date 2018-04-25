@@ -16,13 +16,12 @@ import trial.PatientStateCompleted;
 import trial.PatientStateFailed;
 import trial.PatientStateWithdrawn;
 
-import static com.sandiprai.clinicaltrial.AddPatientActivity.clinicalTrial;
-
-public class PatientListActivity extends AppCompatActivity {
+public class PatientListActivity extends ClinicalTrialActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        clinicalTrial = getClinicalTrial();
         setContentView(R.layout.activity_patient_list);
 
         //Grab the spinner
@@ -97,7 +96,7 @@ public class PatientListActivity extends AppCompatActivity {
         Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerPatientIdinPatientList);
         Spinner patientStatusSpinner = (Spinner) findViewById(R.id.spinnerStatusPatientList);
 
-        if (AddPatientActivity.clinicalTrial.getAllClinics().size() == 0){
+        if (clinicalTrial.getAllClinics().size() == 0){
             Toast toast = Toast.makeText(getApplicationContext(),
                     "No Clinic. Please add a new clinic.",Toast.LENGTH_SHORT);
             toast.show();

@@ -9,15 +9,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import trial.Clinic;
+import trial.ClinicalTrial;
 
-import static com.sandiprai.clinicaltrial.AddPatientActivity.clinicalTrial;
-
-public class AddClinicActivity extends AppCompatActivity {
-
+public class AddClinicActivity extends ClinicalTrialActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_clinic);
+        clinicalTrial = getClinicalTrial();
     }
 
     public void onClickAddToClinicList(View view){

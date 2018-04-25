@@ -18,7 +18,7 @@ import java.util.Date;
 import trial.Clinic;
 import trial.Patient;
 
-public class AddPatientInfoActivity extends AppCompatActivity {
+public class AddPatientInfoActivity extends ClinicalTrialActivity {
     //Used for the intent putExtra()
     public static final String PATIENTID = "patientId";
 
@@ -37,7 +37,7 @@ public class AddPatientInfoActivity extends AppCompatActivity {
          Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerReadingPatientId);
          ArrayAdapter<Patient> adapter= new ArrayAdapter<>(this,
          android.R.layout.simple_spinner_item,
-         AddPatientActivity.clinicalTrial.getAllPatients());
+         clinicalTrial.getAllPatients());
          adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
          patientListSpinner.setAdapter(adapter);
          **/
@@ -46,7 +46,7 @@ public class AddPatientInfoActivity extends AppCompatActivity {
         Spinner clinicListSpinner = (Spinner) findViewById(R.id.spinnerClinicId);
         ArrayAdapter<Clinic> clinicListAdapter= new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,
-                AddPatientActivity.clinicalTrial.getAllClinics());
+                clinicalTrial.getAllClinics());
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         clinicListSpinner.setAdapter(clinicListAdapter);
 
@@ -60,7 +60,7 @@ public class AddPatientInfoActivity extends AppCompatActivity {
         //Get the patientId from the textView which is passed from PatientListActivity
         TextView patientIdText = (TextView) findViewById(R.id.textViewPatientId);
         String patientId = patientIdText.getText().toString();
-        Patient patient = AddPatientActivity.clinicalTrial.findPatient(patientId);
+        Patient patient = clinicalTrial.findPatient(patientId);
 
         //get selected reading type from spinner
         Spinner readingTypeSpinner = (Spinner) findViewById(R.id.spinnerReadingType);
@@ -87,9 +87,9 @@ public class AddPatientInfoActivity extends AppCompatActivity {
             makeToast("Patient is not currently active.");
         }
 
-        Clinic clinic = AddPatientActivity.clinicalTrial.findClinic(clinicId);
+        Clinic clinic = clinicalTrial.findClinic(clinicId);
 
-        String dateFormat =  AddPatientActivity.clinicalTrial.getSettings().getDateFormat();
+        String dateFormat =  clinicalTrial.getSettings().getDateFormat();
         SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
         Date date = null; // Change date from String to Date
         try {

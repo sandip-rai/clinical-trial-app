@@ -12,13 +12,12 @@ import android.view.View;
 
 import com.file.FileAdapter;
 
-import static com.sandiprai.clinicaltrial.AddPatientActivity.clinicalTrial;
-
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends ClinicalTrialActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        writeAllowed();
-        readAllowed();
+        if(readAllowed()){
+            FileAdapter fileAdapter = new FileAdapter();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
     }
@@ -82,56 +81,6 @@ public class MainMenuActivity extends AppCompatActivity {
         if (writeAllowed()) {
             FileAdapter fileAdapter = new FileAdapter();
             fileAdapter.getFiles(clinicalTrial, getApplicationContext());
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        if (writeAllowed()){
-            super.onStop();
-            FileAdapter fileAdapter = new FileAdapter();
-            fileAdapter.saveState(clinicalTrial, getApplicationContext());
-        }
-
-    }
-
-    @Override
-    protected void onPause()   {
-        if(readAllowed()){
-            super.onPause();
-            FileAdapter fileAdapter = new FileAdapter();
-            clinicalTrial = fileAdapter.loadState(getApplicationContext());
-        }
-
-    }
-
-    private boolean writeAllowed(){
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            return true;
-        }
-    }
-
-    private boolean readAllowed(){
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            return true;
         }
     }
 }

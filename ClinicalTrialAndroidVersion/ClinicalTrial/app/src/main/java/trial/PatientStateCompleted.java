@@ -3,11 +3,9 @@ package trial;
 import java.util.Date;
 
 public class PatientStateCompleted extends PatientState {
-
-    String stateName = "Completed";
-
     public PatientStateCompleted(Patient p){
         super(p);
+        stateName = "Completed";
     }
 
     @Override

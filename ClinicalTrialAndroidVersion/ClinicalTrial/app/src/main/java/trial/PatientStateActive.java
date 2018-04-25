@@ -4,10 +4,9 @@ import java.util.Date;
 
 public class PatientStateActive extends PatientState {
 
-    String stateName = "Active";
-
     public PatientStateActive(Patient p) {
         super(p);
+        stateName = "Active";
     }
 
     @Override

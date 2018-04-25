@@ -5,10 +5,9 @@ import java.util.Date;
 
 public class PatientStateFailed extends PatientState {
 
-    private String stateName = "Failed";
-
     public PatientStateFailed(Patient p){
         super(p);
+        stateName = "Failed";
     }
 
     @Override

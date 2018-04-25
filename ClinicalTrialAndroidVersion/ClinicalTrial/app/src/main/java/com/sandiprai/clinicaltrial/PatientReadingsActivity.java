@@ -18,7 +18,7 @@ import org.w3c.dom.Text;
 import trial.Patient;
 import trial.Reading;
 
-public class PatientReadingsActivity extends AppCompatActivity {
+public class PatientReadingsActivity extends ClinicalTrialActivity {
     //Used for the intent putExtra()
     public static final String SELECTED_PATIENTID = "patientId";
 
@@ -26,10 +26,11 @@ public class PatientReadingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_readings);
+        clinicalTrial = getClinicalTrial();
 
         //Get the Patient object using the selected_patientId
         String selectedPatientId = (String)getIntent().getExtras().get(SELECTED_PATIENTID);
-        Patient patient = AddPatientActivity.clinicalTrial.findPatient(selectedPatientId);
+        Patient patient = clinicalTrial.findPatient(selectedPatientId);
 
         //Fill the textView with the selectedPatient
         TextView textViewPatientId = (TextView) findViewById(R.id.textViewPatientIdinPatientReadings);

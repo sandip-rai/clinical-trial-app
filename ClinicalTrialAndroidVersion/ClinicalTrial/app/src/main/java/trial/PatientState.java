@@ -6,7 +6,7 @@ import java.util.Date;
 public class PatientState {
 
     private String patientId;
-    private String stateName = "";
+    protected String stateName;
     private ArrayList<Reading> readings;
     private int readingCount = 1;
     private Patient patient = null;
@@ -89,7 +89,7 @@ public class PatientState {
     /**
      * Sets state
      *
-     * @param state
+     * @param newState
      */
     public void setState(PatientState newState) {
         if(newState.toString().equals("Active") || newState.toString().equals("Withdrawn")

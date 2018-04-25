@@ -12,13 +12,13 @@ import trial.ClinicalTrial;
 import trial.Patient;
 import trial.PatientStateActive;
 
-public class AddPatientActivity extends AppCompatActivity {
-    public static trial.ClinicalTrial clinicalTrial = new ClinicalTrial();
-
+public class AddPatientActivity extends ClinicalTrialActivity {
+    ClinicalTrial clinicalTrial;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_patient);
+        clinicalTrial = getClinicalTrial();
     }
 
     /**
@@ -73,9 +73,5 @@ public class AddPatientActivity extends AppCompatActivity {
         //Create the toast and show it
         Toast toast = Toast.makeText(context,text,duration);
         toast.show();
-    }
-
-    public ClinicalTrial getClinicalTrial() {
-        return clinicalTrial;
     }
 }
