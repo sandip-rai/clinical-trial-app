@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Clinical Trial</string>
 
+    <!--String names of Activities used for their labels-->
+    <string name="add_patient">Add Patient</string>
+    <string name="add_patient_info">Add Patient Information</string>
+    <string name="system_settings">System Settings</string>
+    <string name="patient_list">Patient List</string>
+    <string name="patient_readings">Patient Readings</string>
+    <string name="add_clinic">Add Clinic</string>
+
+    <!--Reading types displayed in AddPatientInfoActivity-->
     <string-array name="reading_type_array">
         <item> Weight</item>
         <item>Steps</item>
@@ -8,20 +17,16 @@
         <item>Blood Pressure</item>
     </string-array>
 
-    <string-array name="dummy_patientId_array">
-        <item>1a</item>
-        <item>2b</item>
-        <item>3c</item>
-        <item>4b</item>
-    </string-array>
-    <string name="title_activity_system_settings">SystemSettingsActivity</string>
-
+    <!--Patient Status used in PatientListActivity-->
     <string-array name = "statusList">
         <item>Active</item>
         <item>Withdrawn</item>
         <item>Failed</item>
         <item>Completed</item>
     </string-array>
+
+    <string name="title_activity_system_settings">SystemSettingsActivity</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

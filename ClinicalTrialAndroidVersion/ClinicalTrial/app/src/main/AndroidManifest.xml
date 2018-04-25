@@ -18,12 +18,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddPatientActivity" />
-        <activity android:name=".AddPatientInfoActivity" />
-        <activity android:name=".SystemSettingsActivity" />
-        <activity android:name=".PatientListActivity" />
-        <activity android:name=".PatientReadingsActivity" />
-        <activity android:name=".AddClinicActivity"></activity>
+        <activity android:name=".AddPatientActivity"
+            android:label="@string/add_patient"
+            android:parentActivityName=".MainMenuActivity"/>
+
+        <activity android:name=".AddPatientInfoActivity"
+            android:label="@string/add_patient_info"
+            android:parentActivityName=".PatientListActivity"/>
+
+        <activity android:name=".SystemSettingsActivity"
+            android:label="@string/system_settings"
+            android:parentActivityName=".MainMenuActivity"/>
+
+        <activity android:name=".PatientListActivity"
+            android:label="@string/patient_list"
+            android:parentActivityName=".MainMenuActivity"/>
+
+        <activity android:name=".PatientReadingsActivity"
+            android:label="@string/patient_readings"
+            android:parentActivityName=".PatientListActivity"/>
+
+        <activity android:name=".AddClinicActivity"
+            android:label="@string/add_clinic"
+            android:parentActivityName=".MainMenuActivity"/>
     </application>
 
 </manifest>
