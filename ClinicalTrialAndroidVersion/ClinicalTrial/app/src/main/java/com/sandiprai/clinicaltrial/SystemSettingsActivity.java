@@ -2,6 +2,7 @@ package com.sandiprai.clinicaltrial;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -11,6 +12,13 @@ public class SystemSettingsActivity extends ClinicalTrialActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_settings);
+
+        //Get the toolbar and assign
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.system_settings);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         clinicalTrial = getClinicalTrial();
 
         // initiate a Switch

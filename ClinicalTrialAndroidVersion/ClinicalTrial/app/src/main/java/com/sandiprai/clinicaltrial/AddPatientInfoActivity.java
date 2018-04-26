@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -26,6 +27,12 @@ public class AddPatientInfoActivity extends ClinicalTrialActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_patient_info);
+
+        //Get the toolbar and assign
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.add_patient_info);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Get the Patient object using the PATIENTID and fill it to patientIdTextView
         String selectedPatientId = (String)getIntent().getExtras().get(PATIENTID);

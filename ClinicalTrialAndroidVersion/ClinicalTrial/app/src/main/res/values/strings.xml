@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Clinical Trial</string>
+    <string name="user">testuser@clinicaltrial.com</string>
 
     <!--String names of Activities used for their labels-->
     <string name="add_patient">Add Patient</string>
@@ -58,7 +59,12 @@
     <string name="string_format_hint">Enter in string format</string>
     <string name="dateFormatHints">Format= 20Apr2018 04:20</string>
 
+    <!--Strings used for AddPatientInfoActivity-->
     <string name="title_activity_system_settings">SystemSettingsActivity</string>
+    <string name="add_reading_unknown_patients">Add readings from unknown patients</string>
+    <string name="import_xml">When importing XML files:</string>
+    <string name="import_json">When importing JASON files:</string>
+    <string name="add_patient_to_trial">Add patients to the trial </string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

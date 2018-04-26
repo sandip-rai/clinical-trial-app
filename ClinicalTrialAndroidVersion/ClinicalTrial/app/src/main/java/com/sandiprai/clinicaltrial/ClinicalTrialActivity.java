@@ -9,6 +9,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import 	android.R.layout;
+import android.support.v7.widget.Toolbar;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.file.FileAdapter;
 
@@ -28,6 +31,28 @@ public class ClinicalTrialActivity extends AppCompatActivity {
         }
         return clinicalTrial;
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_clinical_trial);
+
+
+    }
+
+    /**
+    @Override
+    public void setContentView(int layoutResID)
+    {
+        LinearLayout fullView = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_clinical_trial, null);
+        FrameLayout activityContainer = (FrameLayout) findViewById(R.id.activity_content);
+        getLayoutInflater().inflate(layoutResID, activityContainer, true);
+        super.setContentView(fullView);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle("Activity Title");
+    }
+     **/
 
     @Override
     protected void onStop() {

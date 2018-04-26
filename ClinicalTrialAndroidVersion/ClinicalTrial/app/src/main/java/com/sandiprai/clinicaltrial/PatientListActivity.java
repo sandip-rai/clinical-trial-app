@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import trial.Patient;
 import trial.PatientStateActive;
@@ -23,6 +24,12 @@ public class PatientListActivity extends ClinicalTrialActivity {
         super.onCreate(savedInstanceState);
         clinicalTrial = getClinicalTrial();
         setContentView(R.layout.activity_patient_list);
+
+        //Get the toolbar and assign
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.patient_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Grab the spinner
         final Spinner patientListSpinner = (Spinner) findViewById(R.id.spinnerPatientIdinPatientList);

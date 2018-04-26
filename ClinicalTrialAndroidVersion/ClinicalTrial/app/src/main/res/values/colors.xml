@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name = "colorForTableHeaders">#d7daea</color>2fb4fc
     <color name="colorForTableRows">#83cef7</color>
+    <color name="colorForActivityTitle">#f7f7f7</color>
 </resources>

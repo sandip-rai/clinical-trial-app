@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,6 +27,13 @@ public class PatientReadingsActivity extends ClinicalTrialActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_readings);
+
+        //Get the toolbar and assign
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.patient_readings);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         clinicalTrial = getClinicalTrial();
 
         //Get the Patient object using the selected_patientId

@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context=".AddPatientInfoActivity">
 
+    <include
+        layout="@layout/toolbar_main"
+        android:id="@+id/toolbar" />
+
     <GridLayout
         android:id="@+id/gridLayoutReadings"
         android:layout_width="wrap_content"

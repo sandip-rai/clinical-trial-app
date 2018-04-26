@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".SystemSettingsActivity">
 
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Switch
         android:id="@+id/switchXMLAddReadings"
         android:layout_width="42dp"
@@ -22,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="32dp"
-        android:text="Add readings from unknown patients "
+        android:text="@string/add_reading_unknown_patients"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewXMLAddPAtients" />
@@ -32,21 +40,21 @@
         android:layout_width="42dp"
         android:layout_height="34dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="32dp"
         android:checked="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchJasonAddReadings" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewXMLHeader" />
 
     <TextView
         android:id="@+id/textViewXMLHeader"
         android:layout_width="wrap_content"
         android:layout_height="39dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginTop="260dp"
-        android:text="When importing XML files:"
+        android:layout_marginEnd="68dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/import_xml"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewJasonAddReadings" />
 
     <Switch
         android:id="@+id/switchJasonAddReadings"
@@ -64,21 +72,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="32dp"
-        android:text="Add readings from unknown patients "
+        android:text="@string/add_reading_unknown_patients"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewJasonAddPatient" />
 
     <TextView
         android:id="@+id/textViewJASONHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="322dp"
         android:layout_height="39dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="36dp"
-        android:text="When importing JASON files:"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/import_json"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/textViewJasonAddPatient"
@@ -86,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="32dp"
-        android:text="Add patients to the trail "
+        android:text="@string/add_patient_to_trial"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewJASONHeader" />
@@ -97,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="32dp"
-        android:text="Add patients to the trail "
+        android:text="@string/add_patient_to_trial"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewXMLHeader" />
@@ -107,9 +117,9 @@
         android:layout_width="42dp"
         android:layout_height="34dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="32dp"
         android:checked="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewJASONHeader" />
 
 </android.support.constraint.ConstraintLayout>
