@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <item android:title="Add">
+        <menu>
+            <item
+                android:id="@+id/nav_add_patient"
+                android:title="Add Patient"
+                android:icon="@drawable/patient"/>
+            <item
+                android:id="@+id/nav_add_clinic"
+                android:title="Add Clinic"
+                android:icon="@drawable/clinic"/>
+            <item
+                android:id="@+id/nav_add_readings"
+                android:title="Add Readings"
+                android:icon="@drawable/list"/>
+        </menu>
+    </item>
+
+    <group android:checkableBehavior = "single">
+        <item
+            android:id="@+id/nav_patient_list"
+            android:title="Patient List"
+            android:icon="@drawable/patientlist"/>
+        <item
+            android:id="@+id/nav_import_data"
+            android:title="Import Data"
+            android:icon="@drawable/importfile"/>
+        <item
+            android:id="@+id/nav_system_settings"
+            android:title="Settings"
+            android:icon="@drawable/systemsettings"/>
+
+    </group>
+
+
+
+</menu>
