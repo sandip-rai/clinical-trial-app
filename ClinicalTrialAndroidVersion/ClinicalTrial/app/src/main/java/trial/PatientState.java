@@ -91,13 +91,14 @@ public class PatientState {
      *
      * @param newState
      */
-    public void setState(PatientState newState) {
+    public String setState(PatientState newState) {
         if(newState.toString().equals("Active") || newState.toString().equals("Withdrawn")
                 || newState.toString().equals("Failed")|| newState.toString().equals("Completed")) {
             this.patient.changeState(newState);
         }
         else
             System.out.println("Invalid entry");
+        return this.toString();
     }
 
     /**

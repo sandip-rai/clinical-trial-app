@@ -16,7 +16,7 @@ public class Patient {
         private String patientId;
 
         /** The active. */
-        private PatientState state = new PatientStateActive(this);
+        private String state = new PatientStateActive(this).toString();
 
         /** The readings. */
         private ArrayList<Reading> readings;
@@ -47,19 +47,34 @@ public class Patient {
         }
 
         public PatientState getState(){
-            return state;
+            PatientState pState = null;
+            switch ((String) state) {
+                case "Active":
+                    pState = new PatientStateActive(this);
+                    break;
+                case "Withdrawn":
+                    pState = new PatientStateWithdrawn(this);
+                    break;
+                case "Failed":
+                    pState = new PatientStateFailed(this);
+                    break;
+                case "Completed":
+                    pState = new PatientStateCompleted(this);
+                    break;
+            }
+            return pState;
         }
 
         protected void changeState(PatientState newState){
-            state = newState;
+            state = newState.toString();
         }
 
         public void setState(PatientState newState){
-            state.setState(newState);
+            this.getState().setState(newState);
         }
 
         public Boolean addReading(String readingId, String type, String value, Date d, Clinic c){
-	        return state.addReading(readingId, type, value, d, c);
+	        return this.getState().addReading(readingId, type, value, d, c);
         }
 
         /**
