@@ -16,6 +16,7 @@ public class FileAdapter {
 	/** The save state path. */
 	private final String SAVE_STATE_NAME = "SaveState.json";
 	private final String OUT_NAME = "out.json";
+	private ArrayList<String> filePaths = new ArrayList<>();
 
 	/**
 	 * Gets the path from the user for file importing and exporting.
@@ -23,7 +24,7 @@ public class FileAdapter {
 	 * @param directory the directory
 	 * @return the path
 	 */
-	private void getAllFiles(File directory, ArrayList<String> filePaths) {
+	private void getAllFiles(File directory, ArrayList<String> filecd ) {
 			File files[] = directory.listFiles();
 			if (files != null && files.length > 0) {
 				for (int i = 0; i < files.length; i++) {

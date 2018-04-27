@@ -143,7 +143,8 @@ public class PatientListActivity extends ClinicalTrialActivity {
 
 
         if(patientListSpinner.getSelectedItem() != null &&
-                patientStatusSpinner.getSelectedItem().equals("Active")){//Check if patient is selected or not
+                (patientStatusSpinner.getSelectedItem().equals("Active")) ||
+                patientStatusSpinner.getSelectedItem().equals("Completed")){//Check if patient is selected or not
             //Get the selected patientId
             String patientId = patientListSpinner.getSelectedItem().toString();
             //Create an intent
