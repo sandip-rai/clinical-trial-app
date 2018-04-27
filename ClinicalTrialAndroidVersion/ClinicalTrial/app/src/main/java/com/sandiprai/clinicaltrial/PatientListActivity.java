@@ -156,7 +156,7 @@ public class PatientListActivity extends ClinicalTrialActivity {
         }else if (patientListSpinner.getSelectedItem() != null &&
                 !patientStatusSpinner.getSelectedItem().equals("Active")) {
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Readings shown only for Active Patients",Toast.LENGTH_SHORT);
+                    "Readings shown only for Active or Completed Patients",Toast.LENGTH_SHORT);
             toast.show();
         }
         else{//Show the error message
