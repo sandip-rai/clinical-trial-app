@@ -6,6 +6,7 @@ import com.file.xml.XmlHandler;
 import java.io.File;
 import java.util.ArrayList;
 import trial.ClinicalTrial;
+import android.os.Environment;
 
 
 /**
@@ -19,17 +20,18 @@ public class FileAdapter {
 	private ArrayList<String> filePaths = new ArrayList<>();
 
 	/**
-	 * Gets the path from the user for file importing and exporting.
+	 * Gets the paths from the user for file importing and exporting.
 	 *
-	 * @param directory the directory
-	 * @return the path
+	 * @param directoryPath the directory
+	 * @param filecd the directory
 	 */
-	private void getAllFiles(File directory, ArrayList<String> filecd ) {
+	private void getAllFiles(String directoryPath) {
+			File directory = new File(directoryPath);
 			File files[] = directory.listFiles();
 			if (files != null && files.length > 0) {
 				for (int i = 0; i < files.length; i++) {
 					if (files[i].isDirectory()) {
-						getAllFiles(files[i], filePaths);
+						getAllFiles(files[i].getAbsolutePath());
 					} else {
 						if (files[i].getName().toLowerCase().endsWith(".json")
 								|| files[i].getName().toLowerCase().endsWith(".xml"))
@@ -60,9 +62,9 @@ public class FileAdapter {
 	 * @param clinicalTrial the clinical trial
 	 * @return true, if successful
 	 */
-	public boolean getFiles(ClinicalTrial clinicalTrial, Context context) {
-		ArrayList<String> filePaths = new ArrayList<>();
-		getAllFiles(context.getExternalFilesDir(null), filePaths);
+	public boolean getFiles(ClinicalTrial clinicalTrial) {
+		getAllFiles(Environment.getExternalStorageDirectory()
+				.getAbsolutePath());
 		for (String path : filePaths){
 			String fileType;
 			//find the file extension
