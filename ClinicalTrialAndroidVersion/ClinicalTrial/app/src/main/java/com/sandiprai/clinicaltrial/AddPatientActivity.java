@@ -2,7 +2,6 @@ package com.sandiprai.clinicaltrial;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -80,5 +79,10 @@ public class AddPatientActivity extends ClinicalTrialActivity {
         //Create the toast and show it
         Toast toast = Toast.makeText(context,text,duration);
         toast.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        makeToast("Back button disabled, because it makes the patient that you just added disappear, we do not know why, please use show patient list to navigate.");
     }
 }
