@@ -109,9 +109,16 @@ public class MainMenuActivity extends ClinicalTrialActivity
     }
 
     public void onClickImportData(View view) {
-        if (writeAllowed()) {
+        if (readAllowed()) {
             FileAdapter fileAdapter = new FileAdapter();
             fileAdapter.getFiles(clinicalTrial);
+        }
+    }
+
+    public void onClickExportData(View view) {
+        if (writeAllowed()) {
+            FileAdapter fileAdapter = new FileAdapter();
+            fileAdapter.writeFile(clinicalTrial);
         }
     }
 

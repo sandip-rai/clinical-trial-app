@@ -32,6 +32,7 @@
     <string name="add_clinic_button">Add Clinic</string>
     <string name="patient_list_button">Patient List</string>
     <string name="import_data_button">Import Data</string>
+    <string name="export_data_button">Export Data</string>
     <string name="system_settings_button">System Settings</string>
     <string name="add_to_patient_list_button">Add to Patient List</string>
     <string name="show_patient_list_button">Show Patient List</string>

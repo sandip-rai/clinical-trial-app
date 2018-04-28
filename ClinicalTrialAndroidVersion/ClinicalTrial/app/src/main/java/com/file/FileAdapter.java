@@ -4,7 +4,10 @@ import android.content.Context;
 import com.file.json.JsonHandler;
 import com.file.xml.XmlHandler;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import trial.ClinicalTrial;
 import android.os.Environment;
 
@@ -25,23 +28,23 @@ public class FileAdapter {
 	 * @param directoryPath the directory
 	 */
 	private void getAllFiles(String directoryPath) {
-			File directory = new File(directoryPath);
-			File files[] = directory.listFiles();
-			if (files != null && files.length > 0) {
-				for (int i = 0; i < files.length; i++) {
-					if (files[i].isDirectory()) {
-						getAllFiles(files[i].getAbsolutePath());
-					} else {
-						if (files[i].getName().toLowerCase().endsWith(".json")
-								|| files[i].getName().toLowerCase().endsWith(".xml"))
-						{
-							filePaths.add(files[i].getAbsolutePath());
-						}
+		File directory = new File(directoryPath);
+		File files[] = directory.listFiles();
+		if (files != null && files.length > 0) {
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					getAllFiles(files[i].getAbsolutePath());
+				} else {
+					if (files[i].getName().toLowerCase().endsWith(".json")
+							|| files[i].getName().toLowerCase().endsWith(".xml"))
+					{
+						filePaths.add(files[i].getAbsolutePath());
 					}
-
 				}
+
 			}
-			return;
+		}
+		return;
 	}
 
 	/**
@@ -50,9 +53,15 @@ public class FileAdapter {
 	 * @param clinicalTrial the clinical trial
 	 * @return true, if successful
 	 */
-	public boolean writeFile(ClinicalTrial clinicalTrial, Context context) {
+	public boolean writeFile(ClinicalTrial clinicalTrial) {
+		String date = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+		String fileName =  OUT_NAME + date;
 		JsonHandler json = new JsonHandler(clinicalTrial);
-			return json.WritePatientReadings(context.getFilesDir().getAbsolutePath() + OUT_NAME);
+		File sdCard = Environment.getExternalStorageDirectory();
+		File dir = new File (sdCard.getAbsolutePath() + "/ClinicalTrial");
+		dir.mkdirs();
+		File file = new File(dir, fileName);
+		return json.WritePatientReadings(file.getAbsolutePath());
 	}
 
 	/**
