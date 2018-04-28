@@ -81,6 +81,6 @@ public class AddPatientActivity extends ClinicalTrialActivity {
 
     @Override
     public void onBackPressed() {
-        makeToast("Back button disabled, because it makes the patient that you just added disappear, we do not know why, please use show patient list to navigate.");
+        makeToast("Back button disabled, please use show patient list to navigate.");
     }
 }
