@@ -23,10 +23,9 @@ public class ClinicalTrialActivity extends AppCompatActivity {
 
    private FileAdapter fileAdapter = new FileAdapter();
 
-    protected ClinicalTrial getClinicalTrial() {
-        if (!readAllowed()) {
-            clinicalTrial = new ClinicalTrial();
-        } else {
+    private ClinicalTrial getClinicalTrial() {
+        clinicalTrial = new ClinicalTrial();
+        if (readAllowed()) {
             clinicalTrial = fileAdapter.loadState(getApplicationContext());
         }
         return clinicalTrial;
@@ -35,29 +34,20 @@ public class ClinicalTrialActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getClinicalTrial();
     }
 
-    /**
     @Override
-    public void setContentView(int layoutResID)
-    {
-        LinearLayout fullView = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_clinical_trial, null);
-        FrameLayout activityContainer = (FrameLayout) findViewById(R.id.activity_content);
-        getLayoutInflater().inflate(layoutResID, activityContainer, true);
-        super.setContentView(fullView);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle("Activity Title");
+    protected void onResume(){
+        super.onResume();
+        getClinicalTrial();
     }
-     **/
 
     @Override
     protected void onStop() {
+        super.onStop();
         if (writeAllowed()){
-            super.onStop();
-            if(readAllowed()) {
                 fileAdapter.saveState(clinicalTrial, getApplicationContext());
-            }
         }
 
     }
@@ -65,7 +55,7 @@ public class ClinicalTrialActivity extends AppCompatActivity {
     @Override
     protected void onPause()   {
         super.onPause();
-        if(readAllowed()){
+        if(writeAllowed()){
             fileAdapter.saveState(clinicalTrial, getApplicationContext());
         }
 

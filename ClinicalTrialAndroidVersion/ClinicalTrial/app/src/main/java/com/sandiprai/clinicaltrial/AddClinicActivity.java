@@ -17,8 +17,6 @@ public class AddClinicActivity extends ClinicalTrialActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_clinic);
-        clinicalTrial = getClinicalTrial();
-
 
         //Get the toolbar and assign
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

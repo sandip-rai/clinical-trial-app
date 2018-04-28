@@ -13,12 +13,10 @@ import trial.Patient;
 import trial.PatientStateActive;
 
 public class AddPatientActivity extends ClinicalTrialActivity {
-    ClinicalTrial clinicalTrial;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_patient);
-        clinicalTrial = getClinicalTrial();
 
         //Get the toolbar and assign
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

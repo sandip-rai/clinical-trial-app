@@ -19,8 +19,6 @@ public class SystemSettingsActivity extends ClinicalTrialActivity {
         getSupportActionBar().setTitle(R.string.system_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        clinicalTrial = getClinicalTrial();
-
         // initiate a Switch
         final Switch switchJasonAddPatients = (Switch) findViewById(R.id.switchJasonAddPatients);
         final Switch switchJasonAddReadings = (Switch) findViewById(R.id.switchJasonAddReadings);

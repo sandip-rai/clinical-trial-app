@@ -34,8 +34,6 @@ public class PatientReadingsActivity extends ClinicalTrialActivity {
         getSupportActionBar().setTitle(R.string.patient_readings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        clinicalTrial = getClinicalTrial();
-
         //Get the Patient object using the selected_patientId
         String selectedPatientId = (String)getIntent().getExtras().get(SELECTED_PATIENTID);
         Patient patient = clinicalTrial.findPatient(selectedPatientId);

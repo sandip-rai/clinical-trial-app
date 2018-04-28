@@ -22,7 +22,6 @@ public class PatientListActivity extends ClinicalTrialActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        clinicalTrial = getClinicalTrial();
         setContentView(R.layout.activity_patient_list);
 
         //Get the toolbar and assign
