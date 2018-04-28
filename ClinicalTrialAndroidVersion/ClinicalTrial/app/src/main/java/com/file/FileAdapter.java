@@ -23,7 +23,6 @@ public class FileAdapter {
 	 * Gets the paths from the user for file importing and exporting.
 	 *
 	 * @param directoryPath the directory
-	 * @param filecd the directory
 	 */
 	private void getAllFiles(String directoryPath) {
 			File directory = new File(directoryPath);
