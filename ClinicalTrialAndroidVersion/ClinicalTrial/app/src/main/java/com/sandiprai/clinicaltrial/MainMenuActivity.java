@@ -143,6 +143,9 @@ public class MainMenuActivity extends ClinicalTrialActivity
             case R.id.nav_import_data:
                 //intent = new Intent(this,ImportDataActivity.class);
                 break;
+            case R.id.nav_export_data:
+                //intent = new Intent(this,ImportDataActivity.class);
+                break;
             case R.id.nav_system_settings:
                 intent = new Intent(this, SystemSettingsActivity.class);
                 break;
