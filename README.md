@@ -4,6 +4,24 @@
 
 Designed and build an Android and a Java program simulating a hospital conducting a clinical trial at a number of remote sites.
 
+<b> Screenshots: </b>
+1. Main Menu and Navigation Drawer
+
+![rsz_smartselect_20180505-092305_clinical_trial](https://user-images.githubusercontent.com/35808377/41977989-69d66240-79e6-11e8-91fe-305af562b252.jpg)_____________________________![rsz_smartselect_20180505-092321_clinical_trial](https://user-images.githubusercontent.com/35808377/41978135-c54f0ba4-79e6-11e8-900e-f86503241574.jpg)
+
+2. Adding Patient and Clinic
+
+![rsz_smartselect_20180505-092337_clinical_trial](https://user-images.githubusercontent.com/35808377/41978317-352def3a-79e7-11e8-8fde-2174cad2aa43.jpg)_____________________________![rsz_smartselect_20180505-092602_clinical_trial](https://user-images.githubusercontent.com/35808377/41978318-3540c68c-79e7-11e8-882c-7413a6cc7feb.jpg)
+
+3. Patient List and Readings
+
+![rsz_smartselect_20180505-092353_clinical_trial](https://user-images.githubusercontent.com/35808377/41978602-ce317418-79e7-11e8-967f-681b51d151ca.jpg)_____________________________![rsz_smartselect_20180505-092547_clinical_trial](https://user-images.githubusercontent.com/35808377/41978603-ce41412c-79e7-11e8-810e-e24f7b710583.jpg)
+
+4. Settings
+
+![rsz_smartselect_20180505-092627_clinical_trial](https://user-images.githubusercontent.com/35808377/41978604-ce504a46-79e7-11e8-9679-11daa251f5af.jpg)
+
+
 <b>Java Program Version 1 fulfilled requirements</b>:
 
 Nurses will use the software to record data that patients have entered into their journals.  It
